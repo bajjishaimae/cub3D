@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-# include <limits.h>
-
+#include <limits.h>
+#include <string.h>
 # define BUFFER_SIZE 10
 
 typedef struct s_data
@@ -35,6 +35,7 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoin(char *s1, char *s2);
 void parse(t_data *file_data, char *file_name);
 int	isonly_spaces(char *input);
-
-
+int sizeof_array(char **str);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
 #endif
