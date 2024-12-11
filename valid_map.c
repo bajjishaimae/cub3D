@@ -55,9 +55,9 @@ int check_for_top_row(char **map)
 	while(map[0][j] && j <= k)
 	{
 		if (map[0][j] == ' '
-		&& (map[0 + 1][j] != '1' && map[0 + 1][j] != ' ')
+		&& ((map[0 + 1][j] != '1' && map[0 + 1][j] != ' ')
 		|| (map[0][j - 1] != '1' && map[0][j - 1] != ' ')
-		|| (map[0][j + 1] != '1' && map[0][j + 1] != ' '))
+		|| (map[0][j + 1] != '1' && map[0][j + 1] != ' ')))
 			return (0);
 		j++;
 	}
@@ -76,9 +76,9 @@ int check_for_last_row(char **map)
 	while(map[i][j] && j <= k)
 	{
 		if (map[i][j] == ' '
-		&& (map[i - 1][j] != '1' && map[i - 1][j] != ' ')
+		&& ((map[i - 1][j] != '1' && map[i - 1][j] != ' ')
 		|| (map[i][j - 1] != '1' && map[i][j - 1] != ' ')
-		|| (map[i][j + 1] != '1' && map[i][j + 1] != ' '))
+		|| (map[i][j + 1] != '1' && map[i][j + 1] != ' ')))
 			return (0);
 		j++;
 	}
@@ -102,11 +102,11 @@ int space_btw_walls(char **map)
 		k = skip_end_spaces(map[i]);
 		while(map[i][j] && j <= k)
 		{
-			if (map[j][i] == ' ' &&
-            (map[j - 1][i] != '1' && map[j - 1][i] != ' ') ||
-            (map[j + 1][i] != '1' && map[j + 1][i] != ' ') ||
-            (map[j][i - 1] != '1' && map[j][i - 1] != ' ') ||
-            (map[j][i + 1] != '1' && map[j][i + 1] != ' '))
+			if (map[i][j] == ' ' &&
+            ((map[i - 1][j] != '1' && map[i - 1][j] != ' ') ||
+            (map[i + 1][j] != '1' && map[i + 1][j] != ' ') ||
+            (map[i][j - 1] != '1' && map[i][j - 1] != ' ') ||
+            (map[i][j + 1] != '1' && map[i][j + 1] != ' ')))
 				return (0);
 			j++;
 		}

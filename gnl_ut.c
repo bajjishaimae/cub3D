@@ -31,7 +31,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	char	*res;
 
-	res = malloc(size * count);
+	res = c_malloc(size * count, 1);
 	if (!res)
 		return (NULL);
 	ft_bzero(res, size * count);

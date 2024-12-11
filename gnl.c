@@ -1,14 +1,5 @@
 #include "cub.h"
 
-char	*ft_join_free(char *save, char *buffer)
-{
-	char	*temp;
-
-	temp = ft_strjoin(save, buffer);
-	free(save);
-	return (temp);
-}
-
 char	*ft_rest(char *save)
 {
 	int		i;
@@ -20,20 +11,17 @@ char	*ft_rest(char *save)
 		i++;
 	if (!save[i])
 	{
-		free(save);
 		return (NULL);
 	}
 	rest = ft_calloc((ft_strlen(save) - i + 1), sizeof(char));
 	if (!rest)
 	{
-		free(rest);
-		return (NULL);
+		ft_error('a');
 	}
 	i++;
 	j = 0;
 	while (save[i])
 		rest[j++] = save[i++];
-	free(save);
 	return (rest);
 }
 
@@ -55,8 +43,7 @@ char	*ft_line(char *save)
 		line = ft_calloc(i + 1, sizeof(char));
 	if (!line)
 	{
-		free(line);
-		return (NULL);
+		ft_error('a');
 	}
 	i = 0;
 	while (save[i] && save[i] != '\n')
@@ -74,21 +61,21 @@ char	*ft_manip(int fd, char *save)
 	if (!save)
 		save = ft_calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!save || !buffer)
+		ft_error('a');
 	nb = 1;
 	while (nb > 0)
 	{
 		nb = read(fd, buffer, BUFFER_SIZE);
 		if (nb == -1)
 		{
-			free(buffer);
 			return (NULL);
 		}
 		buffer[nb] = '\0';
-		save = ft_join_free(save, buffer);
+		save = ft_strjoin(save, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	free(buffer);
 	return (save);
 }
 

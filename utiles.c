@@ -20,7 +20,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	ptr = c_malloc(ft_strlen(s1) + ft_strlen(s2) + 1, 1);
 	if (ptr == NULL)
 		return (NULL);
 	while (s1[i])
@@ -68,7 +68,7 @@ char	*ft_strdup(char *s)
 
 	i = 0;
 	size = ft_strlen(s);
-	ptr = malloc(size + 1);
+	ptr = c_malloc(size + 1, 1);
 	if (!ptr)
 		return (0);
 	while (s[i] != '\0')
@@ -110,20 +110,6 @@ static int	ft_word_len(char const *str, char c)
 	return (i);
 }
 
-static void	*ft_freee(char **arr, int i)
-{
-	int	j;
-
-	j = 0;
-	while (j < i)
-	{
-		free(arr[j]);
-		j++;
-	}
-	free(arr);
-	return (NULL);
-}
-
 static char	**ft_fillptr(char const *in, char **out, char c, int words)
 {
 	int		i;
@@ -137,9 +123,9 @@ static char	**ft_fillptr(char const *in, char **out, char c, int words)
 		while (*in == c)
 			in++;
 		wlen = ft_word_len(in, c);
-		out[i] = (char *)malloc((wlen * sizeof(char)) + 1);
+		out[i] = c_malloc((wlen * sizeof(char)) + 1, 1);
 		if (!out[i])
-			return (ft_freee(out, i));
+			ft_error('a');
 		j = 0;
 		while (j < wlen)
 			out[i][j++] = *in++;
@@ -158,11 +144,16 @@ char	**ft_split(char *s, char c)
 	if (!s)
 		return (NULL);
 	words = ft_wordcounter(s, c);
-	ptr = (char **)malloc((words + 1) * sizeof(char *));
+	ptr = c_malloc((words + 1) * sizeof(char *), 1);
 	if (!(ptr))
-		return (NULL);
+		ft_error('a');
 	ptr = ft_fillptr(s, ptr, c, words);
 	return (ptr);
+}
+
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
 }
 
 int	isonly_spaces(char *input)

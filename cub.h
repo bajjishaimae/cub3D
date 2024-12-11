@@ -10,9 +10,22 @@
 #include <string.h>
 # define BUFFER_SIZE 10
 
+typedef struct s_line
+{
+    int line_order;
+    int NO_line;
+    int SO_line;
+    int WE_line;
+    int EA_line;
+    int F_line;
+    int C_line;
+    int map_line;
+} t_line;
+
 typedef struct s_data
 {
     char **map;
+    t_line order;
     char *NO;
     char *WE;
     char *EA;
@@ -24,7 +37,14 @@ typedef struct s_data
     int x_player;
     int y_player;
     char direction;
+    int end_map;
 } t_data;
+
+typedef struct s_coll
+{
+	void			*ptr;
+	struct s_coll	*next;
+}	t_coll;
 
 char	*ft_strchr(const char *string, int c );
 void	ft_bzero(void *s, size_t n);
@@ -50,4 +70,7 @@ int	open_cub_file(char *str);
 int surrounded_by_walls(char **map);
 int space_btw_walls(char **map);
 int	composition_checker(t_data *data, int i, int j);
+char *extract_content(char *line);
+int	ft_isdigit(int c);
+void	*c_malloc(size_t size, int flag);
 #endif

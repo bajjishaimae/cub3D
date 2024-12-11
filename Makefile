@@ -1,7 +1,7 @@
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 NAME = cub
-SRC = gnl_ut.c gnl.c main.c parse.c utiles.c
+SRC = gnl_ut.c gnl.c main.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c
 OBJ = $(SRC:.c=.o)
 
 all         : $(NAME)
