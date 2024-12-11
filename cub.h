@@ -21,6 +21,9 @@ typedef struct s_data
     int ceiling_color[3];
     int map_width;
     int map_lenght;
+    int x_player;
+    int y_player;
+    char direction;
 } t_data;
 
 char	*ft_strchr(const char *string, int c );
@@ -38,4 +41,13 @@ int	isonly_spaces(char *input);
 int sizeof_array(char **str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
+int skip_beg_spaces(char *row);
+int skip_end_spaces(char *row);
+void ft_error(char type);
+void set_texture(t_data *data, char *line);
+void set_colors(t_data *data, char *line);
+int	open_cub_file(char *str);
+int surrounded_by_walls(char **map);
+int space_btw_walls(char **map);
+int	composition_checker(t_data *data, int i, int j);
 #endif

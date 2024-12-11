@@ -1,22 +1,11 @@
 #include "cub.h"
 
-int	open_cub_file(char *str)
-{
-	int		fd;
-
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr_fd("Error\nError opening the file\n", 2);
-		exit (1);
-	}
-	return (fd);
-}
 char *extract_content(char *line)
 {
 	int end;
     int start;
     char *content;
+
     end = ft_strlen(line) - 1;
     while (end >= 0 && (line[end] == ' ' || line[end] == '\t' || line[end] == '\n'))
         end--;
@@ -25,76 +14,39 @@ char *extract_content(char *line)
         start++;
     content = malloc(sizeof(char) * (end - start + 2));
     if (!content)
-        return (NULL);
+        ft_error('a');
     ft_strncpy(content, &line[start], end - start + 1);
     content[end - start + 1] = '\0';
     return (content);
 }
-void set_texture(t_data *data, char *line)
+
+
+int manip_line(t_data *data, char *line, int *nb, char **joined)
 {
-    while (*line == ' ' || *line == '\t')
-        line++;
-
-    if (ft_strncmp(line, "NO", 2) == 0)
-        data->NO = extract_content(line + 2);
-    else if (ft_strncmp(line, "SO", 2) == 0)
-        data->SO = extract_content(line + 2);
-    else if (ft_strncmp(line, "EA", 2) == 0)
-        data->EA = extract_content(line + 2);
-    else if (ft_strncmp(line, "WE", 2) == 0)
-        data->WE = extract_content(line + 2);
-
-}
-
-void set_colors(t_data *data, char *line)
-{
-	char *colors;
-    char **splited;
-    int *color_array;
-	int i;
-
-	i = 0;
-    while (*line == ' ' || *line == '\t')
-        line++;
-    if (ft_strncmp(line, "F", 1) == 0)
-        color_array = data->floor_color;
-    else if (ft_strncmp(line, "C", 1) == 0)
-        color_array = data->ceiling_color;
-    else
-        return;
-    colors = extract_content(line + 1);
-    splited = ft_split(colors, ',');
-    if (!splited || sizeof_array(splited) != 3)
-    {
-        ft_putstr_fd("Error\nInvalid color format\n", 2);
-        exit(1);
-    }
-	while (i < 3)
-    {
-        color_array[i] = atoi(splited[i]);
-        if (color_array[i] < 0 || color_array[i] > 255)
-        {
-            ft_putstr_fd("Error\nColor values must be in [0, 255]\n", 2);
-            exit(1);
-        }
-		i++;
-    }
-}
-
-void manip_line(t_data *data, char *line, int *nb, char **joined)
-{
-	if (strstr(line, "NO") || strstr(line, "EA") || strstr(line, "WE") || strstr(line, "SO"))
+	if (!ft_strncmp(line + skip_beg_spaces(line), "NO ", 3)
+		|| !ft_strncmp(line + skip_beg_spaces(line), "SO ", 3)
+		|| !ft_strncmp(line + skip_beg_spaces(line), "EA ", 3)
+		|| !ft_strncmp(line + skip_beg_spaces(line), "WE ", 3))
 	{
 		set_texture(data, line);
 		(*nb)++;
+		return (1);
 	}
-	else if (ft_strchr(line, 'F') || ft_strchr(line, 'C'))
+	else if (!ft_strncmp(line + skip_beg_spaces(line), "F ", 2)
+			|| !ft_strncmp(line + skip_beg_spaces(line), "C ", 2))
 	{
 		set_colors(data, line);
 		(*nb)++;
+		return (1);
 	}
-	else
+	else if (!ft_strncmp(line + skip_beg_spaces(line), "1", 1)
+			|| !ft_strncmp(line + skip_beg_spaces(line), "0", 1))
+	{
 		*joined = ft_strjoin(*joined, line);
+		return (1);
+	}
+	else 
+		return (0);
 
 }
 void manip_file(t_data *file_data, int fd)
@@ -107,22 +59,21 @@ void manip_file(t_data *file_data, int fd)
 	valid_infonumber = 0;
 	while (1)
 	{
-
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		if (!ft_strcmp(line, "\n") || isonly_spaces(line))
 			continue ;
 		
-		manip_line(file_data, line, &valid_infonumber, &joined);
+		if (!manip_line(file_data, line, &valid_infonumber, &joined))
+			ft_error('f');
 	}
 	file_data->map = ft_split(joined, '\n');
 	if (file_data->map[0])
 		valid_infonumber++;
 	if (valid_infonumber != 7)
 	{
-		ft_putstr_fd("Error\n missing information\n", 2);
-		exit(1);
+		ft_error('f');
 	}
 }
 
@@ -132,4 +83,9 @@ void parse(t_data *file_data, char *file_name)
 
 	fd = open_cub_file(file_name);
 	manip_file(file_data, fd);
+	if (!surrounded_by_walls(file_data->map) || !space_btw_walls(file_data->map))
+		ft_error('m');
+	if (!composition_checker(file_data, 0, 0))
+		ft_error('m');
+	
 }

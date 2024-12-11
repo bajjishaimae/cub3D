@@ -1,5 +1,35 @@
 #include "cub.h"
 
+void ft_error(char type)
+{
+	if (type == 'f')
+		ft_putstr_fd("Error\nError in file structure\n", 2);
+	else if (type == 'm')
+		ft_putstr_fd("Error\nError in map\n", 2);
+	else if (type == 'a')
+		ft_putstr_fd("Error\nError in allocation\n", 2);
+	else if (type == 'c')
+		ft_putstr_fd("Error\nError in colors\n", 2);
+	else if (type == 't')
+		ft_putstr_fd("Error\nError in textures\n", 2);
+	else if (type == 'o')
+		ft_putstr_fd("Error\nError opening the file\n", 2);
+	//add free for carbage coll
+	exit(1);
+}
+
+int	open_cub_file(char *str)
+{
+	int		fd;
+
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_error('o');
+	}
+	return (fd);
+}
+
 void check_file_ext(char *str)
 {
 	while (*str)
