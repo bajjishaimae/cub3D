@@ -8,7 +8,12 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
+# include <mlx.h>
+# include <math.h>
+# include <stdbool.h>
 # define BUFFER_SIZE 10
+# define pi M_PI
+# define inf INFINITY
 
 typedef struct s_line
 {
@@ -22,8 +27,41 @@ typedef struct s_line
     int map_line;
 } t_line;
 
+
+typedef struct s_player
+{
+    double  x_pos;
+    double  y_pos;
+    double  x_dir;
+    double  y_dir;
+    double  plane_x;
+    double  plane_y;
+    double  fov;
+}   t_player;
+
+typedef struct s_ray
+{
+    double  rayd_x;
+    double  rayd_y;
+    double  delta_x;
+    double  delta_y;
+    double  side_x;
+    double  side_y;
+    int     step_x;
+    int     step_y;
+    // bool    hit_wall;
+    int     side_wall; // 0 : x_side , 1 : y_side
+}   t_ray;
+
 typedef struct s_data
 {
+     t_player   player;
+    void        *mlx_ptr;
+    void        *mlx_win;
+    int         screen_width;
+    int         screen_height;
+    double      fov;
+    t_ray       ray;
     char **map;
     t_line order;
     char *NO;
