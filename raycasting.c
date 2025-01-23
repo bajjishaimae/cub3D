@@ -57,6 +57,7 @@ void    init_dist(t_data *data)
 void    raytrace(t_data *data, int map_x, int map_y)
 {
     bool    hit_wall;
+    double  perpWallDist;
 
     hit_wall = 0;
     while (hit_wall == 0)
@@ -76,6 +77,10 @@ void    raytrace(t_data *data, int map_x, int map_y)
         if (data->map[map_x][map_y] > 0)
             hit_wall = 1;
     }
+     if (data->ray.side_wall == 0)
+        perpWallDist = data->ray.side_x - data->ray.delta_x;
+    else
+        perpWallDist = data->ray.side_y - data->ray.delta_y;
 }
 
 
