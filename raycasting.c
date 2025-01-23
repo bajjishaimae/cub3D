@@ -56,14 +56,25 @@ void    init_dist(t_data *data)
 
 void    raytrace(t_data *data, int map_x, int map_y)
 {
-    int     step_x;
-    int     step_y;
     bool    hit_wall;
 
     hit_wall = 0;
     while (hit_wall == 0)
     {
-        
+        if (data->ray.side_x < data->ray.side_y)
+        {
+            data->ray.side_x += data->ray.delta_x;
+            map_x += data->ray.step_x;
+            data->ray.side_wall = 0;
+        }
+        else
+        {
+            data->ray.side_y += data->ray.delta_y;
+            map_y += data->ray.step_y;
+            data->ray.side_wall = 1;
+        }
+        if (data->map[map_x][map_y] > 0)
+            hit_wall = 1;
     }
 }
 
