@@ -73,4 +73,6 @@ int	composition_checker(t_data *data, int i, int j);
 char *extract_content(char *line);
 int	ft_isdigit(int c);
 void	*c_malloc(size_t size, int flag);
+void map_lenght(t_data *data);
+void map_width(t_data *data);
 #endif
