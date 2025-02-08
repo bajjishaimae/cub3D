@@ -14,6 +14,7 @@
 # define BUFFER_SIZE 10
 # define pi M_PI
 # define inf INFINITY
+# define CELL_SIZE 64
 
 typedef struct s_line
 {
@@ -53,6 +54,15 @@ typedef struct s_ray
     int     side_wall; // 0 : x_side , 1 : y_side
 }   t_ray;
 
+typedef struct s_image
+{
+    void        *img;
+    int         bits_per_pixel;
+    int         size_line;
+    int         endian;
+    char        *buffer;
+}   t_img;
+
 typedef struct s_data
 {
      t_player   player;
@@ -62,6 +72,10 @@ typedef struct s_data
     int         screen_height;
     double      fov;
     t_ray       ray;
+    double      pwd;
+    int         pixel_x;
+    int         pixel_y;
+    t_img       img;
     char **map;
     t_line order;
     char *NO;
@@ -111,4 +125,11 @@ int	composition_checker(t_data *data, int i, int j);
 char *extract_content(char *line);
 int	ft_isdigit(int c);
 void	*c_malloc(size_t size, int flag);
+//
+void check_file_ext(char *str);
+void	init_data(t_data *data);
+void	init_player(t_data *data);
+void    raycast(t_data *data);
+void    init_dist(t_data *data, int x);
+
 #endif

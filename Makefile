@@ -1,23 +1,31 @@
+NAME = cub3d
+
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-NAME = cub
-SRC = gnl_ut.c gnl.c main.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c
-OBJ = $(SRC:.c=.o)
 
-all         : $(NAME)
+CFLAGS = -Wall -Wextra -Werror -Imlx
 
-$(NAME)     : $(OBJ)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ)
+MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
-%.o			:	%.c cub.h
-			$(CC) $(FLAGS)  -c $< -o $@
+SRCS = cub3d.c gnl_ut.c gnl.c main.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c 
 
-clean       :
-			@rm -f $(OBJ)
+HEADS = cub.h
 
-fclean      : clean
-			@rm -f $(NAME)
+OBJS = $(SRCS:.c=.o)
 
-re          : fclean all
+all : $(NAME)
 
-.PHONY      : clean
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) $(MLXFLAGS) $^ -o $@
+
+$(OBJS) : %.o: %.c $(HEADS) Makefile
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean :
+	rm	-f $(OBJS) $(OBJSB)
+
+fclean : clean
+	rm	-f $(NAME) $(BONUS)
+
+re : fclean all
+
+.PHONY : clean
