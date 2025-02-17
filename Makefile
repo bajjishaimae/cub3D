@@ -2,13 +2,13 @@ NAME = cub3d
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Imlx
+CFLAGS = -Wall -Wextra -Werror -Imlx -g -fsanitize=address
 
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
-SRCS = cub3d.c gnl_ut.c gnl.c main.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c 
+SRCS = cub3d.c gnl_ut.c gnl.c main.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c moves.c
 
-HEADS = cub.h
+HEADS = cub3d.h
 
 OBJS = $(SRCS:.c=.o)
 

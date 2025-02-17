@@ -1,32 +1,33 @@
-#ifndef CUB_H
-# define CUB_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 10:46:45 by kelmounj          #+#    #+#             */
+/*   Updated: 2025/02/17 16:19:05 by kelmounj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_H
+#define CUB3D_H
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <limits.h>
-#include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <string.h>
 # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
-# define BUFFER_SIZE 10
+# include  <sys/time.h>
 # define pi M_PI
 # define inf INFINITY
-# define CELL_SIZE 64
-
-typedef struct s_line
-{
-    int line_order;
-    int NO_line;
-    int SO_line;
-    int WE_line;
-    int EA_line;
-    int F_line;
-    int C_line;
-    int map_line;
-} t_line;
+# define BUFFER_SIZE 10
+# define CELL_SIZE 16
 
 
 typedef struct s_player
@@ -51,7 +52,7 @@ typedef struct s_ray
     int     step_x;
     int     step_y;
     // bool    hit_wall;
-    int     side_wall; // 0 : x_side , 1 : y_side
+    // int     side_wall; // 0 : x_side , 1 : y_side
 }   t_ray;
 
 typedef struct s_image
@@ -63,9 +64,21 @@ typedef struct s_image
     char        *buffer;
 }   t_img;
 
+typedef struct s_line
+{
+    int line_order;
+    int NO_line;
+    int SO_line;
+    int WE_line;
+    int EA_line;
+    int F_line;
+    int C_line;
+    int map_line;
+} t_line;
+
 typedef struct s_data
 {
-     t_player   player;
+    t_player   player;
     void        *mlx_ptr;
     void        *mlx_win;
     int         screen_width;
@@ -76,20 +89,20 @@ typedef struct s_data
     int         pixel_x;
     int         pixel_y;
     t_img       img;
-    char **map;
-    t_line order;
-    char *NO;
-    char *WE;
-    char *EA;
-    char *SO;
-    int floor_color[3];
-    int ceiling_color[3];
-    int map_width;
-    int map_lenght;
-    int x_player;
-    int y_player;
-    char direction;
-    int end_map;
+    char        **map;
+    t_line      order;
+    char        *NO;
+    char        *WE;
+    char        *EA;
+    char        *SO;
+    int         floor_color[3];
+    int         ceiling_color[3];
+    int         map_width;
+    int         map_lenght;
+    int         x_player;
+    int         y_player;
+    char        direction;
+    int         end_map;
 } t_data;
 
 typedef struct s_coll
@@ -125,11 +138,17 @@ int	composition_checker(t_data *data, int i, int j);
 char *extract_content(char *line);
 int	ft_isdigit(int c);
 void	*c_malloc(size_t size, int flag);
-//
+void map_lenght(t_data *data);
+void map_width(t_data *data);
 void check_file_ext(char *str);
+//
 void	init_data(t_data *data);
 void	init_player(t_data *data);
 void    raycast(t_data *data);
 void    init_dist(t_data *data, int x);
+int     move(int key_code, t_data *data);
+void put_pixel_to_image(t_data *data, int x, int y, int color);
+int render_minimap(t_data *data);
+int render_frame(t_data *data);
 
 #endif
