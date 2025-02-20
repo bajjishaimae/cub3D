@@ -54,5 +54,4 @@ int	main(int ac, char **av)
 	}
 	check_file_ext(av[1]);
 	parse(&file_data, av[1]);
-
 }

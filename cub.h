@@ -68,11 +68,14 @@ void set_texture(t_data *data, char *line);
 void set_colors(t_data *data, char *line);
 int	open_cub_file(char *str);
 int surrounded_by_walls(char **map);
-int space_btw_walls(char **map);
+int deep_surr_walls(char **map);
 int	composition_checker(t_data *data, int i, int j);
 char *extract_content(char *line);
 int	ft_isdigit(int c);
+int	ft_atoi(const char *str);
 void	*c_malloc(size_t size, int flag);
 void map_lenght(t_data *data);
 void map_width(t_data *data);
+int	is_space(char c);
+int count_spaces(char *number);
 #endif
