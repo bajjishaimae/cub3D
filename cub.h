@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
+#include "minilibx-linux/mlx.h"
 # define BUFFER_SIZE 10
 
 typedef struct s_line
@@ -21,6 +22,17 @@ typedef struct s_line
     int C_line;
     int map_line;
 } t_line;
+
+typedef struct s_text
+{
+    void *img;
+    char *addr;
+    int width;
+    int height;
+    int endian;
+    int bpp;
+    int line_len;
+} t_text;
 
 typedef struct s_data
 {
@@ -38,7 +50,12 @@ typedef struct s_data
     int y_player;
     char direction;
     int end_map;
+    t_text north;
+    t_text south;
+    t_text east;
+    t_text west;
 } t_data;
+
 
 typedef struct s_coll
 {
@@ -78,4 +95,6 @@ void map_lenght(t_data *data);
 void map_width(t_data *data);
 int	is_space(char c);
 int count_spaces(char *number);
+void load_all_text(t_data *data);
+void destroy_text(t_data *data);
 #endif
