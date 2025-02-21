@@ -8,8 +8,49 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
-#include "minilibx-linux/mlx.h"
+// #include "minilibx-linux/mlx.h"
+# include <mlx.h>
 # define BUFFER_SIZE 10
+# include <math.h>
+# include <stdbool.h>
+# include  <sys/time.h>
+# define pi M_PI
+# define inf INFINITY
+# define CELL_SIZE 16
+
+typedef struct s_player
+{
+    double  x_pos;
+    double  y_pos;
+    double  x_dir;
+    double  y_dir;
+    double  plane_x;
+    double  plane_y;
+    double  fov;
+}   t_player;
+
+typedef struct s_ray
+{
+    double  rayd_x;
+    double  rayd_y;
+    double  delta_x;
+    double  delta_y;
+    double  side_x;
+    double  side_y;
+    int     step_x;
+    int     step_y;
+    // bool    hit_wall;
+    // int     side_wall; // 0 : x_side , 1 : y_side
+}   t_ray;
+
+typedef struct s_image
+{
+    void        *img;
+    int         bits_per_pixel;
+    int         size_line;
+    int         endian;
+    char        *buffer;
+}   t_img;
 
 typedef struct s_line
 {
@@ -36,6 +77,17 @@ typedef struct s_text
 
 typedef struct s_data
 {
+    t_player   player;
+    void        *mlx_ptr;
+    void        *mlx_win;
+    int         screen_width;
+    int         screen_height;
+    double      fov;
+    t_ray       ray;
+    double      pwd;
+    int         pixel_x;
+    int         pixel_y;
+    t_img       img;
     char **map;
     t_line order;
     char *NO;
@@ -97,4 +149,15 @@ int	is_space(char c);
 int count_spaces(char *number);
 void load_all_text(t_data *data);
 void destroy_text(t_data *data);
+//
+void	init_data(t_data *data);
+void	init_player(t_data *data);
+void    raycast(t_data *data);
+void    init_dist(t_data *data, int x);
+int     move(int key_code, t_data *data);
+void    put_pixel_to_image(t_data *data, int x, int y, int color);
+int     render_minimap(t_data *data);
+int     render_frame(t_data *data);
+int     ft_destroy_win(t_data *data);
+int     mouse_move(int x, int y, t_data *data);
 #endif

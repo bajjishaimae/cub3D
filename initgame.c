@@ -43,15 +43,3 @@ void check_file_ext(char *str)
 	exit(1);
 }
 
-int	main(int ac, char **av)
-{
-
-	t_data file_data;
-	if (ac != 2)
-	{
-		printf("Error\nyou need 1 file , .cub file\n");
-		return (1);
-	}
-	check_file_ext(av[1]);
-	parse(&file_data, av[1]);
-}
