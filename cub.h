@@ -1,34 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 10:46:45 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/21 12:18:55 by kelmounj         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef CUB3D_H
-#define CUB3D_H
+#ifndef CUB_H
+# define CUB_H
 
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <limits.h>
-# include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <string.h>
+// #include "minilibx-linux/mlx.h"
 # include <mlx.h>
+# define BUFFER_SIZE 10
 # include <math.h>
 # include <stdbool.h>
 # include  <sys/time.h>
 # define pi M_PI
 # define inf INFINITY
-# define BUFFER_SIZE 10
 # define CELL_SIZE 16
-
 
 typedef struct s_player
 {
@@ -76,6 +64,17 @@ typedef struct s_line
     int map_line;
 } t_line;
 
+typedef struct s_text
+{
+    void *img;
+    char *addr;
+    int width;
+    int height;
+    int endian;
+    int bpp;
+    int line_len;
+} t_text;
+
 typedef struct s_data
 {
     t_player   player;
@@ -89,21 +88,26 @@ typedef struct s_data
     int         pixel_x;
     int         pixel_y;
     t_img       img;
-    char        **map;
-    t_line      order;
-    char        *NO;
-    char        *WE;
-    char        *EA;
-    char        *SO;
-    int         floor_color[3];
-    int         ceiling_color[3];
-    int         map_width;
-    int         map_lenght;
-    int         x_player;
-    int         y_player;
-    char        direction;
-    int         end_map;
+    char **map;
+    t_line order;
+    char *NO;
+    char *WE;
+    char *EA;
+    char *SO;
+    int floor_color[3];
+    int ceiling_color[3];
+    int map_width;
+    int map_lenght;
+    int x_player;
+    int y_player;
+    char direction;
+    int end_map;
+    t_text north;
+    t_text south;
+    t_text east;
+    t_text west;
 } t_data;
+
 
 typedef struct s_coll
 {
@@ -133,14 +137,18 @@ void set_texture(t_data *data, char *line);
 void set_colors(t_data *data, char *line);
 int	open_cub_file(char *str);
 int surrounded_by_walls(char **map);
-int space_btw_walls(char **map);
+int deep_surr_walls(char **map);
 int	composition_checker(t_data *data, int i, int j);
 char *extract_content(char *line);
 int	ft_isdigit(int c);
+int	ft_atoi(const char *str);
 void	*c_malloc(size_t size, int flag);
 void map_lenght(t_data *data);
 void map_width(t_data *data);
-void check_file_ext(char *str);
+int	is_space(char c);
+int count_spaces(char *number);
+void load_all_text(t_data *data);
+void destroy_text(t_data *data);
 //
 void	init_data(t_data *data);
 void	init_player(t_data *data);
@@ -152,6 +160,4 @@ int     render_minimap(t_data *data);
 int     render_frame(t_data *data);
 int     ft_destroy_win(t_data *data);
 int     mouse_move(int x, int y, t_data *data);
-
-
 #endif

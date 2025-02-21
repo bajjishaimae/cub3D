@@ -6,11 +6,11 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:36:18 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/17 14:10:59 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:29:30 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 void	init_player(t_data *data)
 {

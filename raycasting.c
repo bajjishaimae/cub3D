@@ -6,11 +6,11 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/17 15:52:46 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:29:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 void    raycast(t_data *data)
 {

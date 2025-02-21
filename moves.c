@@ -6,11 +6,11 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:53 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/21 12:18:00 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:28:36 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 int move_up(t_data *data, double move_speed)
 {

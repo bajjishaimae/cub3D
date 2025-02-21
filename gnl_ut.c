@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "cub.h"
 
 char	*ft_strchr(const char *string, int c )
 {

@@ -1,4 +1,5 @@
-#include "cub3d.h"
+#include "cub.h"
+#include <time.h>
 
 int	ft_strlen(char *s)
 {
@@ -235,4 +236,59 @@ void map_width(t_data *data)
 		i++;
 	}
 	data->map_width = j;
+}
+
+int	is_space(char c)
+{
+	if (!c || c == 32 || c == 9)
+		return (1);
+	return (0);
+}
+
+static int	ft_is_space(int c)
+{
+	return (c == 32 || (c >= 9 && c <= 13));
+}
+
+int	ft_atoi(const char *str)
+{
+	int		sign;
+	long	result;
+
+	sign = 1;
+	result = 0;
+	while (ft_is_space(*str))
+		str++;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	while (ft_isdigit(*str))
+	{
+		if (result > 922337203685477580
+			|| (result == 922337203685477580 && *str - '0' > 7))
+			return (-1 * (sign == 1));
+		result *= 10;
+		result += (*str - '0');
+		str++;
+	}
+	return (result * sign);
+}
+
+int count_spaces(char *number)
+{
+	int i= 0;
+	int counter = 0;
+	while(number[i])
+	{
+		if (number[i] == ' ' || number[i] == '\t')
+		{
+			counter++;
+		}
+		i++;
+	}
+	return (counter);
 }

@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "cub.h"
 
 int check_content(char *colors)
 {
@@ -36,7 +36,9 @@ void set_colors(t_data *data, char *line)
 	}
     colors = extract_content(line + 1);
     if (!check_content(colors))
+	{
         ft_error('c');
+	}
     splited = ft_split(colors, ',');
     if (!splited || sizeof_array(splited) != 3)
 	{
@@ -44,7 +46,9 @@ void set_colors(t_data *data, char *line)
 	}
 	while (i < 3)
     {
-        color_array[i] = atoi(splited[i]);
+		if (ft_strlen(splited[i]) > 3 && (ft_strlen(splited[i]) - count_spaces(splited[i]) > 3))
+			ft_error('c');
+        color_array[i] = ft_atoi(splited[i]);
         if (color_array[i] < 0 || color_array[i] > 255)
 		{
         	ft_error('c');

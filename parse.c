@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "cub.h"
 int check_order(t_data *data)
 {
 	if (data->order.map_line < data->order.C_line
@@ -20,15 +20,18 @@ char *extract_content(char *line)
     while (end >= 0 && (line[end] == ' ' || line[end] == '\t' || line[end] == '\n'))
         end--;
     start = 0;
+	if (start >= end)
+		ft_error('t');
     while (line[start] && (line[start] == ' ' || line[start] == '\t'))
         start++;
     content = c_malloc(sizeof(char) * (end - start + 2), 1);
     if (!content)
         ft_error('a');
     ft_strncpy(content, &line[start], end - start + 1);
-    content[end - start + 1] = '\0';
+	content[end - start + 1] = '\0';
     return (content);
 }
+
 
 
 int manip_line(t_data *data, char *line, int *nb, char **joined)
@@ -115,7 +118,7 @@ void parse(t_data *file_data, char *file_name)
 	manip_file(file_data, fd);
 	if (!check_order(file_data))
 		ft_error('m');
-	if (!surrounded_by_walls(file_data->map) || !space_btw_walls(file_data->map))
+	if (!surrounded_by_walls(file_data->map) || !deep_surr_walls(file_data->map))
 		ft_error('m');
 	if (!composition_checker(file_data, 0, 0))
 		ft_error('m');
