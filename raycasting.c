@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/24 20:54:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:32:51 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,35 @@ void draw_line(t_data *data, double perpWallDist, int x)
     }
 }
 
-void put_texture(t_data *data, int end_line, int start_line)
+void put_texture(t_data *data, int end_line, int start_line, int line_h)
 {
+    t_text texture;
+    int tex_x;
+    int color;
+    double pos;
+    double step;
     
+    texture = get_wall_texture(data, data->side_wall, data->ray.rayd_x, data->ray.rayd_y);
+    tex_x = data->wall_x * texture.width;
+    
+    if ((data->side_wall == 0 && data->ray.rayd_x < 0) || (data->side_wall == 1 && data->ray.rayd_y > 0))
+	    tex_x = texture.width - tex_x - 1;
+    step = 1.0 * texture.width / line_h;
+    pos = (start_line - data->screen_height / 2 + line_h / 2) * step;
+    // while (start_line < end_line)
+    // {
+	//     pos += step;
+	//     color = (texture_buffer)[dir][texture.width * ((int)pos & (texture.width - 1)) + tex_x];
+
+	//     if (dir == NORTH || dir == SOUTH)
+	// 	// add some shading to the north and south walls
+	// 	    color = (color >> 1) & 0x7F7F7F;
+	//     if (color > 0)
+	// 	// your pixel map (int** in this case)
+	// 	    pixels_map[start_line][x] = color;
+
+	//     start_line++;
+    }
 }
 
 void    raytrace(t_data *data, int map_x, int map_y, int x)
