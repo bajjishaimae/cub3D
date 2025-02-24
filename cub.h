@@ -153,7 +153,7 @@ void load_all_text(t_data *data);
 void destroy_text(t_data *data);
 void check_file_ext(char *str);
 int convert_rgb(int r, int g, int b);
-char *get_wall_texture(int side, double rayd_x, double rayd_y);
+t_text get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y);
 //
 void	init_data(t_data *data);
 void	init_player(t_data *data);
