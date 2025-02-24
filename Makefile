@@ -8,7 +8,7 @@ MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 SRCS = cub3d.c gnl_ut.c gnl.c initgame.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c moves.c window.c
 
-HEADS = cub3d.h
+HEADS = cub.h
 
 OBJS = $(SRCS:.c=.o)
 

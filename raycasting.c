@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/21 17:20:57 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/02/24 18:59:33 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,19 @@ void draw_line(t_data *data, double perpWallDist, int x)
         end_line = data->screen_height - 1;
     draw_ceiling(data, start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
     draw_floor(data, end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
-    color = 0xC5A5AD;
-    i = start_line;
-    while (i <= end_line)
-    {
-       put_pixel_to_image(data, x, i, color);
-       i++;
-    }
+    
+    // color = 0xC5A5AD;
+    // i = start_line;
+    // while (i <= end_line)
+    // {
+    //    put_pixel_to_image(data, x, i, color);
+    //    i++;
+    // }
+}
+
+void put_texture(t_data *data, int end_line, int start_line)
+{
+    
 }
 
 void    raytrace(t_data *data, int map_x, int map_y, int x)
@@ -95,6 +101,7 @@ void    raytrace(t_data *data, int map_x, int map_y, int x)
     bool    hit_wall;
     double  perpWallDist;
     int     side_wall;
+    double  wall_x;
 
     hit_wall = 0;
     side_wall = -1;
@@ -125,6 +132,10 @@ void    raytrace(t_data *data, int map_x, int map_y, int x)
         perpWallDist = data->ray.side_x - data->ray.delta_x;
     else
         perpWallDist = (data->ray.side_y) - (data->ray.delta_y);
+    if (side_wall == 0)
+        wall_x = data->player.y_pos + perpWallDist * data->ray.rayd_y;
+    else
+        wall_x = data->player.x_pos + perpWallDist * data->ray.rayd_x;
     draw_line(data,perpWallDist, x);
 }
 

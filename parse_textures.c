@@ -54,3 +54,21 @@ void destroy_text(t_data *data)
     mlx_destroy_image(data->mlx_ptr, data->east.img);
     mlx_destroy_image(data->mlx_ptr, data->west.img);
 }
+
+t_text get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y)
+{
+    if (side == 0)
+    {
+        if (rayd_x > 0) 
+            return data->east;
+        else 
+            return data->west;
+    }
+    else
+    {
+        if (rayd_y > 0) 
+            return data->south;
+        else 
+            return data->north;
+    }
+}
