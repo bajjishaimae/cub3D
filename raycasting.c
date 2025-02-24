@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/24 20:49:29 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:52:52 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void draw_line(t_data *data, double perpWallDist, int x)
     end_line = line_h / 2 + data->screen_height / 2;
     if (end_line >= data->screen_height)
         end_line = data->screen_height - 1;
-    draw_ceiling(data, start_line, x, 0x87CEEB);
-    draw_floor(data, end_line, x, 0x228B22);
+    draw_ceiling(data, start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
+    draw_floor(data, end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
     color = 0xC5A5AD;
     i = start_line;
     while (i <= end_line)
