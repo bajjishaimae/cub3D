@@ -17,6 +17,8 @@
 # define pi M_PI
 # define inf INFINITY
 # define CELL_SIZE 16
+# define SPEED_MOVE 0.8
+# define SPEED_ROT 0.2
 
 typedef struct s_player
 {

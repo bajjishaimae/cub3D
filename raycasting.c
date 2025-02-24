@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/24 18:59:33 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/02/24 20:54:24 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ void draw_line(t_data *data, double perpWallDist, int x)
     draw_ceiling(data, start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
     draw_floor(data, end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
     
-    // color = 0xC5A5AD;
-    // i = start_line;
-    // while (i <= end_line)
-    // {
-    //    put_pixel_to_image(data, x, i, color);
-    //    i++;
-    // }
+    color = 0xC5A5AD;
+    i = start_line;
+    while (i <= end_line)
+    {
+       put_pixel_to_image(data, x, i, color);
+       i++;
+    }
 }
 
 void put_texture(t_data *data, int end_line, int start_line)
@@ -125,7 +125,7 @@ void    raytrace(t_data *data, int map_x, int map_y, int x)
             hit_wall = 1;
             break;
         }
-        if (data->map[map_y][map_x] != '0')
+        if (data->map[map_y][map_x] == '1')
             hit_wall = 1;
     }
     if (side_wall == 0)
