@@ -8,8 +8,8 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
-#include "minilibx-linux/mlx.h"
-// # include <mlx.h>
+// #include "minilibx-linux/mlx.h"
+# include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
 # include  <sys/time.h>
