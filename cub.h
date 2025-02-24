@@ -108,6 +108,8 @@ typedef struct s_data
     t_text south;
     t_text east;
     t_text west;
+    int side_wall;
+    double wall_x;
 } t_data;
 
 
@@ -153,6 +155,7 @@ void load_all_text(t_data *data);
 void destroy_text(t_data *data);
 void check_file_ext(char *str);
 int convert_rgb(int r, int g, int b);
+t_text get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y);
 //
 void	init_data(t_data *data);
 void	init_player(t_data *data);
