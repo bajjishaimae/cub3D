@@ -32,6 +32,7 @@ t_text load_texutes(char *path, t_data *data)
 {
     t_text texture;
     texture.img = mlx_xpm_file_to_image(data->mlx_ptr, path, &texture.width, &texture.height);
+
     if (texture.img == NULL)
         ft_error('t');
     texture.addr = mlx_get_data_addr(texture.img, &texture.bpp, &texture.line_len, &texture.endian);
@@ -51,34 +52,6 @@ void load_all_text(t_data *data)
         i++;
     }
 }
-
-
-// void destroy_text(t_data *data)
-// {
-//     mlx_destroy_image(data->mlx_ptr, data->north.img);
-//     mlx_destroy_image(data->mlx_ptr, data->south.img);
-//     mlx_destroy_image(data->mlx_ptr, data->east.img);
-//     mlx_destroy_image(data->mlx_ptr, data->west.img);
-// }
-
-int get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y)
-{
-    if (side == 0)
-    {
-        if (rayd_x > 0) 
-            return 2;
-        else 
-            return 3;
-    }
-    else
-    {
-        if (rayd_y > 0) 
-            return 1;
-        else 
-            return 0;
-    }
-}
-
 /*
 north 1
 south 2
@@ -110,4 +83,21 @@ void fill_text(t_data *data, int i)
         }
         y++;
     }    
+}
+int get_wall_texture(int side, double rayd_x, double rayd_y)
+{
+    if (side == 0)
+    {
+        if (rayd_x > 0) 
+            return 2;
+        else 
+            return 3;
+    }
+    else
+    {
+        if (rayd_y > 0) 
+            return 1;
+        else 
+            return 0;
+    }
 }

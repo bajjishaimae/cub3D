@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/25 15:08:46 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:36:53 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void put_pixel_to_image(t_data *data, int x, int y, int color)
         *(unsigned int *)(data->img.buffer + offset) = color;
     }
 }
+
 
 void draw_ceiling(t_data *data,int start_line, int x, int color)
 {
@@ -69,8 +70,6 @@ void draw_line(t_data *data, double perpWallDist, int x)
 {
     int start_line;
     int end_line;
-    int color;
-    int i;
 
     data->line_h = (int)(data->screen_height / perpWallDist);
     start_line = -data->line_h / 2 + data->screen_height / 2;
@@ -93,10 +92,10 @@ void put_texture(t_data *data, int end_line, int start_line, int x)
     int color;
     double pos;
     double step;
-    
-    index = get_wall_texture(data, data->side_wall, data->ray.rayd_x, data->ray.rayd_y);
+
+    index = get_wall_texture(data->side_wall, data->ray.rayd_x, data->ray.rayd_y);
     texture = data->text[index];
-    tex_x = (int)data->wall_x * texture.width;
+    tex_x = (int)data->wall_x * (double)texture.width;
     
     if ((data->side_wall == 0 && data->ray.rayd_x < 0) || (data->side_wall == 1 && data->ray.rayd_y > 0))
 	    tex_x = texture.width - tex_x - 1;
@@ -108,6 +107,8 @@ void put_texture(t_data *data, int end_line, int start_line, int x)
         int tex_y = (int)pos & (texture.height - 1);
         pos += step;
         color = data->textures[index][data->text[index].height * tex_y + tex_x];
+        if (data->side_wall == 1)
+			color = (color >> 1) & 8355711;
         put_pixel_to_image(data, x, y, color);
         y++;
     }

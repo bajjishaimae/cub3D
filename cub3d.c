@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/24 19:59:49 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:53:51 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int main(int ac, char **av)
     data.mlx_win = mlx_new_window(data.mlx_ptr, data.screen_width, data.screen_height, "cub3d");
     data.img.img = mlx_new_image(data.mlx_ptr, data.screen_width, data.screen_height);
     data.img.buffer = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, &data.img.size_line, &data.img.endian);
+    load_all_text(&data);
     mlx_hook(data.mlx_win, 17, 0, ft_destroy_win, &data);
 	mlx_hook(data.mlx_win, 2, 0, move, &data);
     mlx_hook(data.mlx_win, 6, 0, mouse_move, &data);
