@@ -40,35 +40,74 @@ t_text load_texutes(char *path, t_data *data)
 
 void load_all_text(t_data *data)
 {
-    data->north = load_texutes(data->NO, data);
-    data->south = load_texutes(data->SO, data);
-    data->east = load_texutes(data->EA, data);
-    data->west = load_texutes(data->WE, data);
+    int i = 0;
+    data->text[0] = load_texutes(data->NO, data);
+    data->text[1] = load_texutes(data->SO, data);
+    data->text[2] = load_texutes(data->EA, data);
+    data->text[3] = load_texutes(data->WE, data);
+    while (i < 4)
+    {
+        fill_text(data, i);
+        i++;
+    }
 }
 
 
-void destroy_text(t_data *data)
-{
-    mlx_destroy_image(data->mlx_ptr, data->north.img);
-    mlx_destroy_image(data->mlx_ptr, data->south.img);
-    mlx_destroy_image(data->mlx_ptr, data->east.img);
-    mlx_destroy_image(data->mlx_ptr, data->west.img);
-}
+// void destroy_text(t_data *data)
+// {
+//     mlx_destroy_image(data->mlx_ptr, data->north.img);
+//     mlx_destroy_image(data->mlx_ptr, data->south.img);
+//     mlx_destroy_image(data->mlx_ptr, data->east.img);
+//     mlx_destroy_image(data->mlx_ptr, data->west.img);
+// }
 
-t_text get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y)
+int get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y)
 {
     if (side == 0)
     {
         if (rayd_x > 0) 
-            return data->east;
+            return 2;
         else 
-            return data->west;
+            return 3;
     }
     else
     {
         if (rayd_y > 0) 
-            return data->south;
+            return 1;
         else 
-            return data->north;
+            return 0;
     }
+}
+
+/*
+north 1
+south 2
+east 3
+west 4
+*/
+
+void fill_text(t_data *data, int i)
+{
+
+    int y = 0;
+    int x = 0;
+    if (i == 0)
+    {
+        data->textures = c_malloc(sizeof(int *) * 4, 1);
+        if (!data->textures)
+            ft_error('a');
+    }
+
+    data->textures[i] = c_malloc(sizeof(int) * (data->text[i].height * data->text[i].width), 1);
+    
+    while (y < data->text[i].height)
+    {
+        x = 0;
+        while (x < data->text[i].width)
+        {
+            data->textures[i][data->text[i].height * y + x] = data->text[i].addr[data->text[i].height * y + x];
+            x++;
+        }
+        y++;
+    }    
 }

@@ -90,6 +90,8 @@ typedef struct s_data
     int         pixel_x;
     int         pixel_y;
     t_img       img;
+    int **textures;
+    int line_h;
     char **map;
     t_line order;
     char *NO;
@@ -104,10 +106,7 @@ typedef struct s_data
     int y_player;
     char direction;
     int end_map;
-    t_text north;
-    t_text south;
-    t_text east;
-    t_text west;
+    t_text text[4];
     int side_wall;
     double wall_x;
 } t_data;
@@ -155,7 +154,9 @@ void load_all_text(t_data *data);
 void destroy_text(t_data *data);
 void check_file_ext(char *str);
 int convert_rgb(int r, int g, int b);
-t_text get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y);
+int get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y);
+void put_texture(t_data *data, int end_line, int start_line, int x);
+void fill_text(t_data *data, int i);
 //
 void	init_data(t_data *data);
 void	init_player(t_data *data);

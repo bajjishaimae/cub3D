@@ -6,11 +6,12 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/24 21:32:51 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:08:46 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <math.h>
 
 void    raycast(t_data *data)
 {
@@ -66,59 +67,49 @@ void draw_floor(t_data *data,int end_line, int x, int color)
 
 void draw_line(t_data *data, double perpWallDist, int x)
 {
-    int line_h;
     int start_line;
     int end_line;
     int color;
     int i;
 
-    line_h = (int)(data->screen_height / perpWallDist);
-    start_line = -line_h / 2 + data->screen_height / 2;
+    data->line_h = (int)(data->screen_height / perpWallDist);
+    start_line = -data->line_h / 2 + data->screen_height / 2;
     if (start_line < 0)
         start_line = 0;
-    end_line = line_h / 2 + data->screen_height / 2;
+    end_line = data->line_h / 2 + data->screen_height / 2;
     if (end_line >= data->screen_height)
         end_line = data->screen_height - 1;
     draw_ceiling(data, start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
     draw_floor(data, end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
     
-    color = 0xC5A5AD;
-    i = start_line;
-    while (i <= end_line)
-    {
-       put_pixel_to_image(data, x, i, color);
-       i++;
-    }
+    put_texture(data, end_line, start_line, x);
 }
 
-void put_texture(t_data *data, int end_line, int start_line, int line_h)
+void put_texture(t_data *data, int end_line, int start_line, int x)
 {
     t_text texture;
+    int index;
     int tex_x;
     int color;
     double pos;
     double step;
     
-    texture = get_wall_texture(data, data->side_wall, data->ray.rayd_x, data->ray.rayd_y);
-    tex_x = data->wall_x * texture.width;
+    index = get_wall_texture(data, data->side_wall, data->ray.rayd_x, data->ray.rayd_y);
+    texture = data->text[index];
+    tex_x = (int)data->wall_x * texture.width;
     
     if ((data->side_wall == 0 && data->ray.rayd_x < 0) || (data->side_wall == 1 && data->ray.rayd_y > 0))
 	    tex_x = texture.width - tex_x - 1;
-    step = 1.0 * texture.width / line_h;
-    pos = (start_line - data->screen_height / 2 + line_h / 2) * step;
-    // while (start_line < end_line)
-    // {
-	//     pos += step;
-	//     color = (texture_buffer)[dir][texture.width * ((int)pos & (texture.width - 1)) + tex_x];
-
-	//     if (dir == NORTH || dir == SOUTH)
-	// 	// add some shading to the north and south walls
-	// 	    color = (color >> 1) & 0x7F7F7F;
-	//     if (color > 0)
-	// 	// your pixel map (int** in this case)
-	// 	    pixels_map[start_line][x] = color;
-
-	//     start_line++;
+    step = 1.0 * texture.height / data->line_h;
+    pos = (start_line - data->screen_height / 2 + data->line_h / 2) * step;
+    int y = start_line;
+    while (y < end_line)
+    {
+        int tex_y = (int)pos & (texture.height - 1);
+        pos += step;
+        color = data->textures[index][data->text[index].height * tex_y + tex_x];
+        put_pixel_to_image(data, x, y, color);
+        y++;
     }
 }
 
@@ -127,7 +118,6 @@ void    raytrace(t_data *data, int map_x, int map_y, int x)
     bool    hit_wall;
     double  perpWallDist;
     int     side_wall;
-    double  wall_x;
 
     hit_wall = 0;
     side_wall = -1;
@@ -159,9 +149,10 @@ void    raytrace(t_data *data, int map_x, int map_y, int x)
     else
         perpWallDist = (data->ray.side_y) - (data->ray.delta_y);
     if (side_wall == 0)
-        wall_x = data->player.y_pos + perpWallDist * data->ray.rayd_y;
+        data->wall_x = data->player.y_pos + perpWallDist * data->ray.rayd_y;
     else
-        wall_x = data->player.x_pos + perpWallDist * data->ray.rayd_x;
+        data->wall_x = data->player.x_pos + perpWallDist * data->ray.rayd_x;
+    data->wall_x -= floor(data->wall_x);
     draw_line(data,perpWallDist, x);
 }
 
