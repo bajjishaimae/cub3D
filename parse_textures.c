@@ -41,11 +41,12 @@ t_text load_texutes(char *path, t_data *data)
 
 void load_all_text(t_data *data)
 {
-    int i = 0;
     data->text[0] = load_texutes(data->NO, data);
     data->text[1] = load_texutes(data->SO, data);
     data->text[2] = load_texutes(data->EA, data);
     data->text[3] = load_texutes(data->WE, data);
+
+    int i = 0;
     while (i < 4)
     {
         fill_text(data, i);
@@ -59,31 +60,37 @@ east 3
 west 4
 */
 
-// void fill_text(t_data *data, int i)
-// {
+void fill_text(t_data *data, int i)
+{
+    int y = 0;
+    int x = 0;
 
-//     int y = 0;
-//     int x = 0;
-//     if (i == 0)
-//     {
-//         data->textures = c_malloc(sizeof(int *) * 4, 1);
-//         if (!data->textures)
-//             ft_error('a');
-//     }
+    if (i == 0)
+    {
+        data->textures = c_malloc(sizeof(int *) * 4, 1);
+        if (!data->textures)
+            ft_error('a');
+    }
 
-//     data->textures[i] = c_malloc(sizeof(int) * (data->text[i].height * data->text[i].width), 1);
-    
-//     while (y < data->text[i].height)
-//     {
-//         x = 0;
-//         while (x < data->text[i].width)
-//         {
-//             data->textures[i][data->text[i].height * y + x] = data->text[i].addr[data->text[i].height * y + x];
-//             x++;
-//         }
-//         y++;
-//     }    
-// }
+    int tex_size = data->text[i].width * data->text[i].height;
+    data->textures[i] = c_malloc(sizeof(int) * tex_size, 1);
+    if (!data->textures[i])
+        ft_error('a');
+
+    while (y < data->text[i].height)
+    {
+        x = 0;
+        while (x < data->text[i].width)
+        {
+            int pixel_offset = (y * data->text[i].line_len) + (x * (data->text[i].bpp / 8));
+            int color = *(int *)(data->text[i].addr + pixel_offset);
+            data->textures[i][y * data->text[i].width + x] = color;
+            x++;
+        }
+        y++;
+    }    
+}
+
 int get_wall_texture(t_data *data)
 {
     if (data->side_wall == 1)

@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/25 15:53:51 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/02/26 16:35:42 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int main(int ac, char **av)
     data.img.img = mlx_new_image(data.mlx_ptr, data.screen_width, data.screen_height);
     data.img.buffer = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, &data.img.size_line, &data.img.endian);
     load_all_text(&data);
+    printf("this is text width: %f", data.text[1].width);
     mlx_hook(data.mlx_win, 17, 0, ft_destroy_win, &data);
 	mlx_hook(data.mlx_win, 2, 0, move, &data);
     mlx_hook(data.mlx_win, 6, 0, mouse_move, &data);
