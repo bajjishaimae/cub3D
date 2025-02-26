@@ -108,7 +108,8 @@ typedef struct s_data
     int end_map;
     t_text text[4];
     int side_wall;
-    double wall_x;
+    float wall_x;
+    float wall_y;
 } t_data;
 
 
@@ -154,7 +155,7 @@ void load_all_text(t_data *data);
 void destroy_text(t_data *data);
 void check_file_ext(char *str);
 int convert_rgb(int r, int g, int b);
-int get_wall_texture(int side, double rayd_x, double rayd_y);
+int get_wall_texture(t_data *data);
 void put_texture(t_data *data, int end_line, int start_line, int x);
 void fill_text(t_data *data, int i);
 //

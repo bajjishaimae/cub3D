@@ -6,12 +6,28 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/25 17:36:53 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:58:38 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include <math.h>
+
+unsigned int get_texture_color(t_text *texture, int x, int y, int pos)
+{
+    if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+        return (0);
+    
+    int position = pos;
+    
+
+    unsigned char *ptr = (unsigned char *)texture->addr;
+    
+        return ((unsigned int)ptr[position + 3] << 24 |  
+                (unsigned int)ptr[position + 2] << 16 |  
+                (unsigned int)ptr[position + 1] << 8  |  
+                (unsigned int)ptr[position] << 0);          
+}
 
 void    raycast(t_data *data)
 {
@@ -86,33 +102,37 @@ void draw_line(t_data *data, double perpWallDist, int x)
 
 void put_texture(t_data *data, int end_line, int start_line, int x)
 {
-    t_text texture;
+    t_text *texture;
     int index;
-    int tex_x;
+    float tex_x;
     int color;
-    double pos;
+    int pos;
     double step;
 
-    index = get_wall_texture(data->side_wall, data->ray.rayd_x, data->ray.rayd_y);
-    texture = data->text[index];
-    tex_x = (int)data->wall_x * (double)texture.width;
+    index = get_wall_texture(data);
+    texture = &data->text[index];
+    tex_x = (int)(data->wall_x * (double)texture->width);
     
     if ((data->side_wall == 0 && data->ray.rayd_x < 0) || (data->side_wall == 1 && data->ray.rayd_y > 0))
-	    tex_x = texture.width - tex_x - 1;
-    step = 1.0 * texture.height / data->line_h;
+	    tex_x = texture->width - tex_x - 1;
+    step = 1.0 * texture->height / data->line_h;
     pos = (start_line - data->screen_height / 2 + data->line_h / 2) * step;
     int y = start_line;
     while (y < end_line)
     {
-        int tex_y = (int)pos & (texture.height - 1);
+        float tex_y = (int)pos & (texture->height - 1);
         pos += step;
-        color = data->textures[index][data->text[index].height * tex_y + tex_x];
-        if (data->side_wall == 1)
-			color = (color >> 1) & 8355711;
+        color = get_texture_color(texture, x, y, pos);
         put_pixel_to_image(data, x, y, color);
         y++;
     }
 }
+/*
+north 1
+south 2
+east 3
+west 4
+*/
 
 void    raytrace(t_data *data, int map_x, int map_y, int x)
 {

@@ -59,43 +59,43 @@ east 3
 west 4
 */
 
-void fill_text(t_data *data, int i)
-{
+// void fill_text(t_data *data, int i)
+// {
 
-    int y = 0;
-    int x = 0;
-    if (i == 0)
-    {
-        data->textures = c_malloc(sizeof(int *) * 4, 1);
-        if (!data->textures)
-            ft_error('a');
-    }
+//     int y = 0;
+//     int x = 0;
+//     if (i == 0)
+//     {
+//         data->textures = c_malloc(sizeof(int *) * 4, 1);
+//         if (!data->textures)
+//             ft_error('a');
+//     }
 
-    data->textures[i] = c_malloc(sizeof(int) * (data->text[i].height * data->text[i].width), 1);
+//     data->textures[i] = c_malloc(sizeof(int) * (data->text[i].height * data->text[i].width), 1);
     
-    while (y < data->text[i].height)
-    {
-        x = 0;
-        while (x < data->text[i].width)
-        {
-            data->textures[i][data->text[i].height * y + x] = data->text[i].addr[data->text[i].height * y + x];
-            x++;
-        }
-        y++;
-    }    
-}
-int get_wall_texture(int side, double rayd_x, double rayd_y)
+//     while (y < data->text[i].height)
+//     {
+//         x = 0;
+//         while (x < data->text[i].width)
+//         {
+//             data->textures[i][data->text[i].height * y + x] = data->text[i].addr[data->text[i].height * y + x];
+//             x++;
+//         }
+//         y++;
+//     }    
+// }
+int get_wall_texture(t_data *data)
 {
-    if (side == 0)
+    if (data->side_wall == 1)
     {
-        if (rayd_x > 0) 
+        if (data->ray.rayd_x > 0) 
             return 2;
         else 
             return 3;
     }
     else
     {
-        if (rayd_y > 0) 
+        if (data->ray.rayd_y > 0) 
             return 1;
         else 
             return 0;
