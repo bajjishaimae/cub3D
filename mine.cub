@@ -1,7 +1,7 @@
-NO textures/wallE1.xpm
-EA textures/wallE2.xpm
-SO textures/wallE3.xpm
-WE textures/wallE4.xpm
+NO textures/op.xpm
+EA textures/op1.xpm
+SO textures/op2.xpm
+WE textures/op3.xpm
 
 C 20,20,80
 F 20,80,20
