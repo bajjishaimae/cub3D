@@ -29,9 +29,8 @@ char *extract_content(char *line)
         ft_error('a');
     ft_strncpy(content, &line[start], end - start + 1);
 	content[end - start + 1] = '\0';
-    return (content);
+    return (content);      
 }
-
 
 
 int manip_line(t_data *data, char *line, int *nb, char **joined)

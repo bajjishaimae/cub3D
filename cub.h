@@ -23,6 +23,7 @@
 # define CELL_SIZE 16
 # define SPEED_MOVE 0.1
 # define SPEED_ROT 0.1
+# define TEXTURE_SIZE 64
 
 typedef struct s_player
 {
@@ -49,15 +50,6 @@ typedef struct s_ray
 	// int     side_wall; // 0 : x_side , 1 : y_side
 }   t_ray;
 
-// typedef struct s_image
-// {
-// 	void        *img;
-// 	int         bits_per_pixel;
-// 	int         size_line;
-// 	int         endian;
-// 	char        *buffer;
-// }   t_img;
-
 typedef struct s_line
 {
 	int line_order;
@@ -70,49 +62,42 @@ typedef struct s_line
 	int map_line;
 } t_line;
 
-typedef struct s_text
-{
-	void *img;
-	char *addr;
-	int width;
-	int height;
-	int endian;
-	int bpp;
-	int line_len;
-} t_text;
-
 typedef struct s_data
 {
-	t_player   player;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	int         screen_width;
-	int         screen_height;
-	double      fov;
-	t_ray       ray;
-	double      pwd;
-	int         pixel_x;
-	int         pixel_y;
-	char **map;
-	t_line order;
-	char *NO;
-	char *WE;
-	char *EA;
-	char *SO;
-	int floor_color[3];
-	int ceiling_color[3];
-	int map_width;
-	int map_lenght;
-	int x_player;
-	int y_player;
-	char direction;
-	int end_map;
-	t_text north;
-	t_text south;
-	t_text east;
-	t_text west;
-	int side_wall;
-	double wall_x;
+    t_player   player;
+    void        *mlx_ptr;
+    void        *mlx_win;
+    int         screen_width;
+    int         screen_height;
+    double      fov;
+    t_ray       ray;
+    double      pwd;
+    int         pixel_x;
+    int         pixel_y;
+    int line_h;
+    char **map;
+    t_line order;
+    char *NO;
+    char *WE;
+    char *EA;
+    char *SO;
+    int floor_color[3];
+    int ceiling_color[3];
+    int map_width;
+    int map_lenght;
+    int x_player;
+    int y_player;
+    char direction;
+    int end_map;
+    mlx_texture_t *north;
+    mlx_texture_t *south;
+    mlx_texture_t *east;
+    mlx_texture_t *west;
+    int side_wall;
+    float wall_x;
+    float wall_y;
 } t_data;
 
 
@@ -158,7 +143,9 @@ void load_all_text(t_data *data);
 void destroy_text(t_data *data);
 void check_file_ext(char *str);
 int convert_rgb(int r, int g, int b);
-t_text get_wall_texture(t_data *data, int side, double rayd_x, double rayd_y);
+mlx_texture_t *get_wall_texture(t_data *data);
+void put_texture(t_data *data, int end_line, int start_line, int x);
+void fill_text(t_data *data, int i);
 //
 void	init_data(t_data *data);
 void	init_player(t_data *data);

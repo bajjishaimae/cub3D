@@ -1,18 +1,21 @@
-NAME = cub3d
-
 CC = cc
+CFLAGS = -Wall -Wextra -Werror
+NAME = cub3D
 
-CFLAGS = -Wall -Wextra -Werror -Imlx -g -fsanitize=address
+MLX_ARCHIVE = MLX42/build/libmlx42.a
 
 # MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 MLX_ARCHIVE = MLX42/build/libmlx42.a
 
-SRCS = cub3d.c gnl_ut.c gnl.c initgame.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c moves.c window.c
+SRC = cub3d.c gnl_ut.c gnl.c initgame.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c moves.c window.c
 
-HEADS = cub.h
+OBJ = $(SRC:.c=.o)
 
-OBJS = $(SRCS:.c=.o)
+all: mlx $(NAME)
+
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(OBJ) -o $(NAME)
 
 all : mlx $(NAME)
 
