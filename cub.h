@@ -8,108 +8,111 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
-// #include "minilibx-linux/mlx.h"
-# include <mlx.h>
+# include "MLX42/include/MLX42/MLX42.h"
+// # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
 # include  <sys/time.h>
 # define BUFFER_SIZE 10
 # define pi M_PI
 # define inf INFINITY
+# define SCREEN_WIDTH 1800
+# define SCREEN_HEIGHT 1000
+# define MINIMAP_WIDTH 200
+# define MINIMAP_HEIGHT 200
 # define CELL_SIZE 16
-# define SPEED_MOVE 0.8
-# define SPEED_ROT 0.2
+# define SPEED_MOVE 0.1
+# define SPEED_ROT 0.1
 
 typedef struct s_player
 {
-    double  x_pos;
-    double  y_pos;
-    double  x_dir;
-    double  y_dir;
-    double  plane_x;
-    double  plane_y;
-    double  fov;
+	double  x_pos;
+	double  y_pos;
+	double  x_dir;
+	double  y_dir;
+	double  plane_x;
+	double  plane_y;
+	double  fov;
 }   t_player;
 
 typedef struct s_ray
 {
-    double  rayd_x;
-    double  rayd_y;
-    double  delta_x;
-    double  delta_y;
-    double  side_x;
-    double  side_y;
-    int     step_x;
-    int     step_y;
-    // bool    hit_wall;
-    // int     side_wall; // 0 : x_side , 1 : y_side
+	double  rayd_x;
+	double  rayd_y;
+	double  delta_x;
+	double  delta_y;
+	double  side_x;
+	double  side_y;
+	int     step_x;
+	int     step_y;
+	// bool    hit_wall;
+	// int     side_wall; // 0 : x_side , 1 : y_side
 }   t_ray;
 
-typedef struct s_image
-{
-    void        *img;
-    int         bits_per_pixel;
-    int         size_line;
-    int         endian;
-    char        *buffer;
-}   t_img;
+// typedef struct s_image
+// {
+// 	void        *img;
+// 	int         bits_per_pixel;
+// 	int         size_line;
+// 	int         endian;
+// 	char        *buffer;
+// }   t_img;
 
 typedef struct s_line
 {
-    int line_order;
-    int NO_line;
-    int SO_line;
-    int WE_line;
-    int EA_line;
-    int F_line;
-    int C_line;
-    int map_line;
+	int line_order;
+	int NO_line;
+	int SO_line;
+	int WE_line;
+	int EA_line;
+	int F_line;
+	int C_line;
+	int map_line;
 } t_line;
 
 typedef struct s_text
 {
-    void *img;
-    char *addr;
-    int width;
-    int height;
-    int endian;
-    int bpp;
-    int line_len;
+	void *img;
+	char *addr;
+	int width;
+	int height;
+	int endian;
+	int bpp;
+	int line_len;
 } t_text;
 
 typedef struct s_data
 {
-    t_player   player;
-    void        *mlx_ptr;
-    void        *mlx_win;
-    int         screen_width;
-    int         screen_height;
-    double      fov;
-    t_ray       ray;
-    double      pwd;
-    int         pixel_x;
-    int         pixel_y;
-    t_img       img;
-    char **map;
-    t_line order;
-    char *NO;
-    char *WE;
-    char *EA;
-    char *SO;
-    int floor_color[3];
-    int ceiling_color[3];
-    int map_width;
-    int map_lenght;
-    int x_player;
-    int y_player;
-    char direction;
-    int end_map;
-    t_text north;
-    t_text south;
-    t_text east;
-    t_text west;
-    int side_wall;
-    double wall_x;
+	t_player   player;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	int         screen_width;
+	int         screen_height;
+	double      fov;
+	t_ray       ray;
+	double      pwd;
+	int         pixel_x;
+	int         pixel_y;
+	char **map;
+	t_line order;
+	char *NO;
+	char *WE;
+	char *EA;
+	char *SO;
+	int floor_color[3];
+	int ceiling_color[3];
+	int map_width;
+	int map_lenght;
+	int x_player;
+	int y_player;
+	char direction;
+	int end_map;
+	t_text north;
+	t_text south;
+	t_text east;
+	t_text west;
+	int side_wall;
+	double wall_x;
 } t_data;
 
 
@@ -161,10 +164,11 @@ void	init_data(t_data *data);
 void	init_player(t_data *data);
 void    raycast(t_data *data);
 void    init_dist(t_data *data, int x);
-int     move(int key_code, t_data *data);
+void	move(mlx_key_data_t keydata, void *param);
 void    put_pixel_to_image(t_data *data, int x, int y, int color);
 int     render_minimap(t_data *data);
-int     render_frame(t_data *data);
-int     ft_destroy_win(t_data *data);
-int     mouse_move(int x, int y, t_data *data);
+void	render_frame(void *param);
+void	ft_destroy_win(void *param);
+void	mouse_move(double x, double y, void *param);
+
 #endif

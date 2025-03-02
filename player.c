@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:36:18 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/21 12:29:30 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:25:11 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_player(t_data *data)
 {
-	data->player.x_pos = data->x_player;
-	data->player.y_pos = data->y_player;
+	data->player.x_pos = data->x_player + 0.5;
+	data->player.y_pos = data->y_player + 0.5;
 	if (data->direction == 'N')
 	{
 		data->player.x_dir = 0;
@@ -48,8 +48,8 @@ void	init_player(t_data *data)
 
 void	init_data(t_data *data)
 {
-	data->screen_width = data->map_width * 60;
-    data->screen_height = data->map_lenght * 60;
-	if (data->fov <= 0)
+	data->screen_width = SCREEN_WIDTH;
+    data->screen_height = SCREEN_HEIGHT;
+	// if (data->fov <= 0)
 		data->player.fov = pi / 3;
 }

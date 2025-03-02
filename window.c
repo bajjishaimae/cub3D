@@ -6,14 +6,15 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 21:25:32 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/02/21 12:29:36 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:38:30 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int    ft_destroy_win(t_data *data)
+void	ft_destroy_win(void *param)
 {
-    mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-    exit (0);
+	t_data *data = (t_data *)param;
+	mlx_terminate(data->mlx);
+	exit (0);
 }
