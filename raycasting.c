@@ -102,16 +102,14 @@ void draw_line(t_data *data, double perpWallDist, int x)
 
 void put_texture(t_data *data, int end_line, int start_line, int x)
 {
-    t_text *texture;
-    int index;
+    mlx_texture_t *texture;
     int tex_x;
     int color;
     double pos;
     double step;
     int tex_y;
 
-    index = get_wall_texture(data);
-    texture = &data->text[index];
+    texture = get_wall_texture(data);
     tex_x = (int)(data->wall_x * (double)texture->width);
     
     if ((data->side_wall == 1 && data->ray.rayd_y < 0))
@@ -123,7 +121,7 @@ void put_texture(t_data *data, int end_line, int start_line, int x)
     {
         tex_y = (int) pos & (texture->height - 1);
         pos += step;
-        color = data->textures[index][tex_y * texture->width + tex_x];
+        color = texture->pixels[tex_y * texture->width + tex_x];
         put_pixel_to_image(data, x, y, color);
         y++;
     }

@@ -1,31 +1,34 @@
-NAME = cub3d
-
 CC = cc
+CFLAGS = -Wall -Wextra -Werror
+NAME = cub3D
 
-CFLAGS = -Wall -Wextra -Werror -Imlx -g -fsanitize=address
+MLX_ARCHIVE = MLX42/build/libmlx42.a
 
-MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+SRC = cub3d.c gnl_ut.c gnl.c initgame.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c moves.c window.c
 
-SRCS = cub3d.c gnl_ut.c gnl.c initgame.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c moves.c window.c
+OBJ = $(SRC:.c=.o)
 
-HEADS = cub.h
+all: mlx $(NAME)
 
-OBJS = $(SRCS:.c=.o)
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(OBJ) -o $(NAME)
 
-all : $(NAME)
+src/%.o: src/%.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
-$(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(MLXFLAGS) $^ -o $@
+mlx:
+	@cd MLX42 && cmake -B build && cmake --build build -j4
 
-$(OBJS) : %.o: %.c $(HEADS) Makefile
-	$(CC) $(CFLAGS) -c $< -o $@
+clean:
+	@rm -f $(OBJ)
+	@if [ -d "MLX42/build" ]; then \
+		cd MLX42/build && make clean; \
+	fi
 
-clean :
-	rm	-f $(OBJS) $(OBJSB)
+fclean: clean
+	@rm -fr $(NAME) MLX42/build
 
-fclean : clean
-	rm	-f $(NAME) $(BONUS)
+re: fclean all
 
-re : fclean all
+.PHONY: clean mlx
 
-.PHONY : clean

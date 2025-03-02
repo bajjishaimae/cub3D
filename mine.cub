@@ -1,7 +1,7 @@
-NO textures/op.xpm
-EA textures/op1.xpm
-SO textures/op2.xpm
-WE textures/op3.xpm
+NO textures/.xpm
+EA textures/1.xpm
+SO textures/2.xpm
+WE textures/3.xpm
 
 C 20,20,80
 F 20,80,20

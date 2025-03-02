@@ -8,8 +8,8 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
-// #include "minilibx-linux/mlx.h"
-# include <mlx.h>
+#include "MLX42/include/MLX42/MLX42.h"
+// # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
 # include  <sys/time.h>
@@ -91,7 +91,6 @@ typedef struct s_data
     int         pixel_x;
     int         pixel_y;
     t_img       img;
-    int **textures;
     int line_h;
     char **map;
     t_line order;
@@ -107,7 +106,10 @@ typedef struct s_data
     int y_player;
     char direction;
     int end_map;
-    t_text text[4];
+    mlx_texture_t *north;
+    mlx_texture_t *south;
+    mlx_texture_t *east;
+    mlx_texture_t *west;
     int side_wall;
     float wall_x;
     float wall_y;
@@ -156,7 +158,7 @@ void load_all_text(t_data *data);
 void destroy_text(t_data *data);
 void check_file_ext(char *str);
 int convert_rgb(int r, int g, int b);
-int get_wall_texture(t_data *data);
+mlx_texture_t *get_wall_texture(t_data *data);
 void put_texture(t_data *data, int end_line, int start_line, int x);
 void fill_text(t_data *data, int i);
 //
