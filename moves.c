@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:53 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/02 17:39:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:55:45 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	mouse_move(double x, double y, void *param)
 	if (last_x < 0 || last_x > data->screen_width || y > data->screen_height || y < 0)
 	{
 		last_x = x;
-		return (0);
+		return ;
 	}
 	old_dirx = data->player.x_dir;
 	old_planex = data->player.plane_x;
@@ -187,12 +187,10 @@ void	mouse_move(double x, double y, void *param)
 		data->player.plane_y = old_planex * sin(rot_speed) + data->player.plane_y * cos(rot_speed);
 	}
 	last_x = x;
-	return (0);
 }
 
 void	move(mlx_key_data_t keydata, void *param)
 {
 	t_data *data = (t_data *)param;
 	move_to(keydata.key, data, SPEED_MOVE, SPEED_ROT);
-	return (0);
 }
