@@ -95,6 +95,8 @@ int render_minimap(t_data *data)
 void	render_frame(void *param)
 {
 	t_data *data = (t_data *)param;
+	mlx_delete_image(data->mlx, data->img);
+	data->img = mlx_new_image(data->mlx, data->screen_width, data->screen_height);
 	raycast(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 	render_minimap(data);
@@ -115,10 +117,11 @@ int main(int ac, char **av)
 	init_player(&data);
 	data.mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d", false);
 	data.img = mlx_new_image(data.mlx, data.screen_width, data.screen_height);
+	load_all_text(&data);
 	mlx_close_hook(data.mlx, ft_destroy_win, &data);
 	mlx_key_hook(data.mlx, move, &data);
-	mlx_scroll_hook(data.mlx, mouse_move, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
+	mlx_scroll_hook(data.mlx, mouse_move, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 }

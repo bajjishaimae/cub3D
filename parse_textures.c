@@ -27,7 +27,6 @@ void set_texture(t_data *data, char *line)
     }
 }
 
-
 mlx_texture_t *load_texutes(char *path)
 {
     mlx_texture_t *texture;

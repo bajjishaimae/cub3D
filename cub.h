@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
-# include "MLX42/include/MLX42/MLX42.h"
+#include "MLX42/include/MLX42/MLX42.h"
 // # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
@@ -50,6 +50,14 @@ typedef struct s_ray
 	// int     side_wall; // 0 : x_side , 1 : y_side
 }   t_ray;
 
+typedef struct s_text
+{
+    uint32_t	width;
+	uint32_t	height;
+	uint8_t		bytes_per_pixel;
+    int *pixels;
+} t_text;
+
 typedef struct s_line
 {
 	int line_order;
@@ -78,6 +86,7 @@ typedef struct s_data
     int         pixel_y;
     int line_h;
     char **map;
+    uint32_t *color;
     t_line order;
     char *NO;
     char *WE;
@@ -96,8 +105,8 @@ typedef struct s_data
     mlx_texture_t *east;
     mlx_texture_t *west;
     int side_wall;
-    float wall_x;
-    float wall_y;
+    int text_pos_x;
+    int text_pos_y;
 } t_data;
 
 
@@ -144,7 +153,7 @@ void destroy_text(t_data *data);
 void check_file_ext(char *str);
 int convert_rgb(int r, int g, int b);
 mlx_texture_t *get_wall_texture(t_data *data);
-void put_texture(t_data *data, int end_line, int start_line, int x);
+void put_texture(t_data *data, int start_line, int end_line, int x);
 void fill_text(t_data *data, int i);
 //
 void	init_data(t_data *data);
