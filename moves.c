@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:53 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/02 17:39:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:55:45 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void	mouse_move(double x, double y, void *param)
 	if (last_x < 0 || last_x > data->screen_width || y > data->screen_height || y < 0)
 	{
 		last_x = x;
-		return;
+		return ;
 	}
 	old_dirx = data->player.x_dir;
 	old_planex = data->player.plane_x;

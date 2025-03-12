@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 NAME = cub3D
 
-MLX_ARCHIVE = MLX42/build/libmlx42.a
+MLX_ARCHIVE = MLX42/build/libmlx42.a 
 
 # MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -15,7 +15,13 @@ OBJS = $(SRC:.c=.o)
 all: mlx $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" $(OBJ) -o $(NAME)
+
+all : mlx $(NAME)
+
+$(NAME) : $(OBJS)
+	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm $^ -o $@
+	@echo "\033[32mMaking Completed✅"
 
 $(OBJS) : %.o: %.c $(HEADS) Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@
