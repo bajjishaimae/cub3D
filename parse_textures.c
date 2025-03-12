@@ -28,6 +28,7 @@ void set_texture(t_data *data, char *line)
 }
 
 
+
 mlx_texture_t *load_texutes(char *path)
 {
     mlx_texture_t *texture;
@@ -44,58 +45,21 @@ void load_all_text(t_data *data)
     data->east = load_texutes(data->EA);
     data->west = load_texutes(data->WE);
 }
-/*
-north 1
-south 2
-east 3
-west 4
-*/
-
-// void fill_text(t_data *data, int i)
-// {
-//     int y = 0;
-//     int x = 0;
-
-//     if (i == 0)
-//     {
-//         data->textures = c_malloc(sizeof(int *) * 4, 1);
-//         if (!data->textures)
-//             ft_error('a');
-//     }
-
-//     int tex_size = data->text[i].width * data->text[i].height;
-//     data->textures[i] = c_malloc(sizeof(int) * tex_size, 1);
-//     if (!data->textures[i])
-//         ft_error('a');
-
-//     while (y < data->text[i].height)
-//     {
-//         x = 0;
-//         while (x < data->text[i].width)
-//         {
-//             int pixel_offset = (y * data->text[i].line_len) + (x * (data->text[i].bpp / 8));
-//             int color = *(int *)(data->text[i].addr + pixel_offset);
-//             data->textures[i][y * data->text[i].width + x] = color;
-//             x++;
-//         }
-//         y++;
-//     }    
-// }
 
 mlx_texture_t *get_wall_texture(t_data *data)
 {
-    if (data->side_wall == 1)
+    if (data->side_wall == 0) // Vertical wall
     {
-        if (data->ray.rayd_x > 0) 
+        if (data->ray.rayd_x > 0) // Facing east
             return data->east;
-        else 
+        else // Facing west
             return data->west;
     }
-    else
+    else // Horizontal wall
     {
-        if (data->ray.rayd_y > 0) 
+        if (data->ray.rayd_y > 0) // Facing south
             return data->south;
-        else 
+        else // Facing north
             return data->north;
     }
 }

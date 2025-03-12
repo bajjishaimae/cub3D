@@ -134,6 +134,7 @@ int move_to(keys_t keydata, t_data *data, double move_speed, double rot_speed)
 		exit (0);
 	}
 	// mlx_destroy_image(data->mlx_ptr, data->img.img);
+	mlx_delete_image(data->mlx, data->img);
 	data->img = mlx_new_image(data->mlx, data->screen_width, data->screen_height);
 	render_frame(data);
 	render_minimap(data);
@@ -166,7 +167,7 @@ void	mouse_move(double x, double y, void *param)
 	if (last_x < 0 || last_x > data->screen_width || y > data->screen_height || y < 0)
 	{
 		last_x = x;
-		return (0);
+		return;
 	}
 	old_dirx = data->player.x_dir;
 	old_planex = data->player.plane_x;
@@ -187,12 +188,10 @@ void	mouse_move(double x, double y, void *param)
 		data->player.plane_y = old_planex * sin(rot_speed) + data->player.plane_y * cos(rot_speed);
 	}
 	last_x = x;
-	return (0);
 }
 
 void	move(mlx_key_data_t keydata, void *param)
 {
 	t_data *data = (t_data *)param;
 	move_to(keydata.key, data, SPEED_MOVE, SPEED_ROT);
-	return (0);
 }

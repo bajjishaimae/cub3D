@@ -23,7 +23,7 @@
 # define CELL_SIZE 16
 # define SPEED_MOVE 0.1
 # define SPEED_ROT 0.1
-# define TEXTURE_SIZE 64
+# define TEXTURE_SIZE 32
 
 typedef struct s_player
 {
@@ -62,6 +62,16 @@ typedef struct s_line
 	int map_line;
 } t_line;
 
+typedef struct s_text
+{
+    uint32_t	width;
+	uint32_t	height;
+    int         line_len;
+	uint8_t		bytes_per_pixel;
+    int *pixels;
+} t_text;
+
+
 typedef struct s_data
 {
 	mlx_t		*mlx;
@@ -79,6 +89,8 @@ typedef struct s_data
     int line_h;
     char **map;
     t_line order;
+    int start_line;
+    int end_line;
     char *NO;
     char *WE;
     char *EA;
@@ -90,14 +102,17 @@ typedef struct s_data
     int x_player;
     int y_player;
     char direction;
+    uint32_t		*color;
     int end_map;
     mlx_texture_t *north;
     mlx_texture_t *south;
     mlx_texture_t *east;
     mlx_texture_t *west;
     int side_wall;
-    float wall_x;
-    float wall_y;
+    int wall_x;
+    int wall_start;
+    double tex_pos_x;
+    double tex_pos_y;
 } t_data;
 
 
@@ -156,6 +171,8 @@ void    put_pixel_to_image(t_data *data, int x, int y, int color);
 int     render_minimap(t_data *data);
 void	render_frame(void *param);
 void	ft_destroy_win(void *param);
+void draw_ceiling(t_data *data,int start_line, int x, int color);
+void draw_floor(t_data *data,int end_line, int x, int color);
 void	mouse_move(double x, double y, void *param);
 
 #endif
