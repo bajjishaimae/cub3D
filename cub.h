@@ -50,14 +50,6 @@ typedef struct s_ray
 	// int     side_wall; // 0 : x_side , 1 : y_side
 }   t_ray;
 
-typedef struct s_text
-{
-    uint32_t	width;
-	uint32_t	height;
-	uint8_t		bytes_per_pixel;
-    int *pixels;
-} t_text;
-
 typedef struct s_line
 {
 	int line_order;
@@ -69,15 +61,6 @@ typedef struct s_line
 	int C_line;
 	int map_line;
 } t_line;
-
-typedef struct s_text
-{
-    uint32_t	width;
-	uint32_t	height;
-    int         line_len;
-	uint8_t		bytes_per_pixel;
-    int *pixels;
-} t_text;
 
 
 typedef struct s_data
@@ -96,7 +79,6 @@ typedef struct s_data
     int         pixel_y;
     int line_h;
     char **map;
-    uint32_t *color;
     t_line order;
     int start_line;
     int end_line;
