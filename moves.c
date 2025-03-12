@@ -6,16 +6,16 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:53 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/02 17:55:45 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:06:10 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int move_up(t_data *data, double move_speed)
+int	move_up(t_data *data, double move_speed)
 {
-	double x_next;
-	double y_next;
+	double	x_next;
+	double	y_next;
 
 	x_next = (data->player.x_pos + data->player.x_dir * move_speed);
 	y_next = (data->player.y_pos + data->player.y_dir * move_speed);
@@ -29,10 +29,10 @@ int move_up(t_data *data, double move_speed)
 	return (1);
 }
 
-int move_down(t_data *data, double move_speed)
+int	move_down(t_data *data, double move_speed)
 {
-	int x_next;
-	int y_next;
+	int	x_next;
+	int	y_next;
 
 	x_next = (data->player.x_pos - data->player.x_dir * move_speed);
 	y_next = (data->player.y_pos - data->player.y_dir * move_speed);
@@ -45,11 +45,13 @@ int move_down(t_data *data, double move_speed)
 	return (1);
 }
 
-int move_right(t_data *data, double move_speed)
+int	move_right(t_data *data, double move_speed)
 {
-	double x_next = data->player.x_pos + data->player.plane_x * move_speed;
-	double y_next = data->player.y_pos + data->player.plane_y * move_speed;
+	double	x_next;
+	double	y_next;
 
+	x_next = data->player.x_pos + data->player.plane_x * move_speed;
+	y_next = data->player.y_pos + data->player.plane_y * move_speed;
 	if (data->map[(int)data->player.y_pos][(int)x_next] != '1')
 		data->player.x_pos += data->player.plane_x * move_speed;
 	if (data->map[(int)y_next][(int)data->player.x_pos] != '1')
@@ -59,11 +61,13 @@ int move_right(t_data *data, double move_speed)
 }
 
 
-int move_left(t_data *data, double move_speed)
+int	move_left(t_data *data, double move_speed)
 {
-	double x_next = data->player.x_pos - data->player.plane_x * move_speed;
-	double y_next = data->player.y_pos - data->player.plane_y * move_speed;
+	double	x_next;
+	double	y_next;
 
+	x_next = data->player.x_pos - data->player.plane_x * move_speed;
+	y_next = data->player.y_pos - data->player.plane_y * move_speed;
 	if (data->map[(int)data->player.y_pos][(int)x_next] != '1')
 		data->player.x_pos -= data->player.plane_x * move_speed;
 	if (data->map[(int)y_next][(int)data->player.x_pos] != '1')
@@ -72,10 +76,10 @@ int move_left(t_data *data, double move_speed)
 	return (1);
 }
 
-int rot_left(t_data *data, double rot_speed)
+int	rot_left(t_data *data, double rot_speed)
 {
-	double  old_dirx;
-	double  old_planex;
+	double	old_dirx;
+	double	old_planex;
 
 	old_dirx = data->player.x_dir;
 	old_planex = data->player.plane_x;
@@ -87,10 +91,10 @@ int rot_left(t_data *data, double rot_speed)
 	return (1);
 }
 
-int rot_right(t_data *data, double rot_speed)
+int	rot_right(t_data *data, double rot_speed)
 {
-double  old_dirx;
-	double  old_planex;
+	double	old_dirx;
+	double	old_planex;
 	
 	old_dirx = data->player.x_dir;
 	old_planex = data->player.plane_x;
@@ -102,41 +106,30 @@ double  old_dirx;
 	return (1);
 }
 
-int move_to(keys_t keydata, t_data *data, double move_speed, double rot_speed)
+int	move_to(keys_t keydata, t_data *data, double move_speed, double rot_speed)
 {
+	bool	moved;
+
+	moved = false;
 	if (keydata == MLX_KEY_RIGHT)
-	{
 		rot_right(data, rot_speed);
-	}
-	if (keydata == MLX_KEY_LEFT)
-	{
+	else if (keydata == MLX_KEY_LEFT)
 		rot_left(data, rot_speed);
-	}
-	if (keydata == MLX_KEY_D)
+	else if (keydata == MLX_KEY_D)
+		moved = move_right(data, move_speed);
+	else if (keydata == MLX_KEY_A)
+		moved = move_left(data, move_speed);
+	else if (keydata == MLX_KEY_W)
+		moved = move_up(data, move_speed);
+	else if (keydata == MLX_KEY_S)
+		moved = move_down(data, move_speed);
+	else if (keydata == MLX_KEY_ESCAPE)
+		mlx_close_window(data->mlx);
+	if (moved)
 	{
-		move_right(data, move_speed);
+		// mini_map(data);
+		render_frame(data);
 	}
-	if (keydata == MLX_KEY_A)
-	{
-		move_left(data, move_speed);
-	}
-	if (keydata == MLX_KEY_W)
-	{
-		move_up(data, move_speed);
-	}
-	if (keydata == MLX_KEY_S)
-	{
-		move_down(data, move_speed);
-	}
-	if (keydata == MLX_KEY_ESCAPE)
-	{
-		// mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-		exit (0);
-	}
-	// mlx_destroy_image(data->mlx_ptr, data->img.img);
-	data->img = mlx_new_image(data->mlx, data->screen_width, data->screen_height);
-	render_frame(data);
-	render_minimap(data);
 	return (1);
 }
 

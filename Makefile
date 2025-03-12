@@ -8,7 +8,7 @@ MLX_ARCHIVE = MLX42/build/libmlx42.a
 
 MLX_ARCHIVE = MLX42/build/libmlx42.a
 
-SRC = cub3d.c gnl_ut.c gnl.c initgame.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c moves.c window.c
+SRC = cub3d.c gnl_ut.c gnl.c initgame.c parse.c utiles.c parse_colors.c parse_textures.c valid_map.c allocate_free.c raycasting.c player.c moves.c window.c minimap.c
 
 OBJS = $(SRC:.c=.o)
 

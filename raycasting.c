@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/02 17:51:17 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:49:37 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,27 @@ void put_pixel_to_image(t_data *data, int x, int y, int color)
 
 void draw_ceiling(t_data *data,int start_line, int x, int color)
 {
-	mlx_put_pixel(data->img, start_line, x, color);
+    int i = start_line;
+    while (i >= 0)
+    {
+        if ((x >= 0 && x < data->screen_width) && (i >= 0 && i < data->screen_height))
+        {
+            put_pixel_to_image(data, x, i,  color);
+        }
+        i--;
+    }
 }
 void draw_floor(t_data *data,int end_line, int x, int color)
 {
-	mlx_put_pixel(data->img, end_line, x, color);
+    int i = SCREEN_HEIGHT;
+    while (i >= end_line)
+    {
+        if ((x >= 0 && x < data->screen_width) && (i >= 0 && i < data->screen_height))
+        {
+            put_pixel_to_image(data, x, i,  color);
+        }
+        i--;
+    }
 }
 
 void draw_line(t_data *data, double perpWallDist, int x)
@@ -74,8 +90,13 @@ void draw_line(t_data *data, double perpWallDist, int x)
         end_line = data->screen_height - 1;
     draw_ceiling(data, start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
     draw_floor(data, end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
-    
-    put_texture(data, end_line, start_line, x);
+    int i = start_line;
+    while (i <= end_line)
+    {
+       put_pixel_to_image(data, x, i,  0xC5A5AD);
+       i++;
+    }
+    // put_texture(data, end_line, start_line, x);
 }
 
 void put_texture(t_data *data, int end_line, int start_line, int x)
@@ -162,11 +183,11 @@ void	init_dist(t_data *data, int x)
 	map_x = (int)data->player.x_pos;
 	map_y = (int)data->player.y_pos;
 	if (data->ray.rayd_x == 0)
-		data->ray.delta_x = inf;
+		data->ray.delta_x = INF;
 	else
 		data->ray.delta_x = fabs(1 / data->ray.rayd_x);
 	if (data->ray.rayd_y == 0)
-		data->ray.delta_y = inf;
+		data->ray.delta_y = INF;
 	else
 		data->ray.delta_y = fabs(1 / data->ray.rayd_y);
 	if (data->ray.rayd_x < 0)
