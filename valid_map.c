@@ -46,75 +46,7 @@ int surrounded_by_walls(char **map)
 	return (1);
 }
 
-// int check_for_top_row(char **map)
-// {
-// 	int j;
-// 	int k;
 
-// 	j = skip_beg_spaces(map[0]);
-// 	k = skip_end_spaces(map[0]);
-// 	while(map[0][j] && j <= k)
-// 	{
-// 		if (map[0][j] == ' '
-// 		&& ((map[0 + 1][j] != '1' && map[0 + 1][j] != ' ')
-// 		|| (map[0][j - 1] != '1' && map[0][j - 1] != ' ')
-// 		|| (map[0][j + 1] != '1' && map[0][j + 1] != ' ')))
-// 			return (0);
-// 		j++;
-// 	}
-// 	return (1);
-// }
-
-// int check_for_last_row(char **map)
-// {
-// 	int j;
-// 	int k;
-// 	int i;
-
-// 	i = sizeof_array(map) - 1;
-// 	j = skip_beg_spaces(map[i]);
-// 	k = skip_end_spaces(map[i]);
-// 	while(map[i][j] && j <= k)
-// 	{
-// 		if (map[i][j] == ' '
-// 		&& ((map[i - 1][j] != '1' && map[i - 1][j] != ' ')
-// 		|| (map[i][j - 1] != '1' && map[i][j - 1] != ' ')
-// 		|| (map[i][j + 1] != '1' && map[i][j + 1] != ' ')))
-// 			return (0);
-// 		j++;
-// 	}
-// 	return (1);
-// }
-
-
-// int space_btw_walls(char **map)
-// {
-// 	int i;
-// 	int j;
-// 	int k;
-
-// 	i = 1;
-// 	if(!check_for_top_row(map)
-// 		|| !check_for_last_row(map))
-// 		return (0);
-// 	while(map[i + 1])
-// 	{
-// 		j = skip_beg_spaces(map[i]);
-// 		k = skip_end_spaces(map[i]);
-// 		while(map[i][j] && j <= k)
-// 		{
-// 			if (map[i][j] == ' ' &&
-//             ((map[i - 1][j] != '1' && map[i - 1][j] != ' ') ||
-//             (map[i + 1][j] != '1' && map[i + 1][j] != ' ') ||
-//             (map[i][j - 1] != '1' && map[i][j - 1] != ' ') ||
-//             (map[i][j + 1] != '1' && map[i][j + 1] != ' ')))
-// 				return (0);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
 int out_bounds(int i, char **map)
 {
 	int prev_line;

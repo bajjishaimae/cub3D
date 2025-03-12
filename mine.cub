@@ -1,10 +1,10 @@
-NO textures/.xpm
-EA textures/1.xpm
-SO textures/2.xpm
-WE textures/3.xpm
+NO textures/starry1.png
+EA textures/mona.png
+SO textures/perl.png
+WE textures/letter.png
 
-C 20,20,80
-F 20,80,20
+C 0,0,0
+F 0,0,0
 
 
 111111111111

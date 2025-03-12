@@ -293,7 +293,7 @@ int count_spaces(char *number)
 	return (counter);
 }
 
-int convert_rgb(int r, int g, int b)
+int    convert_rgb(int r, int g, int b)
 {
-	return (r << 16 | g << 8 | b);
+    return (r << 24 | g << 16 | b << 8 | 255);
 }
