@@ -95,6 +95,8 @@ int render_minimap(t_data *data)
 void	render_frame(void *param)
 {
 	t_data *data = (t_data *)param;
+	mlx_delete_image(data->mlx, data->img);
+	data->img = mlx_new_image(data->mlx, data->screen_width, data->screen_height);
 	raycast(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 	render_minimap(data);

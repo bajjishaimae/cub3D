@@ -66,13 +66,10 @@ void draw_line(t_data *data, double perpWallDist, int x)
     if (data->end_line >= data->screen_height)
         data->end_line = data->screen_height - 1;
 
-    // Draw ceiling
     draw_ceiling(data, data->start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
 
-    // Draw wall
     put_texture(data, data->end_line, data->start_line, x);
 
-    // Draw floor
     draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
 }
 
@@ -206,5 +203,6 @@ void	init_dist(t_data *data, int x)
 	}
 	raytrace(data, map_x, map_y, x);
 }
+
 
 

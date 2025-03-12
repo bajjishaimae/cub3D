@@ -48,18 +48,18 @@ void load_all_text(t_data *data)
 
 mlx_texture_t *get_wall_texture(t_data *data)
 {
-    if (data->side_wall == 0) // Vertical wall
+    if (data->side_wall == 0)
     {
-        if (data->ray.rayd_x > 0) // Facing east
+        if (data->ray.rayd_x > 0)
             return data->east;
-        else // Facing west
+        else
             return data->west;
     }
-    else // Horizontal wall
+    else
     {
-        if (data->ray.rayd_y > 0) // Facing south
+        if (data->ray.rayd_y > 0)
             return data->south;
-        else // Facing north
+        else
             return data->north;
     }
 }
