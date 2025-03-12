@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
+/*   Updated: 2025/03/12 17:16:50 by kelmounj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 # define CUB_H
 
@@ -12,55 +24,62 @@
 // # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
-# include  <sys/time.h>
+# include <sys/time.h>
 # define BUFFER_SIZE 10
-# define pi M_PI
-# define inf INFINITY
+# define INF INFINITY
 # define SCREEN_WIDTH 1800
 # define SCREEN_HEIGHT 1000
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define CELL_SIZE 16
+# define CELL_SIZE 10
 # define SPEED_MOVE 0.1
 # define SPEED_ROT 0.1
 # define TEXTURE_SIZE 32
 
 typedef struct s_player
 {
-	double  x_pos;
-	double  y_pos;
-	double  x_dir;
-	double  y_dir;
-	double  plane_x;
-	double  plane_y;
-	double  fov;
-}   t_player;
+	double	x_pos;
+	double	y_pos;
+	double	x_dir;
+	double	y_dir;
+	double	plane_x;
+	double	plane_y;
+	double	fov;
+}	t_player;
 
 typedef struct s_ray
 {
-	double  rayd_x;
-	double  rayd_y;
-	double  delta_x;
-	double  delta_y;
-	double  side_x;
-	double  side_y;
-	int     step_x;
-	int     step_y;
+	double	rayd_x;
+	double	rayd_y;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+	int		step_x;
+	int		step_y;
 	// bool    hit_wall;
 	// int     side_wall; // 0 : x_side , 1 : y_side
-}   t_ray;
+}	t_ray;
+
+typedef struct s_sprite
+{
+	double			sprite_x;
+	double			sprite_y;
+	double			dist;
+	struct s_sprite	*next;
+}	t_sprite;
 
 typedef struct s_line
 {
-	int line_order;
-	int NO_line;
-	int SO_line;
-	int WE_line;
-	int EA_line;
-	int F_line;
-	int C_line;
-	int map_line;
-} t_line;
+	int	line_order;
+	int	NO_line;
+	int	SO_line;
+	int	WE_line;
+	int	EA_line;
+	int	F_line;
+	int	C_line;
+	int	map_line;
+}	t_line;
 
 
 typedef struct s_data
@@ -153,17 +172,16 @@ mlx_texture_t *get_wall_texture(t_data *data);
 void put_texture(t_data *data, int start_line, int end_line, int x);
 void fill_text(t_data *data, int i);
 //
-void	init_data(t_data *data);
-void	init_player(t_data *data);
-void    raycast(t_data *data);
-void    init_dist(t_data *data, int x);
-void	move(mlx_key_data_t keydata, void *param);
-void    put_pixel_to_image(t_data *data, int x, int y, int color);
-int     render_minimap(t_data *data);
-void	render_frame(void *param);
-void	ft_destroy_win(void *param);
-void draw_ceiling(t_data *data,int start_line, int x, int color);
-void draw_floor(t_data *data,int end_line, int x, int color);
-void	mouse_move(double x, double y, void *param);
+void			init_data(t_data *data);
+void			init_player(t_data *data);
+void			raycast(t_data *data);
+void			init_dist(t_data *data, int x);
+void			move(mlx_key_data_t keydata, void *param);
+void			put_pixel_to_image(t_data *data, int x, int y, int color);
+// int				render_minimap(t_data *data);
+void			render_frame(void *param);
+void			ft_destroy_win(void *param);
+void			mouse_move(double x, double y, void *param);
+void			mini_map(t_data *data);
 
 #endif

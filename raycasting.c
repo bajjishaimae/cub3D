@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/02 17:51:17 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:18:32 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,11 @@ void	init_dist(t_data *data, int x)
 	map_x = (int)data->player.x_pos;
 	map_y = (int)data->player.y_pos;
 	if (data->ray.rayd_x == 0)
-		data->ray.delta_x = inf;
+		data->ray.delta_x = INF;
 	else
 		data->ray.delta_x = fabs(1 / data->ray.rayd_x);
 	if (data->ray.rayd_y == 0)
-		data->ray.delta_y = inf;
+		data->ray.delta_y = INF;
 	else
 		data->ray.delta_y = fabs(1 / data->ray.rayd_y);
 	if (data->ray.rayd_x < 0)
