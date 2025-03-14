@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/12 17:16:50 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/14 20:21:38 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #include <limits.h>
 #include <string.h>
 #include "MLX42/include/MLX42/MLX42.h"
-// # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
 # include <sys/time.h>
@@ -31,7 +30,7 @@
 # define SCREEN_HEIGHT 1000
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define CELL_SIZE 10
+# define CELL_SIZE 32
 # define SPEED_MOVE 0.1
 # define SPEED_ROT 0.1
 # define TEXTURE_SIZE 32
@@ -138,6 +137,9 @@ typedef struct s_data
     int n_of_doors;
     t_door *doors;
     int hit_door;
+    t_sprite	*sprites;
+	int			sprite_n;
+	double		zbuffer[SCREEN_WIDTH];
 } t_data;
 
 
@@ -195,7 +197,6 @@ void			raycast(t_data *data);
 void			init_dist(t_data *data, int x);
 void			move(mlx_key_data_t keydata, void *param);
 void			put_pixel_to_image(t_data *data, int x, int y, int color);
-// int				render_minimap(t_data *data);
 void			render_frame(void *param);
 void			ft_destroy_win(void *param);
 void			mouse_move(double x, double y, void *param);
