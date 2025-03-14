@@ -124,8 +124,8 @@ void parse(t_data *file_data, char *file_name)
 		ft_error('m');
 	if (!composition_checker(file_data, 0, 0))
 		ft_error('m');
-	file_data->doors = c_malloc(sizeof(t_door) * file_data->n_of_doors, 1);
 	where_doors(file_data);
+	where_sprites(file_data);
 	map_lenght(file_data);
 	map_width(file_data);
 }

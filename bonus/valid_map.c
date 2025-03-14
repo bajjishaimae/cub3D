@@ -158,6 +158,7 @@ void where_doors(t_data *data)
 	int i = 0;
 	int j ;
 	int track = 0;
+	data->doors = c_malloc(sizeof(t_door) * data->n_of_doors, 1);
 	while (data->map[i])
 	{
 		j = 0;
@@ -181,7 +182,7 @@ void where_sprites(t_data *data)
 	int j ;
 	int track = 0;
 
-	data->sprites = malloc(data->sprite_n * sizeof(t_sprite));
+	data->sprites = c_malloc(data->sprite_n * sizeof(t_sprite), 1);
 	while (data->map[i])
 	{
 		j = 0;

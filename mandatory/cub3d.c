@@ -18,7 +18,6 @@ void	render_frame(void *param)
 	mlx_delete_image(data->mlx, data->img);
 	data->img = mlx_new_image(data->mlx, data->screen_width, data->screen_height);
 	raycast(data);
-	mini_map(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
   
@@ -37,10 +36,8 @@ int main(int ac, char **av)
 	init_player(&data);
 	data.mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d", false);
 	data.img = mlx_new_image(data.mlx, data.screen_width, data.screen_height);
-	mlx_set_cursor_mode(data.mlx, MLX_MOUSE_HIDDEN);
 	mlx_close_hook(data.mlx, ft_destroy_win, &data);
 	mlx_key_hook(data.mlx, move, &data);
-	mlx_cursor_hook(data.mlx, mouse_move, &data);
 	load_all_text(&data);
 	mlx_close_hook(data.mlx, ft_destroy_win, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);

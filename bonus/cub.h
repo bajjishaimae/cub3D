@@ -189,6 +189,7 @@ void put_texture(t_data *data, int start_line, int end_line, int x);
 void fill_text(t_data *data, int i);
 void where_doors(t_data *data);
 void check_doors(t_data *data);
+void where_sprites(t_data *data);
 //
 void			init_data(t_data *data);
 void			init_player(t_data *data);

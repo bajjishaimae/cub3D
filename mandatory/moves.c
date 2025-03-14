@@ -133,54 +133,7 @@ int	move_to(keys_t keydata, t_data *data, double move_speed, double rot_speed)
 	return (1);
 }
 
-// size_t	get_tv(void)
-// {
-// 	struct timeval	tv;
-// 	size_t			res;
 
-// 	if (gettimeofday(&tv, NULL) == -1)
-// 		write(2, "Error in time\n", 14);
-// 	res = tv.tv_usec / 1000 + tv.tv_sec * 1000;
-// 	return (res);
-// }
-
-	// printf("mouse mouvement x: %d\ty: %d\n", x, y);
-	// mlx_mouse_hide();
-
-	
-void	mouse_move(double x, double y, void *param)
-{
-	static int	last_x = -1;
-	double		old_dirx;
-	double		old_planex;
-	double		rot_speed;
-	
-	t_data *data = (t_data *)param;
-	if (last_x < 0 || last_x > data->screen_width || y > data->screen_height || y < 0)
-	{
-		last_x = x;
-		return ;
-	}
-	old_dirx = data->player.x_dir;
-	old_planex = data->player.plane_x;
-
-	rot_speed = SPEED_ROT / 2;
-	if (last_x > x)
-	{
-		data->player.x_dir = data->player.x_dir * cos(-rot_speed) - data->player.y_dir * sin(-rot_speed);
-		data->player.y_dir = old_dirx * sin(-rot_speed) + data->player.y_dir * cos(-rot_speed);
-		data->player.plane_x = data->player.plane_x * cos(-rot_speed) - data->player.plane_y * sin(-rot_speed);
-		data->player.plane_y = old_planex * sin(-rot_speed) + data->player.plane_y * cos(-rot_speed);
-	}
-	else
-	{
-		data->player.x_dir = data->player.x_dir * cos(rot_speed) - data->player.y_dir * sin(rot_speed);
-		data->player.y_dir = old_dirx * sin(rot_speed) + data->player.y_dir * cos(rot_speed);
-		data->player.plane_x = data->player.plane_x * cos(rot_speed) - data->player.plane_y * sin(rot_speed);
-		data->player.plane_y = old_planex * sin(rot_speed) + data->player.plane_y * cos(rot_speed);
-	}
-	last_x = x;
-}
 
 void	move(mlx_key_data_t keydata, void *param)
 {
