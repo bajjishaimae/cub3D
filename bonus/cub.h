@@ -68,7 +68,6 @@ typedef struct s_sprite
 	double			sprite_x;
 	double			sprite_y;
 	double			dist;
-	struct s_sprite	*next;
 }	t_sprite;
 
 typedef struct s_line

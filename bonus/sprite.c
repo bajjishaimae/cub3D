@@ -17,7 +17,6 @@ void	set_dist(t_data *data)
 	int	i;
 	
 	i = 0;
-	data->sprites = malloc(data->sprite_n * sizeof(t_sprite));
 	while (i < data->sprite_n)
 	{
 		data->sprites[i].dist = ((data->player.x_pos - data->sprites[i].sprite_x) * (data->player.x_pos - data->sprites[i].sprite_x)) +

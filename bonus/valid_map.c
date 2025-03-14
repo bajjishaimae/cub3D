@@ -120,6 +120,7 @@ int	composition_checker(t_data *data, int i, int j)
 
 	p_counter = 0;
 	data->n_of_doors = 0;
+	data->sprite_n = 0;
 	while (data->map[i])
 	{
 		while (data->map[i][j])
@@ -140,6 +141,8 @@ int	composition_checker(t_data *data, int i, int j)
 				}
 			else if (data->map[i][j] == 'D')
 				data->n_of_doors++;
+			else if (data->map[i][j] == 'A')
+				data->sprite_n++;
 			j++;
 		}
 		j = 0;
@@ -164,6 +167,30 @@ void where_doors(t_data *data)
 			{
 				data->doors[track].x = j;
 				data->doors[track].y = i;
+				track++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void where_sprites(t_data *data)
+{
+	int i = 0;
+	int j ;
+	int track = 0;
+
+	data->sprites = malloc(data->sprite_n * sizeof(t_sprite));
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'A')
+			{
+				data->sprites[track].sprite_x = j;
+				data->sprites[track].sprite_y = i;
 				track++;
 			}
 			j++;
