@@ -1,17 +1,17 @@
-NO textures/starry1.png
-EA textures/mona.png
-SO textures/perl.png
-WE textures/letter.png
+NO textures/wall03.png
+EA textures/wall03.png
+SO textures/wall03.png
+WE textures/wall03.png
 
-C 0,0,0
-F 0,0,0
+C 0,0,12
+F 101,67,33
 
 
 111111111111
 100000001101
 100010001101
 100001001101
-100000001101
+100100001101
 100000001101
 11N010000001
 111111111111

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/12 17:16:50 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:06:12 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define SCREEN_HEIGHT 1000
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define CELL_SIZE 10
-# define SPEED_MOVE 0.1
+# define CELL_SIZE 32
+# define SPEED_MOVE 0.2
 # define SPEED_ROT 0.1
 # define TEXTURE_SIZE 32
 
@@ -63,10 +63,10 @@ typedef struct s_ray
 
 typedef struct s_sprite
 {
+	
 	double			sprite_x;
 	double			sprite_y;
 	double			dist;
-	struct s_sprite	*next;
 }	t_sprite;
 
 typedef struct s_line
@@ -86,45 +86,47 @@ typedef struct s_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-    t_player   player;
-    void        *mlx_ptr;
-    void        *mlx_win;
-    int         screen_width;
-    int         screen_height;
-    double      fov;
-    t_ray       ray;
-    double      pwd;
-    int         pixel_x;
-    int         pixel_y;
-    int line_h;
-    char **map;
-    t_line order;
-    int start_line;
-    int end_line;
-    char *NO;
-    char *WE;
-    char *EA;
-    char *SO;
-    int floor_color[3];
-    int ceiling_color[3];
-    int map_width;
-    int map_lenght;
-    int x_player;
-    int y_player;
-    char direction;
-    uint32_t		*color;
-    int end_map;
-    mlx_texture_t *north;
-    mlx_texture_t *south;
-    mlx_texture_t *east;
-    mlx_texture_t *west;
-    int side_wall;
-    int wall_x;
-    int wall_start;
-    double tex_pos_x;
-    double tex_pos_y;
-} t_data;
-
+	t_player   player;
+	void        *mlx_ptr;
+	void        *mlx_win;
+	int         screen_width;
+	int         screen_height;
+	double      fov;
+	t_ray       ray;
+	double      pwd;
+	int         pixel_x;
+	int         pixel_y;
+	int line_h;
+	char **map;
+	t_line order;
+	int start_line;
+	int end_line;
+	char *NO;
+	char *WE;
+	char *EA;
+	char *SO;
+	int floor_color[3];
+	int ceiling_color[3];
+	int map_width;
+	int map_lenght;
+	int x_player;
+	int y_player;
+	char direction;
+	uint32_t		*color;
+	int end_map;
+	mlx_texture_t *north;
+	mlx_texture_t *south;
+	mlx_texture_t *east;
+	mlx_texture_t *west;
+	int side_wall;
+	int wall_x;
+	int	wall_start;
+	double	tex_pos_x;
+	double	tex_pos_y;
+	t_sprite	*sprites;
+	int			sprite_n;
+	double		zbuffer[SCREEN_WIDTH];
+}	t_data;
 
 typedef struct s_coll
 {

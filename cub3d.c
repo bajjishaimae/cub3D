@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/12 17:17:19 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:17:36 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	render_frame(void *param)
 	mlx_delete_image(data->mlx, data->img);
 	data->img = mlx_new_image(data->mlx, data->screen_width, data->screen_height);
 	raycast(data);
+	mini_map(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
-	// mini_map(data);
 }
   
 int main(int ac, char **av)
@@ -45,7 +45,6 @@ int main(int ac, char **av)
 	mlx_close_hook(data.mlx, ft_destroy_win, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
 	mlx_key_hook(data.mlx, move, &data);
-	// mlx_mouse_hook(data.mlx, mouse_move, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 }

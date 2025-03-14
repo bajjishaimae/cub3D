@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:53 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/12 17:18:14 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:20:05 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,12 @@ int	move_to(keys_t keydata, t_data *data, double move_speed, double rot_speed)
 		moved = move_down(data, move_speed);
 	else if (keydata == MLX_KEY_ESCAPE)
 		mlx_close_window(data->mlx);
-	if (moved)
-	{
-		// mini_map(data);
-		render_frame(data);
-	}
+	// if (moved)
+	// {
+	// 	render_frame(data);
+	// 	mini_map(data);
+	// 	mlx_image_to_window(data->mlx, data->img, 0, 0);
+	// }
 	return (1);
 }
 

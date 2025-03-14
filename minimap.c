@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:26:13 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/12 17:00:02 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:10:19 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	put_player(t_data *data)
 	int player_size;
 	int x;
 	int y;
-	
-	player_x = (int)(data->player.x_pos * CELL_SIZE);
-	player_y = (int)(data->player.y_pos * CELL_SIZE);
+
+	player_x = (int)(data->player.x_pos * CELL_SIZE) - (data->player.x_pos * CELL_SIZE - 100);
+	player_y = (int)(data->player.y_pos * CELL_SIZE) - (data->player.y_pos * CELL_SIZE - 100);
 	player_size = CELL_SIZE / 8;
 	x = -player_size;
 	while (x <= player_size)
@@ -29,7 +29,10 @@ void	put_player(t_data *data)
 		y = -player_size;
 		while (y <= player_size)
 			{
-				put_pixel_to_image(data, player_x + x, player_y + y, 0x00FFFF);
+				if (player_x + x >= 0 && player_y + y >= 0 && player_x + x < 200  && player_y + y < 200)
+				{
+					put_pixel_to_image(data, player_x + x, player_y + y, 0x00FFFF);
+				}
 				y++;
 			}
 		x++;
@@ -53,11 +56,10 @@ void	mini_map(t_data *data)
 
 	player_x = (int)(data->player.x_pos * CELL_SIZE);
 	player_y = (int)(data->player.y_pos * CELL_SIZE);
-	start_x = player_x - 50;
-	start_y = player_y - 50;
-	end_x = player_x + 50;
-	end_y = player_y + 50;
-	
+	start_x = player_x - 100;
+	start_y = player_y - 100;
+	end_x = player_x + 100;
+	end_y = player_y + 100;
 
 	i = 0;
 	while (data->map[i])
