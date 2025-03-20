@@ -24,7 +24,6 @@ int surrounded_by_walls(char **map)
     {
         if (map[0][i] != '1' && map[0][i] != ' ' && map[0][i] != '\n')
             return (0);
-
         i++;
     }
 	i = skip_beg_spaces(map[sizeof_array(map) - 1]);

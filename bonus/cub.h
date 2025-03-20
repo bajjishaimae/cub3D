@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/20 16:53:48 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:00:44 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ typedef struct s_line
 	int	EA_line;
 	int	F_line;
 	int	C_line;
-	int DO_line;
+    int DO_line;
+    int SP_line;
 	int	map_line;
 }	t_line;
 
@@ -111,51 +112,51 @@ typedef struct s_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_player   player;
-	void	    *mlx_ptr;
-	void        *mlx_win;
-	int         screen_width;
-	int         screen_height;
-	double      fov;
-	t_ray       ray;
-	double      pwd;
-	int         pixel_x;
-	int         pixel_y;
-	int line_h;
-	char **map;
-	t_line order;
-	int start_line;
-	int end_line;
-	char *NO;
-	char *WE;
-	char *EA;
-	char *SO;
-	char *DO;
-	int floor_color[3];
-	int ceiling_color[3];
-	int map_width;
-	int map_lenght;
-	int x_player;
-	int y_player;
-	char direction;
-	uint32_t		*color;
-	int end_map;
-	mlx_texture_t *north;
-	mlx_texture_t *south;
-	mlx_texture_t *east;
-	mlx_texture_t *west;
-	mlx_texture_t *door;
-	mlx_texture_t *sprite;
-	mlx_texture_t frames[50];
-	int side_wall;
-	int wall_x;
-	int wall_start;
-	double tex_pos_x;
-	double tex_pos_y;
-	int n_of_doors;
-	t_door *doors;
-	int hit_door;
-	t_sprite	*sprites;
+    t_player   player;
+    void        *mlx_ptr;
+    void        *mlx_win;
+    int         screen_width;
+    int         screen_height;
+    double      fov;
+    t_ray       ray;
+    double      pwd;
+    int         pixel_x;
+    int         pixel_y;
+    int line_h;
+    char **map;
+    t_line order;
+    int start_line;
+    int end_line;
+    char *NO;
+    char *WE;
+    char *EA;
+    char *SO;
+    char *DO;
+    char *SP;
+    int floor_color[3];
+    int ceiling_color[3];
+    int map_width;
+    int map_lenght;
+    int x_player;
+    int y_player;
+    char direction;
+    uint32_t		*color;
+    int end_map;
+    mlx_texture_t *north;
+    mlx_texture_t *south;
+    mlx_texture_t *east;
+    mlx_texture_t *west;
+    mlx_texture_t *door;
+    mlx_texture_t *sprite;
+    int side_wall;
+    int wall_x;
+    int wall_start;
+    double tex_pos_x;
+    double tex_pos_y;
+    int n_of_doors;
+    t_door *doors;
+    int hit_door;
+    t_sprite	*sprites;
 	int			sprite_n;
 	double		zbuffer[SCREEN_WIDTH];
 	t_key       key;

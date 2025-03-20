@@ -6,6 +6,7 @@ int skip_beg_spaces(char *row)
 		i++;
 	return (i);
 }
+
 int skip_end_spaces(char *row)
 {
 	int i = ft_strlen(row) - 1;
@@ -13,24 +14,21 @@ int skip_end_spaces(char *row)
 		i--;
 	return (i);
 }
-int surrounded_by_walls(char **map)
-{
-    int i;
-	int j;
-	int k;
 
+int surrounded_by_walls(char **map, int i, int j, int k)
+{
     i = skip_beg_spaces(map[0]);
     while(map[0][i])
     {
         if (map[0][i] != '1' && map[0][i] != ' ' && map[0][i] != '\n')
             return (0);
-
         i++;
     }
 	i = skip_beg_spaces(map[sizeof_array(map) - 1]);
 	while(map[sizeof_array(map) - 1][i])
     {
-        if (map[sizeof_array(map) - 1][i] != '1' && map[sizeof_array(map) - 1][i] != ' ' && map[sizeof_array(map) - 1][i] != '\n')
+        if (map[sizeof_array(map) - 1][i] != '1' && map[sizeof_array(map) - 1][i] != ' '
+			&& map[sizeof_array(map) - 1][i] != '\n')
             return (0);
         i++;
     }
@@ -93,9 +91,7 @@ int deep_surr_walls(char **map)
 	{
 		j = 0;
 		if (!out_bounds(i, map))
-		{
 			return 0;
-		}
 		while (map[i][j])
 		{
 			if (i != 0 && j != 0 && j < ft_strlen(map[i]) && map[i+1])

@@ -1,9 +1,9 @@
-NO textures/tex/wall.png
-EA textures/tex/wall.png
-SO textures/tex/wall.png
-WE textures/tex/wall.png
-DO textures/tex/door.png
-
+NO textures/starry1.png
+EA textures/mona.png
+SO textures/perl.png
+WE textures/letter.png
+D textures/door.png
+SP textures/door.png
 C 0,0,0
 F 0,0,0
 

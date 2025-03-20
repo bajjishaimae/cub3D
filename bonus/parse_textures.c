@@ -25,10 +25,15 @@ void set_texture(t_data *data, char *line)
         data->WE = extract_content(line + 2);
         data->order.WE_line = data->order.line_order;
     }
-    else if (ft_strncmp(line, "DO ", 3) == 0)
+    else if (ft_strncmp(line, "D ", 2) == 0)
     {
-        data->DO = extract_content(line + 2);
+        data->DO = extract_content(line + 1);
         data->order.DO_line = data->order.line_order;
+    }
+    else if (ft_strncmp(line, "SP ", 3) == 0)
+    {
+        data->SP = extract_content(line + 2);
+        data->order.SP_line = data->order.line_order;
     }
 }
 
@@ -50,6 +55,7 @@ void load_all_text(t_data *data)
     data->east = load_texutes(data->EA);
     data->west = load_texutes(data->WE);
     data->door = load_texutes(data->DO);
+    data->sprite = load_texutes(data->SP);
 }
 
 mlx_texture_t *get_wall_texture(t_data *data)

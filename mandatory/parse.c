@@ -10,6 +10,7 @@ int check_order(t_data *data)
 		return (0);
 	return (1);
 }
+
 char *extract_content(char *line)
 {
 	int end;
@@ -67,32 +68,26 @@ int manip_line(t_data *data, char *line, int *nb, char **joined)
 		return (0);
 	}
 }
-void manip_file(t_data *file_data, int fd)
+
+void manip_file(t_data *file_data, int fd, int valid_infonumber)
 {
-	int valid_infonumber;
 	char *line;
 	char *joined;
  
 	file_data->order.line_order = 0;
 	file_data->end_map = 0;
 	joined = ft_strdup("");
-	valid_infonumber = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		if (ft_strcmp(joined, "") && !ft_strcmp(line, "\n"))
-		{
 			file_data->end_map = 1;
-		}
 		if (!ft_strcmp(line, "\n"))
 			continue ;
-		
 		if (!manip_line(file_data, line, &valid_infonumber, &joined))
-		{
 			ft_error('f');
-		}
 		file_data->order.line_order++;
 	}
 	file_data->map = ft_split(joined, '\n');
@@ -100,9 +95,7 @@ void manip_file(t_data *file_data, int fd)
 		valid_infonumber++;
 	if (valid_infonumber != 7 || !file_data->NO || !file_data->SO
 			|| !file_data->EA || !file_data->WE)
-	{
 		ft_error('f');
-	}
 }
 
 void parse(t_data *file_data, char *file_name)
@@ -114,10 +107,10 @@ void parse(t_data *file_data, char *file_name)
 	file_data->SO = NULL;
 	file_data->EA = NULL;
 	file_data->WE = NULL;
-	manip_file(file_data, fd);
+	manip_file(file_data, fd, 0);
 	if (!check_order(file_data))
 		ft_error('m');
-	if (!surrounded_by_walls(file_data->map) || !deep_surr_walls(file_data->map))
+	if (!surrounded_by_walls(file_data->map, 0, 0, 0) || !deep_surr_walls(file_data->map))
 		ft_error('m');
 	if (!composition_checker(file_data, 0, 0))
 		ft_error('m');
