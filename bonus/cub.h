@@ -80,6 +80,7 @@ typedef struct s_line
 	int	F_line;
 	int	C_line;
     int DO_line;
+    int SP_line;
 	int	map_line;
 }	t_line;
 
@@ -114,6 +115,7 @@ typedef struct s_data
     char *EA;
     char *SO;
     char *DO;
+    char *SP;
     int floor_color[3];
     int ceiling_color[3];
     int map_width;
@@ -128,6 +130,7 @@ typedef struct s_data
     mlx_texture_t *east;
     mlx_texture_t *west;
     mlx_texture_t *door;
+    mlx_texture_t *sprite;
     int side_wall;
     int wall_x;
     int wall_start;

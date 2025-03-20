@@ -125,11 +125,6 @@ int	move_to(keys_t keydata, t_data *data, double move_speed, double rot_speed)
 		moved = move_down(data, move_speed);
 	else if (keydata == MLX_KEY_ESCAPE)
 		mlx_close_window(data->mlx);
-	if (moved)
-	{
-		// mini_map(data);
-		render_frame(data);
-	}
 	return (1);
 }
 

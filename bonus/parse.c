@@ -7,7 +7,8 @@ int check_order(t_data *data)
 		|| data->order.map_line < data->order.SO_line
 		|| data->order.map_line < data->order.EA_line
 		|| data->order.map_line < data->order.WE_line
-		|| data->order.map_line < data->order.DO_line)
+		|| data->order.map_line < data->order.DO_line
+		|| data->order.map_line < data->order.SP_line)
 		return (0);
 	return (1);
 }
@@ -40,7 +41,8 @@ int manip_line(t_data *data, char *line, int *nb, char **joined)
 		|| !ft_strncmp(line + skip_beg_spaces(line), "SO ", 3)
 		|| !ft_strncmp(line + skip_beg_spaces(line), "EA ", 3)
 		|| !ft_strncmp(line + skip_beg_spaces(line), "WE ", 3)
-		|| !ft_strncmp(line + skip_beg_spaces(line), "DO ", 3))
+		|| !ft_strncmp(line + skip_beg_spaces(line), "D ", 2)
+		|| !ft_strncmp(line + skip_beg_spaces(line), "SP ", 3))
 	{
 		set_texture(data, line);
 		(*nb)++;
@@ -100,8 +102,8 @@ void manip_file(t_data *file_data, int fd)
 	file_data->map = ft_split(joined, '\n');
 	if (file_data->map[0])
 		valid_infonumber++;
-	if (valid_infonumber != 8 || !file_data->NO || !file_data->SO
-			|| !file_data->EA || !file_data->WE || !file_data->DO)
+	if (valid_infonumber != 9 || !file_data->NO || !file_data->SO
+			|| !file_data->EA || !file_data->WE || !file_data->DO || !file_data->SP)
 	{
 		ft_error('f');
 	}
@@ -117,6 +119,7 @@ void parse(t_data *file_data, char *file_name)
 	file_data->EA = NULL;
 	file_data->WE = NULL;
 	file_data->DO = NULL;
+	file_data->SP = NULL;
 	manip_file(file_data, fd);
 	if (!check_order(file_data))
 		ft_error('m');

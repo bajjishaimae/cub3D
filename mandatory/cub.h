@@ -155,7 +155,7 @@ void ft_error(char type);
 void set_texture(t_data *data, char *line);
 void set_colors(t_data *data, char *line);
 int	open_cub_file(char *str);
-int surrounded_by_walls(char **map);
+int surrounded_by_walls(char **map, int i, int j, int k);
 int deep_surr_walls(char **map);
 int	composition_checker(t_data *data, int i, int j);
 char *extract_content(char *line);

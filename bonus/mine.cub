@@ -2,7 +2,8 @@ NO textures/starry1.png
 EA textures/mona.png
 SO textures/perl.png
 WE textures/letter.png
-DO textures/door.png
+D textures/door.png
+SP textures/door.png
 C 0,0,0
 F 0,0,0
 

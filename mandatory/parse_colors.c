@@ -14,6 +14,23 @@ int check_content(char *colors)
 	return (1);
 }
 
+int *which_color(t_data *data, char *line)
+{
+	int *color_array = NULL;
+
+	if (ft_strncmp(line, "F ", 2) == 0)
+	{
+        color_array = data->floor_color;
+		data->order.F_line = data->order.line_order;
+	}
+    else if (ft_strncmp(line, "C ", 2) == 0)
+	{
+        color_array = data->ceiling_color;
+		data->order.C_line = data->order.line_order;
+	}
+	return (color_array);
+}
+
 void set_colors(t_data *data, char *line)
 {
 	char *colors;
@@ -24,35 +41,21 @@ void set_colors(t_data *data, char *line)
 	i = 0;
     while (*line == ' ' || *line == '\t')
         line++;
-    if (ft_strncmp(line, "F ", 2) == 0)
-	{
-        color_array = data->floor_color;
-		data->order.F_line = data->order.line_order;
-	}
-    else if (ft_strncmp(line, "C ", 2) == 0)
-	{
-        color_array = data->ceiling_color;
-		data->order.C_line = data->order.line_order;
-	}
+	color_array = which_color(data, line);
     colors = extract_content(line + 1);
     if (!check_content(colors))
-	{
         ft_error('c');
-	}
     splited = ft_split(colors, ',');
     if (!splited || sizeof_array(splited) != 3)
-	{
         ft_error('c');
-	}
 	while (i < 3)
     {
-		if (ft_strlen(splited[i]) > 3 && (ft_strlen(splited[i]) - count_spaces(splited[i]) > 3))
+		if (ft_strlen(splited[i]) > 3 && (ft_strlen(splited[i])
+			- count_spaces(splited[i]) > 3))
 			ft_error('c');
         color_array[i] = ft_atoi(splited[i]);
         if (color_array[i] < 0 || color_array[i] > 255)
-		{
         	ft_error('c');
-		}
 		i++;
     }
 }
