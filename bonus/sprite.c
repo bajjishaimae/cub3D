@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:27:33 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/13 18:18:01 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/20 01:06:36 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ void	trans_sprite(t_data *data)
 	int	i;
 	double	x_sprt;
 	double	y_sprt;
+	double	trans_x;
+	double	trans_y;
+	double	invrs;
+	double	sprite_sc_x;
+	double	sprite_h;
 
 	i = 0;
 	while (i < data->sprite_n)
@@ -62,5 +67,49 @@ void	trans_sprite(t_data *data)
 		y_sprt = data->sprites[i].sprite_y - data->player.y_pos;
 		i++;
 	}
-	
+	invrs = 1 / (data->player.plane_x * data->player.y_dir - data->player.x_dir * data->player.plane_y);
+	trans_x = invrs * data->player.y_dir * x_sprt - data->player.x_dir * y_sprt;
+	trans_y = invrs * (-data->player.plane_y * x_sprt + data->player.plane_x * y_sprt);
+	data->sprites->sprite_sc_x = (SCREEN_WIDTH / 2) * (1 + trans_x / trans_y);
+	data->sprites->sprite_h = fabs(SCREEN_HEIGHT / trans_y);
+	draw_sprite(data);
+}
+
+void	draw_sprite(t_data *data)
+{
+	data->sprites->sprite_w = data->sprites->sprite_h;
+	data->sprites->draw_sx = data->sprites->sprite_sc_x - data->sprites->sprite_w / 2 ;
+	data->sprites->draw_ex = data->sprites->sprite_sc_x + data->sprites->sprite_w / 2;
+	data->sprites->draw_sy = SCREEN_HEIGHT / 2 - data->sprites->sprite_h;
+	data->sprites->draw_ey = SCREEN_HEIGHT / 2 + data->sprites->sprite_h;
+	put_texture_sprite(data);
+}
+
+void	put_texture_sprite(t_data *data)
+{
+	mlx_texture_t *texture;
+	int	stripe;
+	int	y;
+	int	d;
+
+	texture = data->sprite;
+	stripe = data->sprites->draw_sx;
+	while (stripe < data->sprites->draw_ex)
+	{
+		data->sprites->tex_x = (int)((stripe - (-data->sprites->sprite_w / 2 + data->sprites->sprite_sc_x)) * texture->width / data->sprites->sprite_w);
+		if (data->sprites->dist < data->zbuffer[stripe])
+			break;
+		y = data->sprites->draw_sy;
+		while (y < data->sprites->draw_ey)
+		{
+			d = y * 256 - SCREEN_HEIGHT * 128 + data->sprites->sprite_h * 128;
+			data->sprites->tex_y = ((d * texture->height) / data->sprites->sprite_h) / 256;
+			int tmp = data->sprites->tex_y * texture->width + data->sprites->tex_x;
+			int index = tmp * 4;
+			int color = color_from_pixel(texture, index);
+		put_pixel_to_image(data, stripe, y, color);
+			y++;
+		}
+		stripe++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:26:13 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/14 18:10:19 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/17 22:10:50 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	mini_map(t_data *data)
 					{
 							if (data->map[i][j] == '1')
 								put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0xAAAAAA);
+							else if (data->map[i][j] == 'D')
+								put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0x253342);
 							else
 								put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0xFFFFFF);
 						x++;

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/14 20:21:38 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:53:48 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 # include <sys/time.h>
 # define BUFFER_SIZE 10
 # define INF INFINITY
-# define SCREEN_WIDTH 1800
+# define SCREEN_WIDTH 1500
 # define SCREEN_HEIGHT 1000
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
 # define CELL_SIZE 32
-# define SPEED_MOVE 0.1
+# define SPEED_MOVE 0.2
 # define SPEED_ROT 0.1
 # define TEXTURE_SIZE 32
 # define DOOR_OPEN_DIST 2
@@ -57,10 +57,8 @@ typedef struct s_ray
 	double	side_y;
 	int		step_x;
 	int		step_y;
-    int map_x;
-    int map_y;
-	// bool    hit_wall;
-	// int     side_wall; // 0 : x_side , 1 : y_side
+	int map_x;
+	int map_y;
 }	t_ray;
 
 typedef struct s_sprite
@@ -68,7 +66,26 @@ typedef struct s_sprite
 	double			sprite_x;
 	double			sprite_y;
 	double			dist;
+	double			sprite_sc_x;
+	double			sprite_h;
+	double			sprite_w;
+	double			draw_sx;
+	double			draw_sy;
+	double			draw_ex;
+	double			draw_ey;
+	int				tex_x;
+	int				tex_y;
 }	t_sprite;
+
+typedef struct s_key
+{
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	left;
+	bool	right;
+}	t_key;
 
 typedef struct s_line
 {
@@ -79,66 +96,69 @@ typedef struct s_line
 	int	EA_line;
 	int	F_line;
 	int	C_line;
-    int DO_line;
+	int DO_line;
 	int	map_line;
 }	t_line;
 
 typedef struct s_door
 {
-    int is_open;
-    int x;
-    int y;
+	int is_open;
+	int x;
+	int y;
 } t_door;
 
 typedef struct s_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-    t_player   player;
-    void        *mlx_ptr;
-    void        *mlx_win;
-    int         screen_width;
-    int         screen_height;
-    double      fov;
-    t_ray       ray;
-    double      pwd;
-    int         pixel_x;
-    int         pixel_y;
-    int line_h;
-    char **map;
-    t_line order;
-    int start_line;
-    int end_line;
-    char *NO;
-    char *WE;
-    char *EA;
-    char *SO;
-    char *DO;
-    int floor_color[3];
-    int ceiling_color[3];
-    int map_width;
-    int map_lenght;
-    int x_player;
-    int y_player;
-    char direction;
-    uint32_t		*color;
-    int end_map;
-    mlx_texture_t *north;
-    mlx_texture_t *south;
-    mlx_texture_t *east;
-    mlx_texture_t *west;
-    mlx_texture_t *door;
-    int side_wall;
-    int wall_x;
-    int wall_start;
-    double tex_pos_x;
-    double tex_pos_y;
-    int n_of_doors;
-    t_door *doors;
-    int hit_door;
-    t_sprite	*sprites;
+	t_player   player;
+	void	    *mlx_ptr;
+	void        *mlx_win;
+	int         screen_width;
+	int         screen_height;
+	double      fov;
+	t_ray       ray;
+	double      pwd;
+	int         pixel_x;
+	int         pixel_y;
+	int line_h;
+	char **map;
+	t_line order;
+	int start_line;
+	int end_line;
+	char *NO;
+	char *WE;
+	char *EA;
+	char *SO;
+	char *DO;
+	int floor_color[3];
+	int ceiling_color[3];
+	int map_width;
+	int map_lenght;
+	int x_player;
+	int y_player;
+	char direction;
+	uint32_t		*color;
+	int end_map;
+	mlx_texture_t *north;
+	mlx_texture_t *south;
+	mlx_texture_t *east;
+	mlx_texture_t *west;
+	mlx_texture_t *door;
+	mlx_texture_t *sprite;
+	mlx_texture_t frames[50];
+	int side_wall;
+	int wall_x;
+	int wall_start;
+	double tex_pos_x;
+	double tex_pos_y;
+	int n_of_doors;
+	t_door *doors;
+	int hit_door;
+	t_sprite	*sprites;
 	int			sprite_n;
 	double		zbuffer[SCREEN_WIDTH];
+	t_key       key;
 } t_data;
 
 
@@ -195,11 +215,15 @@ void			init_data(t_data *data);
 void			init_player(t_data *data);
 void			raycast(t_data *data);
 void			init_dist(t_data *data, int x);
-void			move(mlx_key_data_t keydata, void *param);
 void			put_pixel_to_image(t_data *data, int x, int y, int color);
 void			render_frame(void *param);
 void			ft_destroy_win(void *param);
 void			mouse_move(double x, double y, void *param);
 void			mini_map(t_data *data);
+void	        key_hook(mlx_key_data_t keydata, void *param);
+void	        key_release(mlx_key_data_t keydata, void *param);
+void            move_to(void *param);
+void			init_keys(t_data *data);
+void			draw_sprite(t_data *data);
 
 #endif
