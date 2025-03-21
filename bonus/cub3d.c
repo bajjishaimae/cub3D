@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/20 16:45:29 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:12:36 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	render_frame(void *param)
 	check_doors(param);
 	raycast(data);
 	mini_map(data);
+	// trans_sprite(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
   

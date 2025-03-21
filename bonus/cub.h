@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/20 17:00:44 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:27:24 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,10 +221,13 @@ void			render_frame(void *param);
 void			ft_destroy_win(void *param);
 void			mouse_move(double x, double y, void *param);
 void			mini_map(t_data *data);
-void	        key_hook(mlx_key_data_t keydata, void *param);
-void	        key_release(mlx_key_data_t keydata, void *param);
-void            move_to(void *param);
+void			key_hook(mlx_key_data_t keydata, void *param);
+void			key_release(mlx_key_data_t keydata, void *param);
+void			move_to(void *param);
 void			init_keys(t_data *data);
 void			draw_sprite(t_data *data);
+void			put_texture_sprite(t_data *data);
+void			trans_sprite(t_data *data);
+int				color_from_pixel(mlx_texture_t *texture, int index);
 
 #endif

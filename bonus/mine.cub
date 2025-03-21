@@ -1,9 +1,9 @@
-NO textures/starry1.png
-EA textures/mona.png
-SO textures/perl.png
-WE textures/letter.png
+NO textures/tex/6.png
+EA textures/tex/6.png
+SO textures/tex/6.png
+WE textures/tex/6.png
 D textures/door.png
-SP textures/door.png
+SP textures/merkava1.png
 C 0,0,0
 F 0,0,0
 
@@ -12,7 +12,7 @@ F 0,0,0
 100000100000001
 100S0011111111111111111111
 10000010000000000000010001
-100000100000000000000D0001
+100A00100000000000000D0001
 10000010000000000000010001
 111D1111111D11111111110001
 110000110000001      10001
