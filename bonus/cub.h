@@ -139,6 +139,7 @@ typedef struct s_data
     int n_of_doors;
     t_door *doors;
     int hit_door;
+    int hit_sprite;
     t_sprite	*sprites;
 	int			sprite_n;
 	double		zbuffer[SCREEN_WIDTH];

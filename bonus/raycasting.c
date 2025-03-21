@@ -123,28 +123,27 @@ void put_texture(t_data *data, int end_line, int start_line, int x)
 
     if (data->hit_door)
         texture = data->door;
+    else if(data->hit_sprite)
+        texture = data->sprite;
     else 
         texture = get_wall_texture(data);
     data->tex_pos_x *= texture->width;
 
     if (data->side_wall == 1 && data->ray.rayd_y < 0)
         data->tex_pos_x = texture->width - data->tex_pos_x - 1;
-
     while (start_line < end_line)
     {
         data->tex_pos_y = (start_line - tmp_start) / (double)(tmp_end - tmp_start);
         data->tex_pos_y *= texture->height;
-
         uint32_t tmp_value = (int)data->tex_pos_y * texture->width;
         tmp_value += (int)data->tex_pos_x;
         int index = tmp_value * 4;
-
         int color = color_from_pixel(texture, index);
         put_pixel_to_image(data, x, start_line, color);
-
         start_line++;
     }
 }
+
 t_door *find_which_door(t_data *data, int x, int y)
 {
     int i = 0;
@@ -160,6 +159,7 @@ t_door *find_which_door(t_data *data, int x, int y)
 void raytrace(t_data *data, int map_x, int map_y, int x)
 {
     data->hit_door = 0;
+    data->hit_sprite = 0;
     bool hit_wall = 0;
     double perpWallDist = 0.0;
     int side_wall = -1;
@@ -183,7 +183,7 @@ void raytrace(t_data *data, int map_x, int map_y, int x)
             hit_wall = 1;
             break;
         }
-        if (data->map[map_y][map_x] == '1' || data->map[map_y][map_x] == 'D')
+        if (data->map[map_y][map_x] == '1' || data->map[map_y][map_x] == 'D' ||  data->map[map_y][map_x] == 'A')
         {
             if (data->map[map_y][map_x] == 'D')
             {
@@ -193,6 +193,11 @@ void raytrace(t_data *data, int map_x, int map_y, int x)
                     hit_wall = 1;
                     data->hit_door = 1;
                 }
+            }
+            else if(data->map[map_y][map_x] == 'A')
+            {
+                data->hit_sprite = 1;
+                hit_wall = 1;
             }
             else
                 hit_wall = 1;

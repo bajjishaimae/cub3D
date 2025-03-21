@@ -128,7 +128,7 @@ int	composition_checker(t_data *data, int i, int j)
 					&& data->map[i][j] != ' ' && data->map[i][j] != 'N'
 					&& data->map[i][j] != 'S' && data->map[i][j] != 'E'
 					&& data->map[i][j] != 'W' && data->map[i][j] != 'D'
-					&& data->map[i][j] != '\n')
+					 && data->map[i][j] != 'A' && data->map[i][j] != '\n')
 				return (0);
 			if (data->map[i][j] == 'S' || data->map[i][j] == 'N'
 				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
