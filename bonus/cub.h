@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/21 14:32:34 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:48:30 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ typedef struct s_line
 	int	map_line;
 }	t_line;
 
+typedef struct s_sprite
+{
+	double			sprite_x;
+	double			sprite_y;
+}	t_sprite;
+
 typedef struct s_door
 {
 	int is_open;
@@ -140,6 +146,9 @@ typedef struct s_data
     int n_of_doors;
     t_door *doors;
     int hit_door;
+    int hit_sprite;
+	t_sprite	*sprites;
+	int			sprite_n;
 	t_key       key;
 } t_data;
 

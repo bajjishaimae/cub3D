@@ -119,31 +119,30 @@ void	put_texture(t_data *data, int end_line, int start_line, int x)
 	int tmp_start = start_line;
 	int tmp_end = end_line;
 
-	if (data->hit_door)
-		texture = data->door;
-	else 
-		texture = get_wall_texture(data);
-	data->tex_pos_x *= texture->width;
+    if (data->hit_door)
+        texture = data->door;
+    else if(data->hit_sprite)
+        texture = data->sprite;
+    else 
+        texture = get_wall_texture(data);
+    data->tex_pos_x *= texture->width;
 
-	if (data->side_wall == 1 && data->ray.rayd_y < 0)
-		data->tex_pos_x = texture->width - data->tex_pos_x - 1;
-
-	while (start_line < end_line)
-	{
-		data->tex_pos_y = (start_line - tmp_start) / (double)(tmp_end - tmp_start);
-		data->tex_pos_y *= texture->height;
-
-		uint32_t tmp_value = (int)data->tex_pos_y * texture->width;
-		tmp_value += (int)data->tex_pos_x;
-		int index = tmp_value * 4;
-
-		int color = color_from_pixel(texture, index);
-		put_pixel_to_image(data, x, start_line, color);
-
-		start_line++;
-	}
+    if (data->side_wall == 1 && data->ray.rayd_y < 0)
+        data->tex_pos_x = texture->width - data->tex_pos_x - 1;
+    while (start_line < end_line)
+    {
+        data->tex_pos_y = (start_line - tmp_start) / (double)(tmp_end - tmp_start);
+        data->tex_pos_y *= texture->height;
+        uint32_t tmp_value = (int)data->tex_pos_y * texture->width;
+        tmp_value += (int)data->tex_pos_x;
+        int index = tmp_value * 4;
+        int color = color_from_pixel(texture, index);
+        put_pixel_to_image(data, x, start_line, color);
+        start_line++;
+    }
 }
-t_door	*find_which_door(t_data *data, int x, int y)
+
+t_door *find_which_door(t_data *data, int x, int y)
 {
 	int i = 0;
 	while (i < data->n_of_doors)
@@ -157,60 +156,66 @@ t_door	*find_which_door(t_data *data, int x, int y)
 
 void	raytrace(t_data *data, int map_x, int map_y, int x)
 {
-	data->hit_door = 0;
-	bool hit_wall = 0;
-	double perpWallDist = 0.0;
-	int side_wall = -1;
+    data->hit_door = 0;
+    data->hit_sprite = 0;
+    bool hit_wall = 0;
+    double perpWallDist = 0.0;
+    int side_wall = -1;
 
-	while (hit_wall == 0)
-	{
-		if (data->ray.side_x < data->ray.side_y)
-		{
-			data->ray.side_x += data->ray.delta_x;
-			map_x += data->ray.step_x;
-			side_wall = 0;
-		}
-		else
-		{
-			data->ray.side_y += data->ray.delta_y;
-			map_y += data->ray.step_y;
-			side_wall = 1;
-		}
-		if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_lenght)
-		{
-			hit_wall = 1;
-			break;
-		}
-		if (data->map[map_y][map_x] == '1' || data->map[map_y][map_x] == 'D')
-		{
-			if (data->map[map_y][map_x] == 'D')
-			{
-				t_door *door = find_which_door(data, map_x, map_y);
-				if (door && !door->is_open)
-				{
-					hit_wall = 1;
-					data->hit_door = 1;
-				}
-			}
-			else
-				hit_wall = 1;
-		}
-	}
-	data->ray.map_x = map_x;
-	data->ray.map_y = map_y;
-	if (side_wall == 0)
-	{
-		perpWallDist = data->ray.side_x - data->ray.delta_x;
-		data->tex_pos_x = data->player.y_pos + perpWallDist * data->ray.rayd_y;
-	}
-	else
-	{
-		perpWallDist = data->ray.side_y - data->ray.delta_y;
-		data->tex_pos_x = data->player.x_pos + perpWallDist * data->ray.rayd_x;
-	}
-	data->tex_pos_x -= floor(data->tex_pos_x);
-	data->side_wall = side_wall;
-	draw_line(data, perpWallDist, x);
+    while (hit_wall == 0)
+    {
+        if (data->ray.side_x < data->ray.side_y)
+        {
+            data->ray.side_x += data->ray.delta_x;
+            map_x += data->ray.step_x;
+            side_wall = 0;
+        }
+        else
+        {
+            data->ray.side_y += data->ray.delta_y;
+            map_y += data->ray.step_y;
+            side_wall = 1;
+        }
+        if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_lenght)
+        {
+            hit_wall = 1;
+            break;
+        }
+        if (data->map[map_y][map_x] == '1' || data->map[map_y][map_x] == 'D' ||  data->map[map_y][map_x] == 'A')
+        {
+            if (data->map[map_y][map_x] == 'D')
+            {
+                t_door *door = find_which_door(data, map_x, map_y);
+                if (door && !door->is_open)
+                {
+                    hit_wall = 1;
+                    data->hit_door = 1;
+                }
+            }
+            else if(data->map[map_y][map_x] == 'A')
+            {
+                data->hit_sprite = 1;
+                hit_wall = 1;
+            }
+            else
+                hit_wall = 1;
+        }
+    }
+    data->ray.map_x = map_x;
+    data->ray.map_y = map_y;
+    if (side_wall == 0)
+    {
+        perpWallDist = data->ray.side_x - data->ray.delta_x;
+        data->tex_pos_x = data->player.y_pos + perpWallDist * data->ray.rayd_y;
+    }
+    else
+    {
+        perpWallDist = data->ray.side_y - data->ray.delta_y;
+        data->tex_pos_x = data->player.x_pos + perpWallDist * data->ray.rayd_x;
+    }
+    data->tex_pos_x -= floor(data->tex_pos_x);
+    data->side_wall = side_wall;
+    draw_line(data, perpWallDist, x);
 }
 
 void	init_dist(t_data *data, int x)
