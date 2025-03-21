@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/20 17:27:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:32:34 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,9 @@ typedef struct s_ray
 	double	side_y;
 	int		step_x;
 	int		step_y;
-	int map_x;
-	int map_y;
+	int		map_x;
+	int		map_y;
 }	t_ray;
-
-typedef struct s_sprite
-{
-	double			sprite_x;
-	double			sprite_y;
-	double			dist;
-	double			sprite_sc_x;
-	double			sprite_h;
-	double			sprite_w;
-	double			draw_sx;
-	double			draw_sy;
-	double			draw_ex;
-	double			draw_ey;
-	int				tex_x;
-	int				tex_y;
-}	t_sprite;
 
 typedef struct s_key
 {
@@ -96,8 +80,8 @@ typedef struct s_line
 	int	EA_line;
 	int	F_line;
 	int	C_line;
-    int DO_line;
-    int SP_line;
+	int	DO_line;
+	int	SP_line;
 	int	map_line;
 }	t_line;
 
@@ -156,9 +140,6 @@ typedef struct s_data
     int n_of_doors;
     t_door *doors;
     int hit_door;
-    t_sprite	*sprites;
-	int			sprite_n;
-	double		zbuffer[SCREEN_WIDTH];
 	t_key       key;
 } t_data;
 

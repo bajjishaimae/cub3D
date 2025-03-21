@@ -1,7 +1,7 @@
 NO textures/tex/6.png
 EA textures/tex/6.png
-SO textures/tex/6.png
-WE textures/tex/6.png
+SO textures/tex/wall.png
+WE textures/tex/wall.png
 D textures/door.png
 SP textures/merkava1.png
 C 0,0,0
