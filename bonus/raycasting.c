@@ -6,18 +6,17 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/12 17:18:32 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/16 06:03:06 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include <math.h>
 
-
-void    raycast(t_data *data)
+void	raycast(t_data *data)
 {
-	double   camera_x;
-	int      i;
+	double	camera_x;
+	int		i;
 
 	i = 0;
 	while (i < data->screen_width)
@@ -30,96 +29,97 @@ void    raycast(t_data *data)
 	}
 }
 
-void put_pixel_to_image(t_data *data, int x, int y, int color)
+void	put_pixel_to_image(t_data *data, int x, int y, int color)
 {
-    if(x >= 0 && x < data->screen_width && y >= 0 && y < data->screen_height)
-	    mlx_put_pixel(data->img, x, y, color);
+	if(x >= 0 && x < data->screen_width && y >= 0 && y < data->screen_height)
+		mlx_put_pixel(data->img, x, y, color);
+}
+
+void	draw_ceiling(t_data *data,int start_line, int x, int color)
+{
+	int	y;
+
+	y = start_line;
+	while (y >= 0)
+	{
+		put_pixel_to_image(data, x ,y, color);
+		y--;
+	}
+}
+void	draw_floor(t_data *data,int end_line, int x, int color)
+{
+	int y;
+
+	y = end_line + 1;
+	while (y <= data->screen_height)
+	{
+		put_pixel_to_image(data, x, y, color);
+		y++;
+	}
+}
+
+double	distance(int x1, int y1, int x2, int y2)
+{
+	return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
+void	check_doors(t_data *data)
+{
+	int i = 0;
+	while (i < data->n_of_doors)
+	{
+		double dist = distance(data->player.x_pos, data->player.y_pos, data->doors[i].x, data->doors[i].y);
+		if (dist < DOOR_OPEN_DIST)
+			data->doors[i].is_open = 1;
+		else
+			data->doors[i].is_open = 0;
+		i++;
+	}
+}
+
+void	draw_line(t_data *data, double perpWallDist, int x)
+{
+	data->line_h = (int)(data->screen_height / perpWallDist);
+	data->start_line = -data->line_h / 2 + data->screen_height / 2;
+	if (data->start_line < 0)
+		data->start_line = 0;
+	data->end_line = data->line_h / 2 + data->screen_height / 2;
+	if (data->end_line >= data->screen_height)
+		data->end_line = data->screen_height - 1;
+
+	draw_ceiling(data, data->start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
+
+	put_texture(data, data->end_line, data->start_line, x);
+
+	draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
 }
 
 
-void draw_ceiling(t_data *data,int start_line, int x, int color)
+int	color_from_pixel(mlx_texture_t *texture, int index)
 {
-    int y = start_line;
-    while (y >= 0)
-    {
-	    put_pixel_to_image(data, x ,y, color);
-        y--;
-    }
-}
-void draw_floor(t_data *data,int end_line, int x, int color)
-{
-    int y = end_line + 1;
-    while (y <= data->screen_height)
-    {
-	    put_pixel_to_image(data, x, y, color);
-        y++;
-    }
+	int	r;
+	int	g;
+	int	b;
+
+	r = texture->pixels[index];
+	g = texture->pixels[index + 1];
+	b = texture->pixels[index + 2];
+	return (convert_rgb(r, g, b));
 }
 
-
-double distance(int x1, int y1, int x2, int y2)
+void	ft_put_pixel(t_data *data, uint32_t x,
+	uint32_t y, uint32_t color)
 {
-    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+	if (x >= 0 && x < (uint32_t)data->screen_width && y >= 0 && y < (uint32_t)data->screen_height)
+		mlx_put_pixel(data->img, x, y, color);
 }
 
 
-void check_doors(t_data *data)
+void	put_texture(t_data *data, int end_line, int start_line, int x)
 {
-    int i = 0;
-    while (i < data->n_of_doors)
-    {
-        double dist = distance(data->player.x_pos, data->player.y_pos, data->doors[i].x, data->doors[i].y);
-        if (dist < DOOR_OPEN_DIST)
-            data->doors[i].is_open = 1;
-        else
-            data->doors[i].is_open = 0;
-        i++;
-    }
-}
-
-void draw_line(t_data *data, double perpWallDist, int x)
-{
-    data->line_h = (int)(data->screen_height / perpWallDist);
-    data->start_line = -data->line_h / 2 + data->screen_height / 2;
-    if (data->start_line < 0)
-        data->start_line = 0;
-    data->end_line = data->line_h / 2 + data->screen_height / 2;
-    if (data->end_line >= data->screen_height)
-        data->end_line = data->screen_height - 1;
-
-    draw_ceiling(data, data->start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
-
-    put_texture(data, data->end_line, data->start_line, x);
-
-    draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
-}
-
-
-int    color_from_pixel(mlx_texture_t *texture, int index)
-{
-    int    r;
-    int    g;
-    int    b;
-
-    r = texture->pixels[index];
-    g = texture->pixels[index + 1];
-    b = texture->pixels[index + 2];
-    return (convert_rgb(r, g, b));
-}
-
-void    ft_put_pixel(t_data *data, uint32_t x,
-    uint32_t y, uint32_t color)
-{
-    if (x >= 0 && x < (uint32_t)data->screen_width && y >= 0 && y < (uint32_t)data->screen_height)
-        mlx_put_pixel(data->img, x, y, color);
-}
-
-
-void put_texture(t_data *data, int end_line, int start_line, int x)
-{
-    mlx_texture_t *texture;
-    int tmp_start = start_line;
-    int tmp_end = end_line;
+	mlx_texture_t *texture;
+	int tmp_start = start_line;
+	int tmp_end = end_line;
 
     if (data->hit_door)
         texture = data->door;
@@ -146,17 +146,17 @@ void put_texture(t_data *data, int end_line, int start_line, int x)
 
 t_door *find_which_door(t_data *data, int x, int y)
 {
-    int i = 0;
-    while (i < data->n_of_doors)
-    {
-        if (data->doors[i].x == x && data->doors[i].y == y)
-            return &data->doors[i];
-        i++;
-    }
-    return NULL;
+	int i = 0;
+	while (i < data->n_of_doors)
+	{
+		if (data->doors[i].x == x && data->doors[i].y == y)
+			return &data->doors[i];
+		i++;
+	}
+	return NULL;
 }
 
-void raytrace(t_data *data, int map_x, int map_y, int x)
+void	raytrace(t_data *data, int map_x, int map_y, int x)
 {
     data->hit_door = 0;
     data->hit_sprite = 0;
@@ -257,6 +257,3 @@ void	init_dist(t_data *data, int x)
 	}
 	raytrace(data, map_x, map_y, x);
 }
-
-
-

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:53 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/13 14:20:05 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:41:28 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,49 +106,25 @@ int	rot_right(t_data *data, double rot_speed)
 	return (1);
 }
 
-int	move_to(keys_t keydata, t_data *data, double move_speed, double rot_speed)
+void	move_to(void *param)
 {
-	bool	moved;
+	t_data *data;
 
-	moved = false;
-	if (keydata == MLX_KEY_RIGHT)
-		rot_right(data, rot_speed);
-	else if (keydata == MLX_KEY_LEFT)
-		rot_left(data, rot_speed);
-	else if (keydata == MLX_KEY_D)
-		moved = move_right(data, move_speed);
-	else if (keydata == MLX_KEY_A)
-		moved = move_left(data, move_speed);
-	else if (keydata == MLX_KEY_W)
-		moved = move_up(data, move_speed);
-	else if (keydata == MLX_KEY_S)
-		moved = move_down(data, move_speed);
-	else if (keydata == MLX_KEY_ESCAPE)
-		mlx_close_window(data->mlx);
-	// if (moved)
-	// {
-	// 	render_frame(data);
-	// 	mini_map(data);
-	// 	mlx_image_to_window(data->mlx, data->img, 0, 0);
-	// }
-	return (1);
+	data = (t_data *)param;
+	if (data->key.right)
+		rot_right(data, SPEED_ROT);
+	if (data->key.left)
+		rot_left(data, SPEED_ROT);
+	if (data->key.d)
+		move_right(data, SPEED_MOVE);
+	if (data->key.a)
+		move_left(data, SPEED_MOVE);
+	if (data->key.w)
+		move_up(data, SPEED_MOVE);
+	if (data->key.s)
+		move_down(data, SPEED_MOVE);
 }
 
-// size_t	get_tv(void)
-// {
-// 	struct timeval	tv;
-// 	size_t			res;
-
-// 	if (gettimeofday(&tv, NULL) == -1)
-// 		write(2, "Error in time\n", 14);
-// 	res = tv.tv_usec / 1000 + tv.tv_sec * 1000;
-// 	return (res);
-// }
-
-	// printf("mouse mouvement x: %d\ty: %d\n", x, y);
-	// mlx_mouse_hide();
-
-	
 void	mouse_move(double x, double y, void *param)
 {
 	static int	last_x = -1;
@@ -181,10 +157,4 @@ void	mouse_move(double x, double y, void *param)
 		data->player.plane_y = old_planex * sin(rot_speed) + data->player.plane_y * cos(rot_speed);
 	}
 	last_x = x;
-}
-
-void	move(mlx_key_data_t keydata, void *param)
-{
-	t_data *data = (t_data *)param;
-	move_to(keydata.key, data, SPEED_MOVE, SPEED_ROT);
 }
