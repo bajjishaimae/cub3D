@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/20 16:54:01 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:37:01 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define CUB_H
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <limits.h>
-#include <string.h>
-#include "MLX42/include/MLX42/MLX42.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <string.h>
+# include "MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdbool.h>
 # include <sys/time.h>
@@ -180,9 +180,14 @@ void			render_frame(void *param);
 void			ft_destroy_win(void *param);
 void			mouse_move(double x, double y, void *param);
 void			mini_map(t_data *data);
-void	        key_hook(mlx_key_data_t keydata, void *param);
-void	        key_release(mlx_key_data_t keydata, void *param);
-void            move_to(void *param);
+void			key_hook(mlx_key_data_t keydata, void *param);
+void			key_release(mlx_key_data_t keydata, void *param);
+void			move_to(void *param);
+int				move_up(t_data *data, double move_speed);
+int				move_down(t_data *data, double move_speed);
+int				move_right(t_data *data, double move_speed);
+int				move_left(t_data *data, double move_speed);
 void			init_keys(t_data *data);
+void			draw_line(t_data *data, double pwd, int x);
 
 #endif

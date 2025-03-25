@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:50:38 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/19 16:34:23 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 02:43:55 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			data->key.w = true;
 	}
 	else if (keydata.action == MLX_RELEASE)
-	{
 		key_release(keydata, param);
-	}
 	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(data->mlx); 
 }

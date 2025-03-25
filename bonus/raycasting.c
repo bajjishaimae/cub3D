@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/20 18:01:36 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:36:27 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,11 @@ void	check_doors(t_data *data)
 	}
 }
 
-void	draw_line(t_data *data, double perpWallDist, int x)
+void	draw_line(t_data *data, double pwd, int x)
 {
-	data->line_h = (int)(data->screen_height / perpWallDist);
+	data->line_h = (int)(data->screen_height / pwd);
 	data->start_line = -data->line_h / 2 + data->screen_height / 2;
-	if (data->start_line < 0)
-		data->start_line = 0;
 	data->end_line = data->line_h / 2 + data->screen_height / 2;
-	if (data->end_line >= data->screen_height)
-		data->end_line = data->screen_height - 1;
-
 	draw_ceiling(data, data->start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
 	put_texture(data, data->end_line, data->start_line, x);
 	draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
@@ -142,6 +137,33 @@ void	put_texture(t_data *data, int end_line, int start_line, int x)
     }
 }
 
+// void	put_weapon(t_data *data)
+// {
+// 	mlx_texture_t	*texture;
+// 	int				i;
+// 	int				x;
+// 	int				y;
+// 	int color;
+
+// 	i = 1;
+// 	while (i <= 258)
+// 	{
+// 		texture = data->frames[i];
+// 		x = 0;
+// 		while (x < texture->width)
+// 		{
+// 			y = 0;
+// 			while (y < texture->height)
+// 			{
+// 				color = color_from_pixel(texture, index);
+// 				put_pixel_to_image(data, x, y, color);
+// 				y++;
+// 			}
+// 			x++;
+// 		}
+// 	}
+// }
+
 t_door *find_which_door(t_data *data, int x, int y)
 {
 	int i = 0;
@@ -159,7 +181,7 @@ void	raytrace(t_data *data, int map_x, int map_y, int x)
     data->hit_door = 0;
     data->hit_sprite = 0;
     bool hit_wall = 0;
-    double perpWallDist = 0.0;
+    double pwd = 0.0;
     int side_wall = -1;
 
     while (hit_wall == 0)
@@ -205,17 +227,17 @@ void	raytrace(t_data *data, int map_x, int map_y, int x)
     data->ray.map_y = map_y;
     if (side_wall == 0)
     {
-        perpWallDist = data->ray.side_x - data->ray.delta_x;
-        data->tex_pos_x = data->player.y_pos + perpWallDist * data->ray.rayd_y;
+        pwd = data->ray.side_x - data->ray.delta_x;
+        data->tex_pos_x = data->player.y_pos + pwd * data->ray.rayd_y;
     }
     else
     {
-        perpWallDist = data->ray.side_y - data->ray.delta_y;
-        data->tex_pos_x = data->player.x_pos + perpWallDist * data->ray.rayd_x;
+        pwd = data->ray.side_y - data->ray.delta_y;
+        data->tex_pos_x = data->player.x_pos + pwd * data->ray.rayd_x;
     }
     data->tex_pos_x -= floor(data->tex_pos_x);
     data->side_wall = side_wall;
-    draw_line(data, perpWallDist, x);
+    draw_line(data, pwd, x);
 }
 
 void	init_dist(t_data *data, int x)

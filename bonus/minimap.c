@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:26:13 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/17 22:10:50 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/24 06:52:52 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,14 @@ void	mini_map(t_data *data)
 					x = 0;
 					while (x < CELL_SIZE)
 					{
-							if (data->map[i][j] == '1')
-								put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0xAAAAAA);
-							else if (data->map[i][j] == 'D')
-								put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0x253342);
-							else
-								put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0xFFFFFF);
+						if (data->map[i][j] == 'D')
+							put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0x253342);
+						else if (data->map[i][j] == 'A')
+							put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0xFF0000);
+						else if (data->map[i][j] == '1')
+							put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0xAAAAAA);
+						else
+							put_pixel_to_image(data, tile_x + x - start_x, tile_y + y - start_y, 0xFFFFFF);
 						x++;
 					}
 					y++;

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/20 16:51:08 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 02:58:05 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 void	render_frame(void *param)
 {
-	t_data *data = (t_data *)param;
+	t_data	*data;
+
+	data = (t_data *)param;
 	mlx_delete_image(data->mlx, data->img);
-	data->img = mlx_new_image(data->mlx, data->screen_width, data->screen_height);
+	data->img = mlx_new_image(data->mlx, data->screen_width,
+			data->screen_height);
 	raycast(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
-  
-int main(int ac, char **av)
+
+int	main(int ac, char **av)
 {
 	t_data	data;
 

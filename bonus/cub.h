@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/21 14:48:30 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 07:45:59 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define SPEED_MOVE 0.2
 # define SPEED_ROT 0.1
 # define TEXTURE_SIZE 32
-# define DOOR_OPEN_DIST 2
+# define DOOR_OPEN_DIST 1.5
 
 typedef struct s_player
 {
@@ -138,6 +138,7 @@ typedef struct s_data
     mlx_texture_t *west;
     mlx_texture_t *door;
     mlx_texture_t *sprite;
+    mlx_texture_t *frames[258];
     int side_wall;
     int wall_x;
     int wall_start;
@@ -215,9 +216,8 @@ void			key_hook(mlx_key_data_t keydata, void *param);
 void			key_release(mlx_key_data_t keydata, void *param);
 void			move_to(void *param);
 void			init_keys(t_data *data);
-void			draw_sprite(t_data *data);
-void			put_texture_sprite(t_data *data);
-void			trans_sprite(t_data *data);
 int				color_from_pixel(mlx_texture_t *texture, int index);
+void        	load_frames(t_data *data);
+char	        *ft_itoa(int n);
 
 #endif
