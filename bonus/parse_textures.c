@@ -59,7 +59,7 @@ void	load_frames(t_data *data)
 		s = ft_itoa(i);
 		path = ft_strjoin("textures/weapon/", ft_strjoin(s, ".png"));
 		// printf("%s\n", path);
-		data->frames[i] = load_texutes(path);
+		data->frames[i - 1] = load_texutes(path);
 		i++;
 	}
 }

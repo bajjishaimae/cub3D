@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/25 07:45:59 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:18:07 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,5 +219,6 @@ void			init_keys(t_data *data);
 int				color_from_pixel(mlx_texture_t *texture, int index);
 void        	load_frames(t_data *data);
 char	        *ft_itoa(int n);
+void put_weapon(t_data *data, int x);
 
 #endif

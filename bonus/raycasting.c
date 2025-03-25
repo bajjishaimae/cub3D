@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/25 17:36:27 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 20:08:36 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,20 @@ void	check_doors(t_data *data)
 	}
 }
 
-void	draw_line(t_data *data, double pwd, int x)
+void draw_line(t_data *data, double pwd, int x)
 {
-	data->line_h = (int)(data->screen_height / pwd);
-	data->start_line = -data->line_h / 2 + data->screen_height / 2;
-	data->end_line = data->line_h / 2 + data->screen_height / 2;
+    data->line_h = (int)(data->screen_height / pwd);
+    data->start_line = -data->line_h / 2 + data->screen_height / 2;
+    data->end_line = data->line_h / 2 + data->screen_height / 2;
+    
 	draw_ceiling(data, data->start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
-	put_texture(data, data->end_line, data->start_line, x);
-	draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
+    put_texture(data, data->end_line, data->start_line, x);
+    draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
+    
+    if (x >= (int) (data->screen_width/2 - data->frames[0]->width/2) && 
+        x <= (int) (data->screen_width/2 + data->frames[0]->width/2/2)) {
+        put_weapon(data, x);
+    }
 }
 
 
@@ -137,32 +143,31 @@ void	put_texture(t_data *data, int end_line, int start_line, int x)
     }
 }
 
-// void	put_weapon(t_data *data)
-// {
-// 	mlx_texture_t	*texture;
-// 	int				i;
-// 	int				x;
-// 	int				y;
-// 	int color;
+void put_weapon(t_data *data, int x)
+{
+    mlx_texture_t *texture = data->frames[0];
+    int weapon_height = texture->height * 0.5;
+    int weapon_width = texture->width * 0.5;
 
-// 	i = 1;
-// 	while (i <= 258)
-// 	{
-// 		texture = data->frames[i];
-// 		x = 0;
-// 		while (x < texture->width)
-// 		{
-// 			y = 0;
-// 			while (y < texture->height)
-// 			{
-// 				color = color_from_pixel(texture, index);
-// 				put_pixel_to_image(data, x, y, color);
-// 				y++;
-// 			}
-// 			x++;
-// 		}
-// 	}
-// }
+    int start_x = data->screen_width/2 - weapon_width/2;
+    int start_y = data->screen_height - weapon_height;
+
+    if (x < start_x || x >= start_x + weapon_width)
+        return;
+    double tex_x = (double)(x - start_x) / weapon_width * texture->width;
+    int y = start_y;
+    while (y < data->screen_height)
+    {
+        double tex_y = (double)(y - start_y) / weapon_height * texture->height;
+        uint32_t tmp_value = (int)tex_y * texture->width + (int)tex_x;
+        int index = tmp_value * 4;
+        if (texture->pixels[index+3] == 0) 
+            continue;
+        int color = color_from_pixel(texture, index);
+        put_pixel_to_image(data, x, y, color);
+        y++;
+    }
+}
 
 t_door *find_which_door(t_data *data, int x, int y)
 {
