@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 03:02:00 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/27 23:08:55 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 03:07:46 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,4 @@ void	init_data(t_data *data)
 {
 	data->screen_width = SCREEN_WIDTH;
 	data->screen_height = SCREEN_HEIGHT;
-	init_player(data);
-	init_keys(data);
 }
