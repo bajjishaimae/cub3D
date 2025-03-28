@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/25 18:18:07 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/03/27 07:08:30 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define SPEED_ROT 0.1
 # define TEXTURE_SIZE 32
 # define DOOR_OPEN_DIST 1.5
+#define FRAME_DELAY 100000
 
 typedef struct s_player
 {
@@ -69,6 +70,7 @@ typedef struct s_key
 	bool	d;
 	bool	left;
 	bool	right;
+    bool    space;
 }	t_key;
 
 typedef struct s_line
@@ -138,7 +140,7 @@ typedef struct s_data
     mlx_texture_t *west;
     mlx_texture_t *door;
     mlx_texture_t *sprite;
-    mlx_texture_t *frames[258];
+    mlx_texture_t *frames[28];
     int side_wall;
     int wall_x;
     int wall_start;
@@ -151,6 +153,7 @@ typedef struct s_data
 	t_sprite	*sprites;
 	int			sprite_n;
 	t_key       key;
+    bool        is_animating;
 } t_data;
 
 
@@ -219,6 +222,10 @@ void			init_keys(t_data *data);
 int				color_from_pixel(mlx_texture_t *texture, int index);
 void        	load_frames(t_data *data);
 char	        *ft_itoa(int n);
-void put_weapon(t_data *data, int x);
+// void            put_weapon(t_data *data, int x);
+// void put_weapon(t_data *data, int frame_index);
+void            put_weapons(t_data *data);
+// void put_weapon(t_data *data, int x);
+void put_weapon(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 03:24:45 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/25 10:30:39 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/28 00:38:52 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	draw_floor(t_data *data, int end_line, int x, int color)
 
 void	draw_line(t_data *data, double pwd, int x)
 {
+	// if (pwd < 1)
+	// 	pwd = 1;
 	data->line_h = (int)(data->screen_height / pwd);
 	data->start_line = -data->line_h / 2 + data->screen_height / 2;
 	data->end_line = data->line_h / 2 + data->screen_height / 2;

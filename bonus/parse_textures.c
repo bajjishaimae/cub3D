@@ -53,12 +53,17 @@ void	load_frames(t_data *data)
 	char	*s;
 	char	*path;
 
+	path = malloc(sizeof(char) * (50));
+	if (!path)
+	{
+		printf("Memory allocation error!\n");
+		return;
+	}
 	i = 1;
-	while (i <= 258)
+	while (i <= 28)
 	{
 		s = ft_itoa(i);
 		path = ft_strjoin("textures/weapon/", ft_strjoin(s, ".png"));
-		// printf("%s\n", path);
 		data->frames[i - 1] = load_texutes(path);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:36:18 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/11 17:16:25 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/27 05:14:00 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_data(t_data *data)
 {
 	data->screen_width = SCREEN_WIDTH;
     data->screen_height = SCREEN_HEIGHT;
+	data->is_animating = false;
 	// if (data->fov <= 0)
 		// data->player.fov = pi / 3;
 }
