@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/27 06:32:14 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 07:16:14 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ void	render_frame(void *param)
 	data->img = mlx_new_image(data->mlx, data->screen_width, data->screen_height);
 	check_doors(param);
 	raycast(data);
-	put_weapon(data);
 	mini_map(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
-
+  
 int main(int ac, char **av)
 {
 	t_data	data;
@@ -45,8 +44,9 @@ int main(int ac, char **av)
 	mlx_cursor_hook(data.mlx, mouse_move, &data);
 	load_all_text(&data);
 	load_frames(&data);
-	mlx_key_hook(data.mlx, key_hook, &data);
+	mlx_close_hook(data.mlx, ft_destroy_win, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
+	mlx_key_hook(data.mlx, key_hook, &data);
 	mlx_loop_hook(data.mlx, move_to, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);

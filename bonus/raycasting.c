@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/28 00:15:09 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/25 20:08:36 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	raycast(t_data *data)
 	i = 0;
 	while (i < data->screen_width)
 	{
-		camera_x = i / (double)data->screen_width;
+		camera_x = 2 * i / (double)data->screen_width - 1;
 		data->ray.rayd_x = data->player.x_dir + data->player.plane_x * camera_x;
 		data->ray.rayd_y = data->player.y_dir  + data->player.plane_y * camera_x;
 		init_dist(data, i);
@@ -46,7 +46,6 @@ void	draw_ceiling(t_data *data,int start_line, int x, int color)
 		y--;
 	}
 }
-
 void	draw_floor(t_data *data,int end_line, int x, int color)
 {
 	int y;
@@ -80,19 +79,20 @@ void	check_doors(t_data *data)
 
 void draw_line(t_data *data, double pwd, int x)
 {
-	data->line_h = (int)(data->screen_height / pwd);
-	data->start_line = -data->line_h / 2 + data->screen_height / 2;
-	data->end_line = data->line_h / 2 + data->screen_height / 2;
-	
+    data->line_h = (int)(data->screen_height / pwd);
+    data->start_line = -data->line_h / 2 + data->screen_height / 2;
+    data->end_line = data->line_h / 2 + data->screen_height / 2;
+    
 	draw_ceiling(data, data->start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
-	put_texture(data, data->end_line, data->start_line, x);
-	draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
-	// if (x >= (int) (data->screen_width/2 - data->frames[0]->width/2) && 
-	// 	x <= (int) (data->screen_width/2 + data->frames[0]->width/2/2)) {
-	// 	put_weapon(data, x);
-	// }
-
+    put_texture(data, data->end_line, data->start_line, x);
+    draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
+    
+    if (x >= (int) (data->screen_width/2 - data->frames[0]->width/2) && 
+        x <= (int) (data->screen_width/2 + data->frames[0]->width/2/2)) {
+        put_weapon(data, x);
+    }
 }
+
 
 int	color_from_pixel(mlx_texture_t *texture, int index)
 {
@@ -120,56 +120,53 @@ void	put_texture(t_data *data, int end_line, int start_line, int x)
 	int tmp_start = start_line;
 	int tmp_end = end_line;
 
-	if (data->hit_door)
-		texture = data->door;
-	else if(data->hit_sprite)
-		texture = data->sprite;
-	else 
-		texture = get_wall_texture(data);
-	data->tex_pos_x *= texture->width;
+    if (data->hit_door)
+        texture = data->door;
+    else if(data->hit_sprite)
+        texture = data->sprite;
+    else 
+        texture = get_wall_texture(data);
+    data->tex_pos_x *= texture->width;
 
-	if (data->side_wall == 1 && data->ray.rayd_y < 0)
-		data->tex_pos_x = texture->width - data->tex_pos_x - 1;
-	while (start_line < end_line)
-	{
-		data->tex_pos_y = (start_line - tmp_start) / (double)(tmp_end - tmp_start);
-		data->tex_pos_y *= texture->height;
-		uint32_t tmp_value = (int)data->tex_pos_y * texture->width;
-		tmp_value += (int)data->tex_pos_x;
-		int index = tmp_value * 4;
-		int color = color_from_pixel(texture, index);
-		put_pixel_to_image(data, x, start_line, color);
-		start_line++;
-	}
+    if (data->side_wall == 1 && data->ray.rayd_y < 0)
+        data->tex_pos_x = texture->width - data->tex_pos_x - 1;
+    while (start_line < end_line)
+    {
+        data->tex_pos_y = (start_line - tmp_start) / (double)(tmp_end - tmp_start);
+        data->tex_pos_y *= texture->height;
+        uint32_t tmp_value = (int)data->tex_pos_y * texture->width;
+        tmp_value += (int)data->tex_pos_x;
+        int index = tmp_value * 4;
+        int color = color_from_pixel(texture, index);
+        put_pixel_to_image(data, x, start_line, color);
+        start_line++;
+    }
 }
 
 void put_weapon(t_data *data, int x)
 {
-	mlx_texture_t *texture = data->frames[0];
-	int weapon_height = texture->height * 0.5;
-	int weapon_width = texture->width * 0.5;
+    mlx_texture_t *texture = data->frames[0];
+    int weapon_height = texture->height * 0.5;
+    int weapon_width = texture->width * 0.5;
 
-	int start_x = data->screen_width/2 - weapon_width/2;
-	int start_y = data->screen_height - weapon_height;
+    int start_x = data->screen_width/2 - weapon_width/2;
+    int start_y = data->screen_height - weapon_height;
 
-	if (x < start_x || x >= start_x + weapon_width)
-		return;
-	double tex_x = (double)(x - start_x) / weapon_width * texture->width;
-	int y = start_y;
-	while (y < data->screen_height)
-	{
-		double tex_y = (double)(y - start_y) / weapon_height * texture->height;
-		uint32_t tmp_value = (int)tex_y * texture->width + (int)tex_x;
-		int index = tmp_value * 4;
-		if (texture->pixels[index+3] == 0)
-		{
-			y++;
-			continue;
-		}
-		int color = color_from_pixel(texture, index);
-		put_pixel_to_image(data, x, y, color);
-		y++;
-	}
+    if (x < start_x || x >= start_x + weapon_width)
+        return;
+    double tex_x = (double)(x - start_x) / weapon_width * texture->width;
+    int y = start_y;
+    while (y < data->screen_height)
+    {
+        double tex_y = (double)(y - start_y) / weapon_height * texture->height;
+        uint32_t tmp_value = (int)tex_y * texture->width + (int)tex_x;
+        int index = tmp_value * 4;
+        if (texture->pixels[index+3] == 0) 
+            continue;
+        int color = color_from_pixel(texture, index);
+        put_pixel_to_image(data, x, y, color);
+        y++;
+    }
 }
 
 t_door *find_which_door(t_data *data, int x, int y)
@@ -186,70 +183,83 @@ t_door *find_which_door(t_data *data, int x, int y)
 
 void	raytrace(t_data *data, int map_x, int map_y, int x)
 {
-	data->hit_door = 0;
-	data->hit_sprite = 0;
-	bool hit_wall = 0;
-	double pwd = 0.0;
-	int side_wall = -1;
+    data->hit_door = 0;
+    data->hit_sprite = 0;
+    bool hit_wall = 0;
+    double pwd = 0.0;
+    int side_wall = -1;
 
-	while (hit_wall == 0)
-	{
-		if (data->ray.side_x < data->ray.side_y)
-		{
-			data->ray.side_x += data->ray.delta_x;
-			map_x += data->ray.step_x;
-			side_wall = 0;
-		}
-		else
-		{
-			data->ray.side_y += data->ray.delta_y;
-			map_y += data->ray.step_y;
-			side_wall = 1;
-		}
-		if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_lenght)
-		{
-			hit_wall = 1;
-			break;
-		}
-		if (data->map[map_y][map_x] == '1' || data->map[map_y][map_x] == 'D' ||  data->map[map_y][map_x] == 'A')
-		{
-			if (data->map[map_y][map_x] == 'D')
-			{
-				t_door *door = find_which_door(data, map_x, map_y);
-				if (door && !door->is_open)
-				{
-					hit_wall = 1;
-					data->hit_door = 1;
-				}
-			}
-			else if(data->map[map_y][map_x] == 'A')
-			{
-				data->hit_sprite = 1;
-				hit_wall = 1;
-			}
-			else
-				hit_wall = 1;
-		}
-	}
-	data->ray.map_x = map_x;
-	data->ray.map_y = map_y;
-	if (side_wall == 0)
-	{
-		pwd = data->ray.side_x - data->ray.delta_x;
-		data->tex_pos_x = data->player.y_pos + pwd * data->ray.rayd_y;
-	}
-	else
-	{
-		pwd = data->ray.side_y - data->ray.delta_y;
-		data->tex_pos_x = data->player.x_pos + pwd * data->ray.rayd_x;
-	}
-	data->tex_pos_x -= floor(data->tex_pos_x);
-	data->side_wall = side_wall;
-	draw_line(data, pwd, x);
+    while (hit_wall == 0)
+    {
+        if (data->ray.side_x < data->ray.side_y)
+        {
+            data->ray.side_x += data->ray.delta_x;
+            map_x += data->ray.step_x;
+            side_wall = 0;
+        }
+        else
+        {
+            data->ray.side_y += data->ray.delta_y;
+            map_y += data->ray.step_y;
+            side_wall = 1;
+        }
+        if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_lenght)
+        {
+            hit_wall = 1;
+            break;
+        }
+        if (data->map[map_y][map_x] == '1' || data->map[map_y][map_x] == 'D' ||  data->map[map_y][map_x] == 'A')
+        {
+            if (data->map[map_y][map_x] == 'D')
+            {
+                t_door *door = find_which_door(data, map_x, map_y);
+                if (door && !door->is_open)
+                {
+                    hit_wall = 1;
+                    data->hit_door = 1;
+                }
+            }
+            else if(data->map[map_y][map_x] == 'A')
+            {
+                data->hit_sprite = 1;
+                hit_wall = 1;
+            }
+            else
+                hit_wall = 1;
+        }
+    }
+    data->ray.map_x = map_x;
+    data->ray.map_y = map_y;
+    if (side_wall == 0)
+    {
+        pwd = data->ray.side_x - data->ray.delta_x;
+        data->tex_pos_x = data->player.y_pos + pwd * data->ray.rayd_y;
+    }
+    else
+    {
+        pwd = data->ray.side_y - data->ray.delta_y;
+        data->tex_pos_x = data->player.x_pos + pwd * data->ray.rayd_x;
+    }
+    data->tex_pos_x -= floor(data->tex_pos_x);
+    data->side_wall = side_wall;
+    draw_line(data, pwd, x);
 }
 
-void	init_steps(t_data *data, int map_x, int map_y)
+void	init_dist(t_data *data, int x)
 {
+	int		map_x;
+	int		map_y;
+
+	map_x = (int)data->player.x_pos;
+	map_y = (int)data->player.y_pos;
+	if (data->ray.rayd_x == 0)
+		data->ray.delta_x = INF;
+	else
+		data->ray.delta_x = fabs(1 / data->ray.rayd_x);
+	if (data->ray.rayd_y == 0)
+		data->ray.delta_y = INF;
+	else
+		data->ray.delta_y = fabs(1 / data->ray.rayd_y);
 	if (data->ray.rayd_x < 0)
 	{
 		data->ray.step_x = -1;
@@ -270,23 +280,5 @@ void	init_steps(t_data *data, int map_x, int map_y)
 		data->ray.step_y = 1;
 		data->ray.side_y = (map_y + 1 - data->player.y_pos) * data->ray.delta_y;
 	}
-}
-
-void	init_dist(t_data *data, int x)
-{
-	int		map_x;
-	int		map_y;
-
-	map_x = (int)data->player.x_pos;
-	map_y = (int)data->player.y_pos;
-	if (data->ray.rayd_x == 0)
-		data->ray.delta_x = INF;
-	else
-		data->ray.delta_x = fabs(1 / data->ray.rayd_x);
-	if (data->ray.rayd_y == 0)
-		data->ray.delta_y = INF;
-	else
-		data->ray.delta_y = fabs(1 / data->ray.rayd_y);
-	init_steps(data, map_x, map_y);
 	raytrace(data, map_x, map_y, x);
 }
