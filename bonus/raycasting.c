@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/25 20:08:36 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/03/28 02:54:16 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-#include <math.h>
 
 void	raycast(t_data *data)
 {
@@ -86,11 +85,6 @@ void draw_line(t_data *data, double pwd, int x)
 	draw_ceiling(data, data->start_line, x, convert_rgb(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]));
     put_texture(data, data->end_line, data->start_line, x);
     draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], data->floor_color[1], data->floor_color[2]));
-    
-    if (x >= (int) (data->screen_width/2 - data->frames[0]->width/2) && 
-        x <= (int) (data->screen_width/2 + data->frames[0]->width/2/2)) {
-        put_weapon(data, x);
-    }
 }
 
 
@@ -140,32 +134,6 @@ void	put_texture(t_data *data, int end_line, int start_line, int x)
         int color = color_from_pixel(texture, index);
         put_pixel_to_image(data, x, start_line, color);
         start_line++;
-    }
-}
-
-void put_weapon(t_data *data, int x)
-{
-    mlx_texture_t *texture = data->frames[0];
-    int weapon_height = texture->height * 0.5;
-    int weapon_width = texture->width * 0.5;
-
-    int start_x = data->screen_width/2 - weapon_width/2;
-    int start_y = data->screen_height - weapon_height;
-
-    if (x < start_x || x >= start_x + weapon_width)
-        return;
-    double tex_x = (double)(x - start_x) / weapon_width * texture->width;
-    int y = start_y;
-    while (y < data->screen_height)
-    {
-        double tex_y = (double)(y - start_y) / weapon_height * texture->height;
-        uint32_t tmp_value = (int)tex_y * texture->width + (int)tex_x;
-        int index = tmp_value * 4;
-        if (texture->pixels[index+3] == 0) 
-            continue;
-        int color = color_from_pixel(texture, index);
-        put_pixel_to_image(data, x, y, color);
-        y++;
     }
 }
 
@@ -245,22 +213,9 @@ void	raytrace(t_data *data, int map_x, int map_y, int x)
     draw_line(data, pwd, x);
 }
 
-void	init_dist(t_data *data, int x)
+void	init_steps(t_data *data, int map_x, int map_y)
 {
-	int		map_x;
-	int		map_y;
-
-	map_x = (int)data->player.x_pos;
-	map_y = (int)data->player.y_pos;
-	if (data->ray.rayd_x == 0)
-		data->ray.delta_x = INF;
-	else
-		data->ray.delta_x = fabs(1 / data->ray.rayd_x);
-	if (data->ray.rayd_y == 0)
-		data->ray.delta_y = INF;
-	else
-		data->ray.delta_y = fabs(1 / data->ray.rayd_y);
-	if (data->ray.rayd_x < 0)
+    if (data->ray.rayd_x < 0)
 	{
 		data->ray.step_x = -1;
 		data->ray.side_x = (data->player.x_pos - map_x) * data->ray.delta_x;
@@ -280,5 +235,23 @@ void	init_dist(t_data *data, int x)
 		data->ray.step_y = 1;
 		data->ray.side_y = (map_y + 1 - data->player.y_pos) * data->ray.delta_y;
 	}
+}
+
+void	init_dist(t_data *data, int x)
+{
+	int		map_x;
+	int		map_y;
+
+	map_x = (int)data->player.x_pos;
+	map_y = (int)data->player.y_pos;
+	if (data->ray.rayd_x == 0)
+		data->ray.delta_x = INF;
+	else
+		data->ray.delta_x = fabs(1 / data->ray.rayd_x);
+	if (data->ray.rayd_y == 0)
+		data->ray.delta_y = INF;
+	else
+		data->ray.delta_y = fabs(1 / data->ray.rayd_y);
+	init_steps(data, map_x, map_y);
 	raytrace(data, map_x, map_y, x);
 }

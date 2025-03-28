@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:50:38 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/25 02:43:55 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/28 05:46:17 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ void	init_keys(t_data *data)
 	data->key.s = false;
 	data->key.left = false;
 	data->key.right = false;
+	data->key.space = false;
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_data *data;
-	
+	t_data	*data;
+
 	data = (t_data *)param;
 	if (keydata.action == MLX_PRESS)
 	{
@@ -41,17 +42,19 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			data->key.s = true;
 		if (keydata.key == MLX_KEY_W)
 			data->key.w = true;
+		if (keydata.key == MLX_KEY_SPACE)
+			data->is_animating = true;
 	}
 	else if (keydata.action == MLX_RELEASE)
 		key_release(keydata, param);
 	if (keydata.key == MLX_KEY_ESCAPE)
-		mlx_close_window(data->mlx); 
+		mlx_close_window(data->mlx);
 }
 
 void	key_release(mlx_key_data_t keydata, void *param)
 {
-	t_data *data;
-	
+	t_data	*data;
+
 	data = (t_data *)param;
 	if (keydata.key == MLX_KEY_RIGHT)
 		data->key.right = false;

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/25 10:37:01 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/28 05:55:38 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,49 +80,47 @@ typedef struct s_line
 	int	map_line;
 }	t_line;
 
-
 typedef struct s_data
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_player   player;
-	void        *mlx_ptr;
-	void        *mlx_win;
-	int         screen_width;
-	int         screen_height;
-	double      fov;
-	t_ray       ray;
-	double      pwd;
-	int         pixel_x;
-	int         pixel_y;
-	int line_h;
-	char **map;
-	t_line order;
-	int start_line;
-	int end_line;
-	char *NO;
-	char *WE;
-	char *EA;
-	char *SO;
-	int floor_color[3];
-	int ceiling_color[3];
-	int map_width;
-	int map_lenght;
-	int x_player;
-	int y_player;
-	char direction;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	t_player		player;
+	void			*mlx_ptr;
+	void			*mlx_win;
+	int				screen_width;
+	int				screen_height;
+	t_ray			ray;
+	double			pwd;
+	int				pixel_x;
+	int				pixel_y;
+	int				line_h;
+	char			**map;
+	t_line			order;
+	int				start_line;
+	int				end_line;
+	char			*NO;
+	char			*WE;
+	char			*EA;
+	char			*SO;
+	int				floor_color[3];
+	int				ceiling_color[3];
+	int				map_width;
+	int				map_lenght;
+	int				x_player;
+	int				y_player;
+	char			direction;
 	uint32_t		*color;
-	int end_map;
-	mlx_texture_t *north;
-	mlx_texture_t *south;
-	mlx_texture_t *east;
-	mlx_texture_t *west;
-	int side_wall;
-	int wall_x;
-	int	wall_start;
-	double	tex_pos_x;
-	double	tex_pos_y;
-	t_key       key;
+	int				end_map;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*east;
+	mlx_texture_t	*west;
+	int				side_wall;
+	int				wall_x;
+	int				wall_start;
+	double			tex_pos_x;
+	double			tex_pos_y;
+	t_key			key;
 }	t_data;
 
 typedef struct s_coll

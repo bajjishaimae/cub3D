@@ -54,11 +54,10 @@ void	load_frames(t_data *data)
 	char	*path;
 
 	i = 1;
-	while (i <= 258)
+	while (i <= 30)
 	{
 		s = ft_itoa(i);
 		path = ft_strjoin("textures/weapon/", ft_strjoin(s, ".png"));
-		// printf("%s\n", path);
 		data->frames[i - 1] = load_texutes(path);
 		i++;
 	}
