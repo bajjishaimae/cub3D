@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:26:13 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/24 06:52:52 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/28 07:01:16 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,28 @@
 
 void	put_player(t_data *data)
 {
-	int player_x;
-	int player_y;
-	int player_size;
-	int x;
-	int y;
+	int		player_x;
+	int		player_y;
+	int		player_size;
+	int		x;
+	int		y;
 
-	player_x = (int)(data->player.x_pos * CELL_SIZE) - (data->player.x_pos * CELL_SIZE - 100);
-	player_y = (int)(data->player.y_pos * CELL_SIZE) - (data->player.y_pos * CELL_SIZE - 100);
-	player_size = CELL_SIZE / 8;
-	x = -player_size;
+	player_x = (int)(data->player.x_pos * CELL_SIZE) \
+		- (data->player.x_pos * CELL_SIZE - 100);
+	player_y = (int)(data->player.y_pos * CELL_SIZE) \
+		- (data->player.y_pos * CELL_SIZE - 100);
+	(1) && (player_size = CELL_SIZE / 8, x = -player_size);
 	while (x <= player_size)
 	{
 		y = -player_size;
 		while (y <= player_size)
-			{
-				if (player_x + x >= 0 && player_y + y >= 0 && player_x + x < 200  && player_y + y < 200)
-				{
-					put_pixel_to_image(data, player_x + x, player_y + y, 0x00FFFF);
-				}
-				y++;
-			}
+		{
+			if (player_x + x >= 0 && player_y + y >= 0
+				&& player_x + x < 200 && player_y + y < 200)
+				put_pixel_to_image(data, player_x + x, \
+						player_y + y, 0x00FFFF);
+			y++;
+		}
 		x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/28 06:02:40 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/28 06:35:15 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	raycast(t_data *data)
 	i = 0;
 	while (i < data->screen_width)
 	{
-		camera_x = i / (double)data->screen_width;
+		camera_x = 2 * i / (double)data->screen_width - 1;
 		data->ray.rayd_x = data->player.x_dir + data->player.plane_x * camera_x;
 		data->ray.rayd_y = data->player.y_dir + data->player.plane_y * camera_x;
 		init_dist(data, i);

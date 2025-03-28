@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/28 05:43:15 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/28 06:51:27 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,18 @@ typedef struct s_ray
 	int		map_x;
 	int		map_y;
 }	t_ray;
+
+typedef struct s_weapon
+{
+	int	height;
+	int	width;
+	int	start_x;
+	int	start_y;
+	double	tex_x;
+	double	tex_y;
+	uint32_t tmp_value;
+	int index;
+}	t_weapon;
 
 typedef struct s_key
 {
@@ -150,6 +162,7 @@ typedef struct s_data
 	int				sprite_n;
 	t_key			key;
 	bool			is_animating;
+	t_weapon		weapon;
 }	t_data;
 
 typedef struct s_coll

@@ -1,7 +1,7 @@
-NO textures/tex/6.png
-EA textures/wall.png
-SO textures/wall.png
-WE textures/wall.png
+NO textures/wall1.png
+EA textures/wall1.png
+SO textures/wall1.png
+WE textures/wall1.png
 D textures/door.png
 SP textures/solid.png
 C 0,0,0

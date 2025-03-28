@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 02:40:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/28 05:35:07 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/03/28 06:53:19 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 void    put_weapon(t_data *data)
 {
-	static int frame = 0;
-	mlx_texture_t *texture;
+	static int		frame = 0;
+	mlx_texture_t	*texture;
+	int				x;
+	int				y;
 
 	if (!data->is_animating)
 		texture = data->frames[0];
 	else
 		texture = data->frames[frame];
-	int weapon_height = texture->height * 0.5;
-	int weapon_width = texture->width * 0.5;
-	int start_x = data->screen_width / 2 - weapon_width / 2;
-	int start_y = data->screen_height - weapon_height;
+	data->weapon.height = texture->height * 0.5;
+	data->weapon.width = texture->width * 0.5;
+	data->weapon.start_x = data->screen_width / 2 - data->weapon.width / 2;
+	data->weapon.start_y = data->screen_height - data->weapon.height;
 
-	int x = start_x;
-	while (x < start_x + weapon_width)
+	x = data->weapon.start_x;
+	while (x < data->weapon.start_x + data->weapon.width)
 	{
-		double tex_x = (double)(x - start_x) / weapon_width * texture->width;
-		int y = start_y;
+		double tex_x = (double)(x - data->weapon.start_x) / data->weapon.width * texture->width;
+		y = data->weapon.start_y;
 		while (y < data->screen_height)
 		{
-			double tex_y = (double)(y - start_y) / weapon_height * texture->height;
+			double tex_y = (double)(y - data->weapon.start_y) / data->weapon.height * texture->height;
 			uint32_t tmp_value = (int)tex_y * texture->width + (int)tex_x;
 			int index = tmp_value * 4;
 			if (texture->pixels[index + 3] == 0)
