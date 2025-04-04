@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/28 06:51:27 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:46:08 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <string.h>
-# include "MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdbool.h>
 # include <sys/time.h>
@@ -32,6 +32,7 @@
 # define CELL_SIZE 32
 # define SPEED_MOVE 0.2
 # define SPEED_ROT 0.1
+# define SPEED_MOS 0.1
 # define TEXTURE_SIZE 32
 # define DOOR_OPEN_DIST 1.5
 
@@ -61,15 +62,28 @@ typedef struct s_ray
 
 typedef struct s_weapon
 {
-	int	height;
-	int	width;
+	int			height;
+	int			width;
+	int			start_x;
+	int			start_y;
+	double		tex_x;
+	double		tex_y;
+	uint32_t	tmp_value;
+	int			index;
+	int			color;
+}	t_weapon;
+
+typedef struct s_mini
+{
+	int	player_x;
+	int	player_y;
 	int	start_x;
 	int	start_y;
-	double	tex_x;
-	double	tex_y;
-	uint32_t tmp_value;
-	int index;
-}	t_weapon;
+	int	end_x;
+	int	end_y;
+	int	tile_x;
+	int	tile_y;
+}	t_mini;
 
 typedef struct s_key
 {
@@ -93,6 +107,7 @@ typedef struct s_line
 	int	C_line;
 	int	DO_line;
 	int	SP_line;
+	int	DE_line;
 	int	map_line;
 }	t_line;
 
@@ -133,6 +148,7 @@ typedef struct s_data
 	char			*SO;
 	char			*DO;
 	char			*SP;
+	char			*DE;
 	int				floor_color[3];
 	int				ceiling_color[3];
 	int				map_width;
@@ -140,7 +156,6 @@ typedef struct s_data
 	int				x_player;
 	int				y_player;
 	char			direction;
-	uint32_t		*color;
 	int				end_map;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
@@ -156,13 +171,15 @@ typedef struct s_data
 	double			tex_pos_y;
 	int				n_of_doors;
 	t_door			*doors;
-	int				hit_door;
-	int				hit_sprite;
+	int				hit_d;
+	int				hit_s;
 	t_sprite		*sprites;
 	int				sprite_n;
 	t_key			key;
 	bool			is_animating;
 	t_weapon		weapon;
+	t_mini			m;
+	int				color;
 }	t_data;
 
 typedef struct s_coll
@@ -213,19 +230,37 @@ void			fill_text(t_data *data, int i);
 void			where_doors(t_data *data);
 void			check_doors(t_data *data);
 void			where_sprites(t_data *data);
+void			put_pixel_to_image(t_data *data, int x, int y, int color);
+double			distance(int x1, int y1, int x2, int y2);
+void			check_doors(t_data *data);
+t_door			*find_which_door(t_data *data, int x, int y);
+void			check_dr_or_sp(t_data *data, int map_x, int map_y, int *hit_w);
+
 //
 void			init_data(t_data *data);
 void			init_player(t_data *data);
 void			raycast(t_data *data);
+void			raytrace(t_data *data, int map_x, int map_y, int x);
+void			draw_ceiling(t_data *data, int start_line, int x, int color);
+void			draw_floor(t_data *data, int end_line, int x, int color);
+void			draw_line(t_data *data, double pwd, int x);
 void			init_dist(t_data *data, int x);
+void			init_steps(t_data *data, int map_x, int map_y);
+void			check_steps(t_data *data, int *map_x, int *map_y, int *sid_w);
 void			put_pixel_to_image(t_data *data, int x, int y, int color);
 void			render_frame(void *param);
 void			ft_destroy_win(void *param);
 void			mouse_move(double x, double y, void *param);
+int				rot_left(t_data *data, double rot_speed);
+int				rot_right(t_data *data, double rot_speed);
+int				move_up(t_data *data, double move_speed);
+int				move_down(t_data *data, double move_speed);
+int				move_right(t_data *data, double move_speed);
+int				move_left(t_data *data, double move_speed);
+void			move_to(void *param);
 void			mini_map(t_data *data);
 void			key_hook(mlx_key_data_t keydata, void *param);
 void			key_release(mlx_key_data_t keydata, void *param);
-void			move_to(void *param);
 void			init_keys(t_data *data);
 int				color_from_pixel(mlx_texture_t *texture, int index);
 void			load_frames(t_data *data);

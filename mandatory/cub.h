@@ -6,13 +6,12 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/28 05:55:38 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/04 18:02:02 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
-
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -20,7 +19,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <string.h>
-# include "MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdbool.h>
 # include <sys/time.h>
@@ -129,45 +128,45 @@ typedef struct s_coll
 	struct s_coll	*next;
 }	t_coll;
 
-char	*ft_strchr(const char *string, int c );
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t count, size_t size);
-char	*get_next_line(int fd);
-int	ft_strlen(char *s);
-char	**ft_split(char *s, char c);
-char	*ft_strdup(char *s);
-int	ft_strcmp(char *s1, char *s2);
-void	ft_putstr_fd(char *s, int fd);
-char	*ft_strjoin(char *s1, char *s2);
-void parse(t_data *file_data, char *file_name);
-int	isonly_spaces(char *input);
-int sizeof_array(char **str);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strncpy(char *dest, char *src, unsigned int n);
-int skip_beg_spaces(char *row);
-int skip_end_spaces(char *row);
-void ft_error(char type);
-void set_texture(t_data *data, char *line);
-void set_colors(t_data *data, char *line);
-int	open_cub_file(char *str);
-int surrounded_by_walls(char **map, int i, int j, int k);
-int deep_surr_walls(char **map);
-int	composition_checker(t_data *data, int i, int j);
-char *extract_content(char *line);
-int	ft_isdigit(int c);
-int	ft_atoi(const char *str);
-void	*c_malloc(size_t size, int flag);
-void map_lenght(t_data *data);
-void map_width(t_data *data);
-int	is_space(char c);
-int count_spaces(char *number);
-void load_all_text(t_data *data);
-void destroy_text(t_data *data);
-void check_file_ext(char *str);
-int convert_rgb(int r, int g, int b);
-mlx_texture_t *get_wall_texture(t_data *data);
-void put_texture(t_data *data, int start_line, int end_line, int x);
-void fill_text(t_data *data, int i);
+char			*ft_strchr(const char *string, int c );
+void			ft_bzero(void *s, size_t n);
+void			*ft_calloc(size_t count, size_t size);
+char			*get_next_line(int fd);
+int				ft_strlen(char *s);
+char			**ft_split(char *s, char c);
+char			*ft_strdup(char *s);
+int				ft_strcmp(char *s1, char *s2);
+void			ft_putstr_fd(char *s, int fd);
+char			*ft_strjoin(char *s1, char *s2);
+void			parse(t_data *file_data, char *file_name);
+int				isonly_spaces(char *input);
+int				sizeof_array(char **str);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*ft_strncpy(char *dest, char *src, unsigned int n);
+int				skip_beg_spaces(char *row);
+int				skip_end_spaces(char *row);
+void			ft_error(char type);
+void			set_texture(t_data *data, char *line);
+void			set_colors(t_data *data, char *line);
+int				open_cub_file(char *str);
+int				surrounded_by_walls(char **map, int i, int j, int k);
+int				deep_surr_walls(char **map);
+int				composition_checker(t_data *data, int i, int j);
+char			*extract_content(char *line);
+int				ft_isdigit(int c);
+int				ft_atoi(const char *str);
+void			*c_malloc(size_t size, int flag);
+void			map_lenght(t_data *data);
+void			map_width(t_data *data);
+int				is_space(char c);
+int				count_spaces(char *number);
+void			load_all_text(t_data *data);
+void			destroy_text(t_data *data);
+void			check_file_ext(char *str);
+int				convert_rgb(int r, int g, int b);
+mlx_texture_t	*get_wall_texture(t_data *data);
+void			put_texture(t_data *data, int start_line, int end_line, int x);
+void			fill_text(t_data *data, int i);
 //
 void			init_data(t_data *data);
 void			init_player(t_data *data);
