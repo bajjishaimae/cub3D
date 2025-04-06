@@ -45,48 +45,65 @@ int surrounded_by_walls(char **map, int i, int j, int k)
 }
 
 
-int out_bounds(int i, char **map)
+static int check_prev_line_bounds(int i, char **map, int curr_line_len)
 {
-	int prev_line;
-	int curr_line;
-	int next_line;
+    int prev_line_len;
 
-	curr_line = ft_strlen(map[i]);
-	if (i == 0)
-		prev_line = 0;
-	else
-		prev_line = ft_strlen(map[i -1]);
-	if (!map[i + 1])
-		next_line = 0;
-	else
-		next_line = ft_strlen(map[i + 1]);
-	if (prev_line > curr_line)
-	{
-		while (curr_line < prev_line)
-		{
-			if (map[i - 1][curr_line] == '0' || map[i - 1][curr_line] == 'N' || map[i - 1][curr_line] == 'S' || map[i - 1][curr_line] == 'E' || map[i - 1][curr_line] == 'W')
-				return (0);
-			curr_line++;
-		}
-	}
-	if (next_line > curr_line)
-	{
-		while (curr_line < next_line)
-		{
-			if (map[i + 1][curr_line] == '0'|| map[i + 1][curr_line] == 'N' || map[i + 1][curr_line] == 'S' || map[i + 1][curr_line] == 'E' || map[i + 1][curr_line] == 'W')
-				return (0);
-			curr_line++;
-		}
-	}
-	return 1;
+    if (i == 0)
+        prev_line_len = 0;
+    else
+        prev_line_len = ft_strlen(map[i - 1]);
+
+    if (prev_line_len > curr_line_len)
+    {
+        while (curr_line_len < prev_line_len)
+        {
+            char c = map[i - 1][curr_line_len];
+            if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+                return 0;
+            curr_line_len++;
+        }
+    }
+    return 1;
 }
 
-int deep_surr_walls(char **map)
+static int check_next_line_bounds(int i, char **map, int curr_line_len)
 {
-	int i;
-	int j;
+    int next_line_len;
 
-	i = 0;
+    if (!map[i + 1])
+        next_line_len = 0;
+    else
+        next_line_len = ft_strlen(map[i + 1]);
+
+    if (next_line_len > curr_line_len)
+    {
+        while (curr_line_len < next_line_len)
+        {
+            char c = map[i + 1][curr_line_len];
+            if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+                return 0;
+            curr_line_len++;
+        }
+    }
+    return 1;
+}
+
+int out_bounds(int i, char **map)
+{
+    int curr_line_len;
+
+	curr_line_len = ft_strlen(map[i]);
+    
+    if (!check_prev_line_bounds(i, map, curr_line_len))
+        return 0;
+    if (!check_next_line_bounds(i, map, curr_line_len))
+        return 0;
+    return 1;
+}
+
+int deep_surr_walls(char **map, int i, int j)
+{
 	while (map[i])
 	{
 		j = 0;
@@ -96,9 +113,11 @@ int deep_surr_walls(char **map)
 		{
 			if (i != 0 && j != 0 && j < ft_strlen(map[i]) && map[i+1])
 			{
-				if (map[i][j] == '0' || map[i][j] == 'E' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'S')
+				if (map[i][j] == '0' || map[i][j] == 'E' || map[i][j] == 'N'
+					|| map[i][j] == 'S' || map[i][j] == 'S')
 				{
-					if (is_space(map[i][j - 1]) || is_space(map[i][j + 1]) || is_space(map[i -1 ][j]) || is_space(map[i + 1][j]))
+					if (is_space(map[i][j - 1]) || is_space(map[i][j + 1])
+					|| is_space(map[i -1 ][j]) || is_space(map[i + 1][j]))
 						return (0);
 				}
 			}
@@ -110,11 +129,8 @@ int deep_surr_walls(char **map)
 }
 
 
-int	composition_checker(t_data *data, int i, int j)
+int	composition_checker(t_data *data, int i, int j, int p_counter)
 {
-	int p_counter;
-
-	p_counter = 0;
 	while (data->map[i])
 	{
 		while (data->map[i][j])

@@ -80,6 +80,7 @@ char	*ft_strdup(char *s)
 	ptr[i] = '\0';
 	return ((char *)ptr);
 }
+
 static int	ft_wordcounter(const char *str, char c)
 {
 	int	i;

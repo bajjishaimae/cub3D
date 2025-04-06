@@ -33,40 +33,51 @@ char *extract_content(char *line)
     return (content);      
 }
 
+int handle_directives(t_data *data, char *line, int *nb)
+{
+    char *trimmed_line;
+
+	trimmed_line = line + skip_beg_spaces(line);
+    if (!ft_strncmp(trimmed_line, "NO ", 3) || !ft_strncmp(trimmed_line, "SO ", 3) ||
+        !ft_strncmp(trimmed_line, "EA ", 3) || !ft_strncmp(trimmed_line, "WE ", 3))
+    {
+        set_texture(data, line);
+        (*nb)++;
+        return (1);
+    }
+    else if (!ft_strncmp(trimmed_line, "F ", 2) || !ft_strncmp(trimmed_line, "C ", 2))
+    {
+        set_colors(data, line);
+        (*nb)++;
+        return (1);
+    }
+    return (0);
+}
+
+int handle_map_lines(t_data *data, char *line, char **joined)
+{
+    char *trimmed_line;
+
+	trimmed_line = line + skip_beg_spaces(line);
+    if (!ft_strncmp(trimmed_line, "1", 1) || !ft_strncmp(trimmed_line, "0", 1))
+    {
+        if (data->end_map)
+            return (0);
+        data->order.map_line = data->order.line_order;
+        *joined = ft_strjoin(*joined, line);
+        return (1);
+    }
+    else
+    {
+        return (isonly_spaces(line));
+    }
+}
 
 int manip_line(t_data *data, char *line, int *nb, char **joined)
 {
-	if (!ft_strncmp(line + skip_beg_spaces(line), "NO ", 3)
-		|| !ft_strncmp(line + skip_beg_spaces(line), "SO ", 3)
-		|| !ft_strncmp(line + skip_beg_spaces(line), "EA ", 3)
-		|| !ft_strncmp(line + skip_beg_spaces(line), "WE ", 3))
-	{
-		set_texture(data, line);
-		(*nb)++;
-		return (1);
-	}
-	else if (!ft_strncmp(line + skip_beg_spaces(line), "F ", 2)
-			|| !ft_strncmp(line + skip_beg_spaces(line), "C ", 2))
-	{
-		set_colors(data, line);
-		(*nb)++;
-		return (1);
-	}
-	else if (!ft_strncmp(line + skip_beg_spaces(line), "1", 1)
-			|| !ft_strncmp(line + skip_beg_spaces(line), "0", 1))
-	{
-		if (data->end_map)
-			return (0);
-		data->order.map_line = data->order.line_order;
-		*joined = ft_strjoin(*joined, line);
-		return (1);
-	}
-	else 
-	{
-		if (isonly_spaces(line))
-			return (1);
-		return (0);
-	}
+    if (handle_directives(data, line, nb))
+        return (1);
+    return (handle_map_lines(data, line, joined));
 }
 
 void manip_file(t_data *file_data, int fd, int valid_infonumber)
@@ -110,9 +121,9 @@ void parse(t_data *file_data, char *file_name)
 	manip_file(file_data, fd, 0);
 	if (!check_order(file_data))
 		ft_error('m');
-	if (!surrounded_by_walls(file_data->map, 0, 0, 0) || !deep_surr_walls(file_data->map))
+	if (!surrounded_by_walls(file_data->map, 0, 0, 0) || !deep_surr_walls(file_data->map, 0, 0))
 		ft_error('m');
-	if (!composition_checker(file_data, 0, 0))
+	if (!composition_checker(file_data, 0, 0, 0))
 		ft_error('m');
 	map_lenght(file_data);
 	map_width(file_data);
