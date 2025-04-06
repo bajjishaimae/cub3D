@@ -1,5 +1,24 @@
 #include "cub.h"
 
+void set_texture2(t_data *data, char *line)
+{
+	if (ft_strncmp(line, "WE ", 3) == 0)
+	{
+		data->WE = extract_content(line + 2);
+		data->order.WE_line = data->order.line_order;
+	}
+	else if (ft_strncmp(line, "D ", 2) == 0)
+	{
+		data->DO = extract_content(line + 1);
+		data->order.DO_line = data->order.line_order;
+	}
+	else if (ft_strncmp(line, "SP ", 3) == 0)
+	{
+		data->SP = extract_content(line + 2);
+		data->order.SP_line = data->order.line_order;
+	}
+}
+
 void	set_texture(t_data *data, char *line)
 {
 	while (*line == ' ' || *line == '\t')
@@ -20,21 +39,11 @@ void	set_texture(t_data *data, char *line)
 		data->EA = extract_content(line + 2);
 		data->order.EA_line = data->order.line_order;
 	}
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-	{
-		data->WE = extract_content(line + 2);
-		data->order.WE_line = data->order.line_order;
-	}
-	else if (ft_strncmp(line, "D ", 2) == 0)
-	{
-		data->DO = extract_content(line + 1);
-		data->order.DO_line = data->order.line_order;
-	}
-	else if (ft_strncmp(line, "SP ", 3) == 0)
-	{
-		data->SP = extract_content(line + 2);
-		data->order.SP_line = data->order.line_order;
-	}
+	else if (ft_strncmp(line, "WE ", 3) == 0 
+		|| ft_strncmp(line, "D ", 2) == 0 
+		|| ft_strncmp(line, "SP ", 3) == 0)
+		set_texture2(data, line);
+	
 }
 
 mlx_texture_t	*load_texutes(char *path)

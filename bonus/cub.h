@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/04 17:46:08 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/06 14:18:40 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,8 @@ void			ft_error(char type);
 void			set_texture(t_data *data, char *line);
 void			set_colors(t_data *data, char *line);
 int				open_cub_file(char *str);
-int				surrounded_by_walls(char **map);
-int				deep_surr_walls(char **map);
+int surrounded_by_walls(char **map, int i, int j, int k);
+int deep_surr_walls(char **map, int i, int j);
 int				composition_checker(t_data *data, int i, int j);
 char			*extract_content(char *line);
 int				ft_isdigit(int c);

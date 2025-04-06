@@ -33,9 +33,7 @@ char *extract_content(char *line)
 	content[end - start + 1] = '\0';
     return (content);      
 }
-
-
-int manip_line(t_data *data, char *line, int *nb, char **joined)
+int manip_line2(t_data *data, char *line, int *nb)
 {
 	if (!ft_strncmp(line + skip_beg_spaces(line), "NO ", 3)
 		|| !ft_strncmp(line + skip_beg_spaces(line), "SO ", 3)
@@ -48,6 +46,13 @@ int manip_line(t_data *data, char *line, int *nb, char **joined)
 		(*nb)++;
 		return (1);
 	}
+	return (0);
+}
+
+int manip_line(t_data *data, char *line, int *nb, char **joined)
+{
+	if (manip_file2(data, line, nb))
+		return (1);
 	else if (!ft_strncmp(line + skip_beg_spaces(line), "F ", 2)
 			|| !ft_strncmp(line + skip_beg_spaces(line), "C ", 2))
 	{
@@ -71,32 +76,26 @@ int manip_line(t_data *data, char *line, int *nb, char **joined)
 		return (0);
 	}
 }
-void manip_file(t_data *file_data, int fd)
+
+void manip_file(t_data *file_data, int fd, int valid_infonumber)
 {
-	int valid_infonumber;
 	char *line;
 	char *joined;
  
 	file_data->order.line_order = 0;
 	file_data->end_map = 0;
 	joined = ft_strdup("");
-	valid_infonumber = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		if (ft_strcmp(joined, "") && !ft_strcmp(line, "\n"))
-		{
 			file_data->end_map = 1;
-		}
 		if (!ft_strcmp(line, "\n"))
 			continue ;
-		
 		if (!manip_line(file_data, line, &valid_infonumber, &joined))
-		{
 			ft_error('f');
-		}
 		file_data->order.line_order++;
 	}
 	file_data->map = ft_split(joined, '\n');
@@ -104,9 +103,7 @@ void manip_file(t_data *file_data, int fd)
 		valid_infonumber++;
 	if (valid_infonumber != 9 || !file_data->NO || !file_data->SO
 			|| !file_data->EA || !file_data->WE || !file_data->DO || !file_data->SP)
-	{
 		ft_error('f');
-	}
 }
 
 void parse(t_data *file_data, char *file_name)
@@ -120,10 +117,10 @@ void parse(t_data *file_data, char *file_name)
 	file_data->WE = NULL;
 	file_data->DO = NULL;
 	file_data->SP = NULL;
-	manip_file(file_data, fd);
+	manip_file(file_data, fd, 0);
 	if (!check_order(file_data))
 		ft_error('m');
-	if (!surrounded_by_walls(file_data->map) || !deep_surr_walls(file_data->map))
+	if (!surrounded_by_walls(file_data->map, 0, 0, 0) || !deep_surr_walls(file_data->map, 0, 0))
 		ft_error('m');
 	if (!composition_checker(file_data, 0, 0))
 		ft_error('m');
