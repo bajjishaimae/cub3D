@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 21:25:32 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/04 16:56:02 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:45:44 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@ void	ft_destroy_win(void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
+	c_malloc(0, 0);
 	mlx_close_window(data->mlx);
+	exit(0);
 }

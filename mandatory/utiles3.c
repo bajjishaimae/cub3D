@@ -1,64 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utiles2.c                                          :+:      :+:    :+:   */
+/*   utiles3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 07:11:15 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 14:20:27 by cbajji           ###   ########.fr       */
+/*   Created: 2025/04/07 15:52:29 by cbajji            #+#    #+#             */
+/*   Updated: 2025/04/07 16:14:44 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-static	int	get_lenght(long nb)
-{
-	int		count;
-
-	count = 0;
-	if (nb < 0)
-	{
-		count++;
-		nb = nb * (-1);
-	}
-	while (nb > 9)
-	{
-		nb = nb / 10;
-		count++;
-	}
-	count++;
-	return (count);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*str;
-	int		len;
-	long	nb;
-
-	nb = n;
-	len = get_lenght(nb);
-	str = (char *)c_malloc((len + 1) * sizeof(char), 1);
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	len--;
-	if (nb < 0)
-		nb = -nb;
-	while (len >= 0)
-	{
-		if (n < 0 && len == 0)
-		{
-			str[len] = '-';
-			break ;
-		}
-		str[len] = (nb % 10) + 48;
-		nb = nb / 10;
-		len--;
-	}
-	return (str);
-}
 
 int	is_space(char c)
 {
@@ -98,4 +50,27 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (result * sign);
+}
+
+int	count_spaces(char *number)
+{
+	int	i;
+	int	counter;
+
+	i = 0;
+	counter = 0;
+	while (number[i])
+	{
+		if (number[i] == ' ' || number[i] == '\t')
+		{
+			counter++;
+		}
+		i++;
+	}
+	return (counter);
+}
+
+int	convert_rgb(int r, int g, int b)
+{
+	return (r << 24 | g << 16 | b << 8 | 255);
 }

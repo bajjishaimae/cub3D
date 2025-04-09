@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/08 01:33:42 by kelmounj         ###   ########.fr       */
+=======
+/*   Updated: 2025/04/09 11:43:58 by cbajji           ###   ########.fr       */
+>>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +74,12 @@ typedef struct s_key
 typedef struct s_line
 {
 	int	line_order;
-	int	NO_line;
-	int	SO_line;
-	int	WE_line;
-	int	EA_line;
-	int	F_line;
-	int	C_line;
+	int	no_line;
+	int	so_line;
+	int	we_line;
+	int	ea_line;
+	int	f_line;
+	int	c_line;
 	int	map_line;
 }	t_line;
 
@@ -97,10 +101,10 @@ typedef struct s_data
 	t_line			order;
 	int				start_line;
 	int				end_line;
-	char			*NO;
-	char			*WE;
-	char			*EA;
-	char			*SO;
+	char			*no;
+	char			*we;
+	char			*ea;
+	char			*so;
 	int				floor_color[3];
 	int				ceiling_color[3];
 	int				map_width;
@@ -139,8 +143,9 @@ int				ft_strcmp(char *s1, char *s2);
 void			ft_putstr_fd(char *s, int fd);
 char			*ft_strjoin(char *s1, char *s2);
 void			parse(t_data *file_data, char *file_name);
+void			manip_file(t_data *file_data, int fd, int valid_infonumber);
 int				isonly_spaces(char *input);
-int				sizeof_array(char **str);
+int				s_array(char **str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strncpy(char *dest, char *src, unsigned int n);
 int				skip_beg_spaces(char *row);
@@ -150,8 +155,8 @@ void			set_texture(t_data *data, char *line);
 void			set_colors(t_data *data, char *line);
 int				open_cub_file(char *str);
 int				surrounded_by_walls(char **map, int i, int j, int k);
-int				deep_surr_walls(char **map);
-int				composition_checker(t_data *data, int i, int j);
+int				deep_surr_walls(char **map, int i, int j);
+int				composition_checker(t_data *data, int i, int j, int p_counter);
 char			*extract_content(char *line);
 int				ft_isdigit(int c);
 int				ft_atoi(const char *str);
