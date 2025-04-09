@@ -1,10 +1,10 @@
-NO mandatory/textures/elbaph.png
-EA mandatory/textures/elbaph.png
-SO mandatory/textures/elbaph.png
-WE mandatory/textures/elbaph.png
+NO mandatory/textures/wall7.png
+EA mandatory/textures/wall8.png
+SO mandatory/textures/wall9.png
+WE mandatory/textures/wall7.png
 
-C 35,19,73
-F 15,6,40
+C 0,0,0
+F 0,0,0
 
 
 111111111111111

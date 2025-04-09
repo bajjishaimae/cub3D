@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/04 17:46:08 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:13:51 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
 # define CELL_SIZE 32
-# define SPEED_MOVE 0.2
+# define SPEED_MOVE 0.3
 # define SPEED_ROT 0.1
 # define SPEED_MOS 0.1
 # define TEXTURE_SIZE 32
@@ -164,6 +164,7 @@ typedef struct s_data
 	mlx_texture_t	*door;
 	mlx_texture_t	*sprite;
 	mlx_texture_t	*frames[30];
+	mlx_texture_t	*panel;
 	int				side_wall;
 	int				wall_x;
 	int				wall_start;
@@ -180,6 +181,7 @@ typedef struct s_data
 	t_weapon		weapon;
 	t_mini			m;
 	int				color;
+	int				open; // for the door of the minimap
 }	t_data;
 
 typedef struct s_coll
@@ -266,5 +268,6 @@ int				color_from_pixel(mlx_texture_t *texture, int index);
 void			load_frames(t_data *data);
 char			*ft_itoa(int n);
 void			put_weapon(t_data *data);
+void			load_panel(t_data *data);
 
 #endif

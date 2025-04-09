@@ -1,10 +1,10 @@
-NO mandatory/textures/elbaph.png
-SO mandatory/textures/elbaph.png
-WE mandatory/textures/elbaph.png
-EA mandatory/textures/elbaph.png
+NO mandatory/textures/ponegred.png
+SO mandatory/textures/ponegred.png
+WE mandatory/textures/ponegred.png
+EA mandatory/textures/ponegred.png
 
-F 220,100,0
-C 225,30,0
+F 67, 76, 42
+C 52, 72, 91
 
         1111111111111111111111111
         1000000000110000000000001

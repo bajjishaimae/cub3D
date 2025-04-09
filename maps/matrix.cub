@@ -1,7 +1,7 @@
-NO textures/matrix.xpm
-SO textures/matrix.xpm
-WE textures/matrix.xpm
-EA textures/matrix.xpm
+NO mandatory/textures/wall5.png
+EA mandatory/textures/wall5.png
+SO mandatory/textures/wall5.png
+WE mandatory/textures/wall5.png
 
 F 0,0,0
 C 0,0,0

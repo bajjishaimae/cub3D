@@ -1,9 +1,9 @@
-NO bonus/textures/wall1.png
-EA bonus/textures/wall1.png
-SO bonus/textures/wall1.png
-WE bonus/textures/wall1.png
+NO bonus/textures/wall8.png
+EA bonus/textures/wall8.png
+SO bonus/textures/wall8.png
+WE bonus/textures/wall8.png
 D bonus/textures/doors/door5.png
-SP bonus/textures/enemy/m2.png
+SP bonus/textures/enemy/m5.png
 
 C 0,0,0
 F 0,0,0
@@ -30,7 +30,7 @@ F 0,0,0
               1000000000000000000010001
               10000000000000000000A0001
               1001000000000000010010001
-              1001100000000000A10010001
+              1001100000000001A10010001
               1000000000000000000010001
               1000000000000000000010001
               1111111111111111111110001

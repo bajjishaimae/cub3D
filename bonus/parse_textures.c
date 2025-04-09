@@ -57,10 +57,15 @@ void	load_frames(t_data *data)
 	while (i <= 30)
 	{
 		s = ft_itoa(i);
-		path = ft_strjoin("/Users/kelmounj/Desktop/cub3D/bonus/textures/weapon/", ft_strjoin(s, ".png"));
+		path = ft_strjoin("bonus/textures/weapon/", ft_strjoin(s, ".png"));
 		data->frames[i - 1] = load_texutes(path);
 		i++;
 	}
+}
+
+void	load_panel(t_data *data)
+{
+	data->panel = load_texutes("bonus/textures/sinwar.png");
 }
 
 void	load_all_text(t_data *data)
