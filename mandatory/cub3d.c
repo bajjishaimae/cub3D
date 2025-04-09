@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 14:35:54 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:01:19 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ void	render_frame(void *param)
 	raycast(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
-void f()
-{
-	system("leaks cub3D");
-}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
-	atexit(f);
+
 	if (ac != 2)
 	{
 		printf("Error\nyou need 1 file, .cub file\n");

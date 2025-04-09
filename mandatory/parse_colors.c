@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:28:06 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/08 17:49:54 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/09 14:56:05 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 int	check_content(char *colors)
 {
 	int	i;
+	int	track;
 
 	i = 0;
+	track = 0;
 	while (colors && colors[i])
 	{
 		if (colors[i] != ' ' && colors[i] != '\n' && colors[i] != '\t'
 			&& colors[i] != ',' && !ft_isdigit(colors[i]))
+			return (0);
+		if (colors[i] == ',')
+			track++;
+		if (track > 3)
 			return (0);
 		i++;
 	}

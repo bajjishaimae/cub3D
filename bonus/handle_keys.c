@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:50:38 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 14:45:59 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/09 14:59:08 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		key_release(keydata, param);
 	if (keydata.key == MLX_KEY_ESCAPE)
 		ft_destroy_win(param);
+}
 
 void	key_release(mlx_key_data_t keydata, void *param)
 {
