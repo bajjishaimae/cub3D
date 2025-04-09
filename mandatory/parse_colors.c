@@ -1,61 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/07 15:28:06 by cbajji            #+#    #+#             */
+/*   Updated: 2025/04/08 17:49:54 by cbajji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
-int check_content(char *colors)
+int	check_content(char *colors)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(colors && colors[i])
+	while (colors && colors[i])
 	{
-		if (colors[i] != ' ' && colors[i] != '\n' && colors[i] != '\t' && colors[i] != ',' && !ft_isdigit(colors[i]))
+		if (colors[i] != ' ' && colors[i] != '\n' && colors[i] != '\t'
+			&& colors[i] != ',' && !ft_isdigit(colors[i]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int *which_color(t_data *data, char *line)
+int	*which_color(t_data *data, char *line)
 {
-	int *color_array = NULL;
+	int	*color_array;
 
+	color_array = NULL;
 	if (ft_strncmp(line, "F ", 2) == 0)
 	{
-        color_array = data->floor_color;
-		data->order.F_line = data->order.line_order;
+		color_array = data->floor_color;
+		data->order.f_line = data->order.line_order;
 	}
-    else if (ft_strncmp(line, "C ", 2) == 0)
+	else if (ft_strncmp(line, "C ", 2) == 0)
 	{
-        color_array = data->ceiling_color;
-		data->order.C_line = data->order.line_order;
+		color_array = data->ceiling_color;
+		data->order.c_line = data->order.line_order;
 	}
 	return (color_array);
 }
 
-void set_colors(t_data *data, char *line)
+void	set_colors(t_data *data, char *line)
 {
-	char *colors;
-    char **splited;
-    int *color_array;
-	int i;
+	char	*colors;
+	char	**splited;
+	int		*color_array;
+	int		i;
 
 	i = 0;
-    while (*line == ' ' || *line == '\t')
-        line++;
+	while (*line == ' ' || *line == '\t')
+		line++;
 	color_array = which_color(data, line);
-    colors = extract_content(line + 1);
-    if (!check_content(colors))
-        ft_error('c');
-    splited = ft_split(colors, ',');
-    if (!splited || sizeof_array(splited) != 3)
-        ft_error('c');
+	colors = extract_content(line + 1);
+	if (!check_content(colors))
+		ft_error('c');
+	splited = ft_split(colors, ',');
+	if (!splited || s_array(splited) != 3)
+		ft_error('c');
 	while (i < 3)
-    {
+	{
 		if (ft_strlen(splited[i]) > 3 && (ft_strlen(splited[i])
-			- count_spaces(splited[i]) > 3))
+				- count_spaces(splited[i]) > 3))
 			ft_error('c');
-        color_array[i] = ft_atoi(splited[i]);
-        if (color_array[i] < 0 || color_array[i] > 255)
-        	ft_error('c');
+		color_array[i] = ft_atoi(splited[i]);
+		if (color_array[i] < 0 || color_array[i] > 255)
+			ft_error('c');
 		i++;
-    }
+	}
 }

@@ -9,8 +9,8 @@ BONUS = cub3D_Bonus
 
 MLX_ARCHIVE = MLX42/build/libmlx42.a
 
-SRC = mandatory/cub3d.c mandatory/gnl_ut.c mandatory/gnl.c mandatory/initgame.c mandatory/parse.c \
-mandatory/utiles.c mandatory/parse_colors.c mandatory/parse_textures.c mandatory/valid_map.c \
+SRC = mandatory/cub3d.c mandatory/gnl_ut.c mandatory/gnl.c mandatory/initgame.c mandatory/parse.c mandatory/parse2.c\
+mandatory/utiles.c mandatory/utiles2.c mandatory/utiles3.c mandatory/utiles4.c mandatory/parse_colors.c mandatory/parse_textures.c mandatory/valid_map.c mandatory/valid_map2.c\
 mandatory/allocate_free.c mandatory/raycasting.c mandatory/moves.c mandatory/moves2.c mandatory/window.c \
 mandatory/handle_keys.c mandatory/drawing.c mandatory/texture.c
 

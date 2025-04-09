@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utiles.c                                           :+:      :+:    :+:   */
+/*   utiles2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 12:19:02 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/09 12:19:04 by cbajji           ###   ########.fr       */
+/*   Created: 2025/04/07 15:51:28 by cbajji            #+#    #+#             */
+/*   Updated: 2025/04/07 15:55:27 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,22 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strdup(char *s)
 {
-	size_t	i;
+	int		i;
+	int		size;
+	char	*ptr;
 
 	i = 0;
-	if (n == 0)
+	size = ft_strlen(s);
+	ptr = c_malloc(size + 1, 1);
+	if (!ptr)
 		return (0);
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n)
+	while (s[i] != '\0')
+	{
+		ptr[i] = s[i];
 		i++;
-	if (i == n)
-		return (0);
-	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+	}
+	ptr[i] = '\0';
+	return ((char *)ptr);
 }

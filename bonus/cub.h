@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/06 14:18:40 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/09 12:13:39 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,14 @@ typedef struct s_key
 typedef struct s_line
 {
 	int	line_order;
-	int	NO_line;
-	int	SO_line;
-	int	WE_line;
-	int	EA_line;
-	int	F_line;
-	int	C_line;
-	int	DO_line;
-	int	SP_line;
-	int	DE_line;
+	int	no_line;
+	int	so_line;
+	int	we_line;
+	int	ea_line;
+	int	f_line;
+	int	c_line;
+	int	do_line;
+	int	sp_line;
 	int	map_line;
 }	t_line;
 
@@ -142,13 +141,12 @@ typedef struct s_data
 	t_line			order;
 	int				start_line;
 	int				end_line;
-	char			*NO;
-	char			*WE;
-	char			*EA;
-	char			*SO;
-	char			*DO;
-	char			*SP;
-	char			*DE;
+	char			*no;
+	char			*we;
+	char			*ea;
+	char			*so;
+	char			*doo;
+	char			*sp;
 	int				floor_color[3];
 	int				ceiling_color[3];
 	int				map_width;
@@ -200,7 +198,7 @@ void			ft_putstr_fd(char *s, int fd);
 char			*ft_strjoin(char *s1, char *s2);
 void			parse(t_data *file_data, char *file_name);
 int				isonly_spaces(char *input);
-int				sizeof_array(char **str);
+int				s_array(char **str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strncpy(char *dest, char *src, unsigned int n);
 int				skip_beg_spaces(char *row);
@@ -209,8 +207,8 @@ void			ft_error(char type);
 void			set_texture(t_data *data, char *line);
 void			set_colors(t_data *data, char *line);
 int				open_cub_file(char *str);
-int surrounded_by_walls(char **map, int i, int j, int k);
-int deep_surr_walls(char **map, int i, int j);
+int				surrounded_by_walls(char **map, int i, int j, int k);
+int				deep_surr_walls(char **map, int i, int j);
 int				composition_checker(t_data *data, int i, int j);
 char			*extract_content(char *line);
 int				ft_isdigit(int c);
@@ -219,6 +217,7 @@ void			*c_malloc(size_t size, int flag);
 void			map_lenght(t_data *data);
 void			map_width(t_data *data);
 int				is_space(char c);
+void			manip_file(t_data *data, int fd, int valid_infonumber);
 int				count_spaces(char *number);
 void			load_all_text(t_data *data);
 void			destroy_text(t_data *data);

@@ -1,16 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utiles.c                                           :+:      :+:    :+:   */
+/*   utiles4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 15:45:32 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/07 15:55:00 by cbajji           ###   ########.fr       */
+/*   Created: 2025/04/09 12:17:33 by cbajji            #+#    #+#             */
+/*   Updated: 2025/04/09 12:22:21 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+char	*ft_strdup(char *s)
+{
+	int		i;
+	int		size;
+	char	*ptr;
+
+	i = 0;
+	size = ft_strlen(s);
+	ptr = c_malloc(size + 1, 1);
+	if (!ptr)
+		return (0);
+	while (s[i] != '\0')
+	{
+		ptr[i] = s[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return ((char *)ptr);
+}
 
 static int	ft_wordcounter(const char *str, char c)
 {
@@ -82,9 +102,4 @@ char	**ft_split(char *s, char c)
 		ft_error('a');
 	ptr = ft_fillptr(s, ptr, c, words);
 	return (ptr);
-}
-
-int	ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
 }
