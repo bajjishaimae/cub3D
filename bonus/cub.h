@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 10:13:51 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:32:35 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ typedef struct s_data
 	mlx_texture_t	*door;
 	mlx_texture_t	*sprite;
 	mlx_texture_t	*frames[30];
-	mlx_texture_t	*panel;
 	int				side_wall;
 	int				wall_x;
 	int				wall_start;
@@ -268,6 +267,5 @@ int				color_from_pixel(mlx_texture_t *texture, int index);
 void			load_frames(t_data *data);
 char			*ft_itoa(int n);
 void			put_weapon(t_data *data);
-void			load_panel(t_data *data);
 
 #endif

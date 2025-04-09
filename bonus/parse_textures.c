@@ -63,11 +63,6 @@ void	load_frames(t_data *data)
 	}
 }
 
-void	load_panel(t_data *data)
-{
-	data->panel = load_texutes("bonus/textures/sinwar.png");
-}
-
 void	load_all_text(t_data *data)
 {
 	data->north = load_texutes(data->NO);

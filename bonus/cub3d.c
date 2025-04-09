@@ -6,48 +6,11 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 10:16:00 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:31:54 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-// void	put_panel(t_data *data)
-// {
-// 	mlx_texture_t	*texture;
-// 	int				tmp_start = 0;
-// 	int				tmp_end = 0;
-// 	uint32_t		tmp_value;
-// 	int				index;
-// 	int				x;
-// 	int				y;
-
-// 	x = 0;
-// 	y = 0;
-// 	(1) && (tmp_start = x, tmp_end = y);
-// 	texture = data->panel;
-// 	data->tex_pos_x *= texture->width;
-// 	while (x < data->screen_width)
-// 	{
-// 		y = 0;
-// 		while (y < data->screen_height)
-// 		{
-// 			(1) && (data->tex_pos_y = (x - tmp_start) / (double)(tmp_end \
-// 			- tmp_start), data->tex_pos_y *= texture->height, tmp_value = (int) \
-// 			data->tex_pos_y * texture->width, tmp_value += (int)data->tex_pos_x, \
-// 			index = tmp_value * 4);
-// 			if (texture->pixels[index + 3] == 0)
-// 			{
-// 				y++;
-// 				continue ;
-// 			}
-// 			data->color = color_from_pixel(texture, index);
-// 			put_pixel_to_image(data, x, y, data->color);
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
 
 void	render_frame(void *param)
 {
@@ -56,7 +19,6 @@ void	render_frame(void *param)
 	data = (t_data *)param;
 	mlx_delete_image(data->mlx, data->img);
 	data->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	// put_panel(data);
 	check_doors(param);
 	raycast(data);
 	put_weapon(data);
@@ -85,7 +47,6 @@ int	main(int ac, char **av)
 	mlx_cursor_hook(data.mlx, mouse_move, &data);
 	load_all_text(&data);
 	load_frames(&data);
-	// load_panel(&data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
 	mlx_key_hook(data.mlx, key_hook, &data);
 	mlx_loop_hook(data.mlx, move_to, &data);
