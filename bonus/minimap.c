@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:26:13 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/06 09:08:00 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:02:35 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ void	mini_map(t_data *data)
 				minimap2(data, i, j);
 		}
 	}
-	i = -1;
 	put_player(data);
 }
