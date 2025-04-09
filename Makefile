@@ -16,9 +16,9 @@ mandatory/handle_keys.c mandatory/drawing.c mandatory/texture.c
 
 HEADS = mandatory/cub.h
 
-SRCB = bonus/cub3d.c bonus/gnl_ut.c bonus/gnl.c bonus/initgame.c bonus/parse.c \
-bonus/utiles.c bonus/utiles2.c bonus/parse_colors.c bonus/parse_textures.c \
-bonus/valid_map.c bonus/allocate_free.c bonus/raycasting.c  bonus/moves.c \
+SRCB = bonus/cub3d.c bonus/gnl_ut.c bonus/gnl.c bonus/initgame.c bonus/parse.c bonus/parse2.c\
+bonus/utiles.c bonus/utiles2.c bonus/utiles3.c bonus/utiles4.c bonus/parse_colors.c bonus/parse_textures.c \
+bonus/valid_map.c bonus/valid_map2.c bonus/valid_map3.c bonus/allocate_free.c bonus/raycasting.c  bonus/moves.c \
 bonus/window.c bonus/minimap.c bonus/handle_keys.c bonus/animation.c bonus/moves2.c \
 bonus/mouse_move.c bonus/drawing.c bonus/checker.c bonus/init_param.c
 

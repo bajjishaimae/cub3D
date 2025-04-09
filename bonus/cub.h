@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 12:13:39 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/09 12:55:04 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ int				skip_beg_spaces(char *row);
 int				skip_end_spaces(char *row);
 void			ft_error(char type);
 void			set_texture(t_data *data, char *line);
+int				out_bounds(int i, char **map);
 void			set_colors(t_data *data, char *line);
 int				open_cub_file(char *str);
 int				surrounded_by_walls(char **map, int i, int j, int k);
