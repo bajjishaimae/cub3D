@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utiles3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:52:29 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/07 16:14:44 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:13:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	count_spaces(char *number)
 	return (counter);
 }
 
-int	convert_rgb(int r, int g, int b)
+int	rgb(int r, int g, int b)
 {
 	return (r << 24 | g << 16 | b << 8 | 255);
 }

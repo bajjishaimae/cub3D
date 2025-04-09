@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 03:17:04 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/08 18:27:12 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:13:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	color_from_pixel(mlx_texture_t *texture, int index)
 	r = texture->pixels[index];
 	g = texture->pixels[index + 1];
 	b = texture->pixels[index + 2];
-	return (convert_rgb(r, g, b));
+	return (rgb(r, g, b));
 }
 
 void	put_texture(t_data *data, int end_line, int start_line, int x)
