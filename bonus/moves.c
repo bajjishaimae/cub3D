@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:53 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/08 20:32:17 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:14:19 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	move_left(t_data *data, double move_speed)
 
 	x_next = data->player.x_pos - data->player.plane_x * move_speed;
 	y_next = data->player.y_pos - data->player.plane_y * move_speed;
-	if (data->map[(int)data->player.y_pos][(int)x_next] != '1' 
+	if (data->map[(int)data->player.y_pos][(int)x_next] != '1'
 		&& data->map[(int)data->player.y_pos][(int)x_next] != ' '
 		&& data->map[(int)data->player.y_pos][(int)x_next] != 'A')
 		data->player.x_pos -= data->player.plane_x * move_speed;

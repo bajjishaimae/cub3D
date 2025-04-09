@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:26:13 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 13:13:08 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:13:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	put_player(t_data *data)
 			if (player_x + x >= 0 && player_y + y >= 0
 				&& player_x + x < 200 && player_y + y < 200)
 				put_pixel_to_image(data, player_x + x, \
-						player_y + y, convert_rgb(83, 89, 154));
+						player_y + y, rgb(83, 89, 154));
 			y++;
 		}
 		x++;
@@ -53,16 +53,16 @@ static void	minimap2(t_data *data, int i, int j)
 		{
 			if (data->map[i][j] == 'D')
 				put_pixel_to_image(data, data->m.tile_x + x - data->m.start_x,
-					data->m.tile_y + y - data->m.start_y, convert_rgb(109, 157, 197));
+					data->m.tile_y + y - data->m.start_y, rgb(109, 157, 197));
 			else if (data->map[i][j] == 'A')
 				put_pixel_to_image(data, data->m.tile_x + x - data->m.start_x,
-					data->m.tile_y + y - data->m.start_y, convert_rgb(255, 0, 0));
+					data->m.tile_y + y - data->m.start_y, rgb(255, 0, 0));
 			else if (data->map[i][j] == '1')
 				put_pixel_to_image(data, data->m.tile_x + x - data->m.start_x,
-					data->m.tile_y + y - data->m.start_y, convert_rgb(6, 141, 157));
+					data->m.tile_y + y - data->m.start_y, rgb(6, 141, 157));
 			else if (data->map[i][j] != ' ')
 				put_pixel_to_image(data, data->m.tile_x + x - data->m.start_x,
-					data->m.tile_y + y - data->m.start_y, convert_rgb(174, 236, 239));
+					data->m.tile_y + y - data->m.start_y, rgb(174, 236, 239));
 			x++;
 		}
 		y++;

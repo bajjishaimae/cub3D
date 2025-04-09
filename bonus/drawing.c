@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:27:42 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/05 17:54:36 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:13:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	draw_line(t_data *data, double pwd, int x)
 	data->line_h = (int)(data->screen_height / pwd);
 	data->start_line = -data->line_h / 2 + data->screen_height / 2;
 	data->end_line = data->line_h / 2 + data->screen_height / 2;
-	draw_ceiling(data, data->start_line, x, convert_rgb(data->ceiling_color[0], \
+	draw_ceiling(data, data->start_line, x, rgb(data->ceiling_color[0], \
 	data->ceiling_color[1], data->ceiling_color[2]));
 	put_texture(data, data->end_line, data->start_line, x);
-	draw_floor(data, data->end_line, x, convert_rgb(data->floor_color[0], \
+	draw_floor(data, data->end_line, x, rgb(data->floor_color[0], \
 	data->floor_color[1], data->floor_color[2]));
 }

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:41 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/04 16:52:00 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:13:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	color_from_pixel(mlx_texture_t *texture, int index)
 	r = texture->pixels[index];
 	g = texture->pixels[index + 1];
 	b = texture->pixels[index + 2];
-	return (convert_rgb(r, g, b));
+	return (rgb(r, g, b));
 }
 
 void	ft_put_pixel(t_data *data, uint32_t x,

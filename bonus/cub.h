@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 15:03:50 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:13:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ int				count_spaces(char *number);
 void			load_all_text(t_data *data);
 void			destroy_text(t_data *data);
 void			check_file_ext(char *str);
-int				convert_rgb(int r, int g, int b);
+int				rgb(int r, int g, int b);
 mlx_texture_t	*get_wall_texture(t_data *data);
 void			put_texture(t_data *data, int start_line, int end_line, int x);
 void			fill_text(t_data *data, int i);
