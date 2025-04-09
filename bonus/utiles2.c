@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 07:11:15 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 12:15:49 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/09 14:20:27 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_itoa(int n)
 
 	nb = n;
 	len = get_lenght(nb);
-	str = (char *)malloc((len + 1) * sizeof(char));
+	str = (char *)c_malloc((len + 1) * sizeof(char), 1);
 	if (!str)
 		return (NULL);
 	str[len] = '\0';

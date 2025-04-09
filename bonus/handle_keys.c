@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:50:38 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/28 05:46:17 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:45:59 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	else if (keydata.action == MLX_RELEASE)
 		key_release(keydata, param);
 	if (keydata.key == MLX_KEY_ESCAPE)
-		mlx_close_window(data->mlx);
-}
+		ft_destroy_win(param);
 
 void	key_release(mlx_key_data_t keydata, void *param)
 {

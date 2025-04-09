@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/04 12:08:13 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:45:22 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(data.mlx, move_to, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
+	c_malloc(0, 0);
 }

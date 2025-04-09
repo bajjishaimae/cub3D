@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/03/25 02:58:05 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:35:54 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,17 @@ void	render_frame(void *param)
 	raycast(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
-
+void f()
+{
+	system("leaks cub3D");
+}
 int	main(int ac, char **av)
 {
 	t_data	data;
-
+	atexit(f);
 	if (ac != 2)
 	{
-		printf("Error\nyou need 1 file , .cub file\n");
+		printf("Error\nyou need 1 file, .cub file\n");
 		return (1);
 	}
 	check_file_ext(av[1]);
@@ -48,4 +51,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(data.mlx, move_to, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
+	c_malloc(0, 0);
 }
