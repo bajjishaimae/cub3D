@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:32:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 15:04:03 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:16:34 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	render_frame(void *param)
 	data->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	check_doors(param);
 	raycast(data);
+	play_s2(data);
 	put_weapon(data);
 	mini_map(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
