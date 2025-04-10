@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/10 16:02:37 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 17:26:01 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_key
 	bool	left;
 	bool	right;
 	bool	space;
+	bool	enter;
 }	t_key;
 
 typedef struct s_line
@@ -178,7 +179,7 @@ typedef struct s_data
 	t_weapon		weapon;
 	t_mini			m;
 	int				color;
-	int				open; // for the door of the minimap
+	bool			is_play;
 }	t_data;
 
 typedef struct s_coll
@@ -268,5 +269,6 @@ int				color_from_pixel(mlx_texture_t *texture, int index);
 void			load_frames(t_data *data);
 char			*ft_itoa(int n);
 void			put_weapon(t_data *data);
+void			play_s2(t_data *data);
 
 #endif

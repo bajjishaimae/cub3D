@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:50:38 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 14:59:08 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 11:29:46 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_keys(t_data *data)
 	data->key.left = false;
 	data->key.right = false;
 	data->key.space = false;
+	data->key.enter = false;
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
@@ -44,6 +45,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			data->key.w = true;
 		if (keydata.key == MLX_KEY_SPACE)
 			data->is_animating = true;
+		(1) && (keydata.key == MLX_KEY_ENTER) && (data->is_play = true);
 	}
 	else if (keydata.action == MLX_RELEASE)
 		key_release(keydata, param);

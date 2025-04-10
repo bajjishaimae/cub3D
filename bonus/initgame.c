@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 05:48:12 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/06 08:57:04 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:52:20 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ void	init_data(t_data *data)
 	data->screen_width = SCREEN_WIDTH;
 	data->screen_height = SCREEN_HEIGHT;
 	data->is_animating = false;
-	data->open = 0;
+	data->is_play = false;
 }

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:35:35 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/06 09:05:16 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:17:11 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,9 @@ void	check_doors(t_data *data)
 		dist = distance(data->player.x_pos, data->player.y_pos, \
 			data->doors[i].x, data->doors[i].y);
 		if (dist < DOOR_OPEN_DIST)
-		{
 			data->doors[i].is_open = 1;
-			data->open = 1;
-		}
 		else
-		{
 			data->doors[i].is_open = 0;
-			data->open = 0;
-		}
 		i++;
 	}
 }

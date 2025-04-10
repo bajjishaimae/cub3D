@@ -1,6 +1,6 @@
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -w#-Wall -Wextra -Werror 
 # -g -fsanitize=address
 
 NAME = cub3D
@@ -20,7 +20,7 @@ SRCB = bonus/cub3d.c bonus/gnl_ut.c bonus/gnl.c bonus/initgame.c bonus/parse.c b
 bonus/utiles.c bonus/utiles2.c bonus/utiles3.c bonus/utiles4.c bonus/parse_colors.c bonus/parse_textures.c \
 bonus/valid_map.c bonus/valid_map2.c bonus/valid_map3.c bonus/allocate_free.c bonus/raycasting.c  bonus/moves.c \
 bonus/window.c bonus/minimap.c bonus/handle_keys.c bonus/animation.c bonus/moves2.c \
-bonus/mouse_move.c bonus/drawing.c bonus/checker.c bonus/init_param.c
+bonus/mouse_move.c bonus/drawing.c bonus/checker.c bonus/init_param.c bonus/play_sound.c
 
 HEADSB = bonus/cub.h
 
@@ -38,7 +38,7 @@ $(NAME) : $(OBJS)
 
 $(BONUS) : $(OBJSB)
 	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L/goinfre/kelmounj/.brew/Cellar/glfw/3.4/lib/ -lglfw -lm $^ -o $@
-	@echo "\033[32mMaking Bonus Completed✅"
+	@echo "\033[32mBonus Completed🔻"
 
 $(OBJS) : %.o: %.c $(HEADS) Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -13,3 +13,11 @@ C ,,,,,,,,,,,,,,,,,,,,,,12,4,,,,,,,,,,,,,,,,,,7,,,,,,,,,,,,,,,,,,,,,,,
 
 
 check the color of the door of the minimap
+
+
+C 8,0 1,12 1
+
+
+joined = ft_strdup(""); // protect if NULL
+
+protect the mlx functions
