@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:50:08 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/10 16:02:22 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 17:30:50 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	out_bounds(int i, char **map)
 	return (1);
 }
 
-int check_spaces(char *splited)
+int	check_spaces(char *splited)
 {
 	int	start;
 	int	end;

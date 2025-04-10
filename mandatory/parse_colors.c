@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:28:06 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/10 15:57:08 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 17:30:20 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	*which_color(t_data *data, char *line)
 	return (color_array);
 }
 
-int check_spaces(char *splited)
+int	check_spaces(char *splited)
 {
 	int	start;
 	int	end;
