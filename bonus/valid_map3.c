@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:50:08 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/09 12:51:04 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 16:02:22 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,20 @@ int	out_bounds(int i, char **map)
 	if (!check_next_line(i, map, curr_len))
 		return (0);
 	return (1);
+}
+
+int check_spaces(char *splited)
+{
+	int	start;
+	int	end;
+
+	start = skip_beg_spaces(splited);
+	end = skip_end_spaces(splited);
+	while (splited[start] && start <= end)
+	{
+		if (splited[start] == ' ' || splited[start] == '\t')
+			return (1);
+		start++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:15:56 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/09 12:51:42 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 16:18:10 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*c_malloc(size_t size, int flag)
 	{
 		ptr = malloc(size);
 		if (!ptr)
-			return (ft_collclear(&head), NULL);
+			ft_error('a');
 		tmp = ft_collnew(ptr);
 		if (!tmp)
 			return (ft_collclear(&head), free(ptr), NULL);

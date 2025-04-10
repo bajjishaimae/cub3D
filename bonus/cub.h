@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 15:13:33 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:02:37 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ int				deep_surr_walls(char **map, int i, int j);
 int				composition_checker(t_data *data, int i, int j);
 char			*extract_content(char *line);
 int				ft_isdigit(int c);
+int				check_spaces(char *splited);
 int				ft_atoi(const char *str);
 void			*c_malloc(size_t size, int flag);
 void			map_lenght(t_data *data);

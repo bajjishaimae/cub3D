@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:58:31 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/09 14:56:47 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 16:00:31 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static void	parse_color_values(int *color_array, char *colors)
 	{
 		if (ft_strlen(splited[i]) > 3
 			&& (ft_strlen(splited[i]) - count_spaces(splited[i]) > 3))
+			ft_error('c');
+		if (check_spaces(splited[i]))
 			ft_error('c');
 		color_array[i] = ft_atoi(splited[i]);
 		if (color_array[i] < 0 || color_array[i] > 255)

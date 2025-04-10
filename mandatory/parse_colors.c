@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:28:06 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/09 14:56:05 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 15:57:08 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,28 @@ int	*which_color(t_data *data, char *line)
 	return (color_array);
 }
 
-void	set_colors(t_data *data, char *line)
+int check_spaces(char *splited)
+{
+	int	start;
+	int	end;
+
+	start = skip_beg_spaces(splited);
+	end = skip_end_spaces(splited);
+	while (splited[start] && start <= end)
+	{
+		if (splited[start] == ' ' || splited[start] == '\t')
+			return (1);
+		start++;
+	}
+	return (0);
+}
+
+void	set_colors(t_data *data, char *line, int i)
 {
 	char	*colors;
 	char	**splited;
 	int		*color_array;
-	int		i;
 
-	i = 0;
 	while (*line == ' ' || *line == '\t')
 		line++;
 	color_array = which_color(data, line);
@@ -72,6 +86,8 @@ void	set_colors(t_data *data, char *line)
 	{
 		if (ft_strlen(splited[i]) > 3 && (ft_strlen(splited[i])
 				- count_spaces(splited[i]) > 3))
+			ft_error('c');
+		if (check_spaces(splited[i]))
 			ft_error('c');
 		color_array[i] = ft_atoi(splited[i]);
 		if (color_array[i] < 0 || color_array[i] > 255)

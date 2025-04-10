@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:45:59 by kelmounj          #+#    #+#             */
-/*   Updated: 2025/04/09 15:13:33 by kelmounj         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:57:28 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int				skip_beg_spaces(char *row);
 int				skip_end_spaces(char *row);
 void			ft_error(char type);
 void			set_texture(t_data *data, char *line);
-void			set_colors(t_data *data, char *line);
+void			set_colors(t_data *data, char *line, int i);
 int				open_cub_file(char *str);
 int				surrounded_by_walls(char **map, int i, int j, int k);
 int				deep_surr_walls(char **map, int i, int j);

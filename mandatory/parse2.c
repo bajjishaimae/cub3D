@@ -6,7 +6,7 @@
 /*   By: cbajji <cbajji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:26:15 by cbajji            #+#    #+#             */
-/*   Updated: 2025/04/08 18:26:44 by cbajji           ###   ########.fr       */
+/*   Updated: 2025/04/10 15:57:42 by cbajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	handle_directives(t_data *data, char *line, int *nb)
 	else if (!ft_strncmp(trimmed_line, "F ", 2)
 		|| !ft_strncmp(trimmed_line, "C ", 2))
 	{
-		set_colors(data, line);
+		set_colors(data, line, 0);
 		(*nb)++;
 		return (1);
 	}
