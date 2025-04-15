@@ -25,7 +25,7 @@ If you don’t have cmake and glfw installed on your machine, you can install th
 brew install glfw
 brew install cmake
 ```
-⚠️ If you're not using macOS or not using Homebrew, please refer to your system’s package manager or the [MLX42 repo](https://github.com/codam-coding-college/MLX42.git)for proper installation.
+⚠️ If you're not using macOS or not using Homebrew, please refer to your system’s package manager or the [MLX42 repo](https://github.com/codam-coding-college/MLX42.git) for proper installation.
 
 3. Build Instructions
 To build the project, run:
