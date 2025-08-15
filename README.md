@@ -54,3 +54,21 @@ Mouse movement support
 Basic animations
 
 Sound effects
+
+## Screenshots: 
+
+<img width="1800" height="998" alt="Screen Shot 2025-08-15 at 4 55 58 PM" src="https://github.com/user-attachments/assets/3814e7c1-fbc3-4b93-889c-403bf7c9ab35" />
+
+
+<img width="1800" height="998" alt="Screen Shot 2025-08-15 at 4 57 32 PM" src="https://github.com/user-attachments/assets/3b84180a-9c36-4ead-9f17-3f067351ba40" />
+
+
+<img width="1494" height="998" alt="Screen Shot 2025-08-15 at 4 42 30 PM" src="https://github.com/user-attachments/assets/82e94a32-1fcd-4163-8870-9c3c738770d1" />
+
+
+
+https://github.com/user-attachments/assets/7af60a8c-eaf6-4c15-a96f-0194f47d4b02
+
+
+
+
