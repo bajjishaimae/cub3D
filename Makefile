@@ -1,6 +1,6 @@
 CC = cc
 
-CFLAGS = -w#-Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror 
 # -g -fsanitize=address
 
 NAME = cub3D
@@ -33,12 +33,12 @@ all: mlx $(NAME)
 bonus: mlx $(BONUS)
 
 $(NAME) : $(OBJS)
-	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L/goinfre/kelmounj/.brew/Cellar/glfw/3.4/lib/ -lglfw -lm $^ -o $@
+	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm $^ -o $@
 	@echo "\033[32mMaking Completed✅"
 
 $(BONUS) : $(OBJSB)
-	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L/goinfre/kelmounj/.brew/Cellar/glfw/3.4/lib/ -lglfw -lm $^ -o $@
-	@echo "\033[32mBonus Completed🔻"
+	@$(CC) $(CFLAGS) $(MLX_ARCHIVE) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm $^ -o $@
+	@echo "\033[32mMaking Bonus Completed✅"
 
 $(OBJS) : %.o: %.c $(HEADS) Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@
